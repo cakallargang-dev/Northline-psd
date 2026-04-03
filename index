@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Northline Pure Drive Society</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0d1b35;
+    --navy-mid: #1a2744;
+    --navy-light: #243356;
+    --copper: #b87333;
+    --copper-bright: #d4894a;
+    --copper-gold: #e8a856;
+    --copper-dim: #7a4c22;
+    --white: #f0ece4;
+    --white-dim: #c8c0b0;
+    --dark: #080f1e;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: ‘Barlow’, sans-serif;
+background-color: var(–dark);
+color: var(–white);
+overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+position: fixed; top: 0; width: 100%; z-index: 100;
+display: flex; justify-content: space-between; align-items: center;
+padding: 18px 40px;
+background: linear-gradient(to bottom, rgba(8,15,30,0.95), transparent);
+backdrop-filter: blur(4px);
+}
+
+.nav-logo {
+display: flex; align-items: center; gap: 14px;
+text-decoration: none;
+}
+
+.nav-logo img {
+width: 42px; height: 42px; border-radius: 50%;
+}
+
+.nav-logo-text {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 15px;
+letter-spacing: 0.2em; text-transform: uppercase;
+color: var(–white);
+line-height: 1.2;
+}
+
+.nav-logo-text span {
+display: block; font-size: 9px; font-weight: 400;
+color: var(–copper-bright); letter-spacing: 0.35em;
+}
+
+.nav-links {
+display: flex; gap: 32px; list-style: none;
+}
+
+.nav-links a {
+color: var(–white-dim); text-decoration: none;
+font-size: 12px; font-weight: 600; letter-spacing: 0.2em;
+text-transform: uppercase; transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(–copper-bright); }
+
+.nav-cta {
+background: transparent;
+border: 1.5px solid var(–copper);
+color: var(–copper-bright);
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 12px;
+letter-spacing: 0.25em; text-transform: uppercase;
+padding: 9px 22px; cursor: pointer;
+text-decoration: none;
+transition: all 0.25s;
+}
+.nav-cta:hover {
+background: var(–copper);
+color: var(–dark);
+}
+
+/* ─── HERO ─── */
+.hero {
+position: relative;
+min-height: 100vh;
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+text-align: center;
+overflow: hidden;
+}
+
+.hero-bg {
+position: absolute; inset: 0;
+background: radial-gradient(ellipse 80% 60% at 50% 40%, #1a2f5a 0%, #0d1b35 45%, #080f1e 100%);
+}
+
+/* Grid lines overlay */
+.hero-grid {
+position: absolute; inset: 0;
+background-image:
+linear-gradient(rgba(184,115,51,0.06) 1px, transparent 1px),
+linear-gradient(90deg, rgba(184,115,51,0.06) 1px, transparent 1px);
+background-size: 60px 60px;
+}
+
+/* Diagonal stripe */
+.hero-stripe {
+position: absolute; inset: 0;
+background: linear-gradient(135deg,
+transparent 40%,
+rgba(184,115,51,0.03) 40%,
+rgba(184,115,51,0.03) 60%,
+transparent 60%
+);
+}
+
+/* Glow */
+.hero-glow {
+position: absolute;
+width: 500px; height: 500px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(184,115,51,0.12) 0%, transparent 70%);
+top: 50%; left: 50%; transform: translate(-50%,-60%);
+pointer-events: none;
+}
+
+.hero-content {
+position: relative; z-index: 2;
+padding: 0 24px;
+}
+
+.hero-eyebrow {
+display: inline-flex; align-items: center; gap: 10px;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 11px; font-weight: 600;
+letter-spacing: 0.45em; text-transform: uppercase;
+color: var(–copper-bright);
+margin-bottom: 28px;
+}
+
+.hero-eyebrow::before, .hero-eyebrow::after {
+content: ‘’; display: block;
+width: 32px; height: 1px;
+background: var(–copper);
+opacity: 0.6;
+}
+
+.hero-logo-img {
+width: 110px; height: 110px; border-radius: 50%;
+margin: 0 auto 36px;
+box-shadow: 0 0 60px rgba(184,115,51,0.25), 0 0 120px rgba(184,115,51,0.08);
+animation: logoPulse 4s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+0%, 100% { box-shadow: 0 0 60px rgba(184,115,51,0.25), 0 0 120px rgba(184,115,51,0.08); }
+50% { box-shadow: 0 0 80px rgba(184,115,51,0.4), 0 0 160px rgba(184,115,51,0.15); }
+}
+
+.hero-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(52px, 12vw, 110px);
+letter-spacing: 0.06em;
+line-height: 0.9;
+color: var(–white);
+text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+margin-bottom: 8px;
+}
+
+.hero-title .copper-word {
+color: var(–copper-bright);
+display: block;
+}
+
+.hero-subtitle {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 14px; font-weight: 400;
+letter-spacing: 0.6em; text-transform: uppercase;
+color: var(–copper);
+margin-bottom: 32px;
+}
+
+.hero-desc {
+max-width: 480px; margin: 0 auto 50px;
+font-size: 16px; font-weight: 300; line-height: 1.7;
+color: var(–white-dim);
+}
+
+.hero-cta-group {
+display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+
+.btn-primary {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 14px;
+letter-spacing: 0.3em; text-transform: uppercase;
+padding: 16px 44px;
+background: linear-gradient(135deg, var(–copper), var(–copper-gold));
+color: var(–dark);
+border: none; cursor: pointer;
+text-decoration: none; display: inline-block;
+clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+transition: all 0.25s;
+box-shadow: 0 8px 32px rgba(184,115,51,0.3);
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 14px 44px rgba(184,115,51,0.45);
+background: linear-gradient(135deg, var(–copper-gold), var(–copper));
+}
+
+.btn-secondary {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 14px;
+letter-spacing: 0.3em; text-transform: uppercase;
+padding: 15px 40px;
+background: transparent;
+color: var(–white-dim);
+border: 1px solid rgba(240,236,228,0.2);
+cursor: pointer; text-decoration: none; display: inline-block;
+clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+transition: all 0.25s;
+}
+
+.btn-secondary:hover {
+border-color: rgba(240,236,228,0.5);
+color: var(–white);
+}
+
+/* Scroll indicator */
+.scroll-hint {
+position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+opacity: 0.4;
+}
+.scroll-hint span {
+font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+font-family: ‘Barlow Condensed’, sans-serif;
+}
+.scroll-line {
+width: 1px; height: 40px;
+background: linear-gradient(to bottom, var(–copper), transparent);
+animation: scrollAnim 1.8s ease-in-out infinite;
+}
+@keyframes scrollAnim {
+0% { transform: scaleY(0); transform-origin: top; }
+50% { transform: scaleY(1); transform-origin: top; }
+51% { transform: scaleY(1); transform-origin: bottom; }
+100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─── STATS ─── */
+.stats-bar {
+background: var(–navy-mid);
+border-top: 1px solid rgba(184,115,51,0.2);
+border-bottom: 1px solid rgba(184,115,51,0.2);
+padding: 28px 40px;
+display: flex; justify-content: center; gap: 0;
+flex-wrap: wrap;
+}
+
+.stat-item {
+text-align: center; padding: 12px 48px;
+position: relative;
+}
+
+.stat-item + .stat-item::before {
+content: ‘’;
+position: absolute; left: 0; top: 20%; height: 60%;
+width: 1px; background: rgba(184,115,51,0.25);
+}
+
+.stat-num {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 42px; color: var(–copper-bright);
+letter-spacing: 0.05em; line-height: 1;
+display: block;
+}
+
+.stat-label {
+font-size: 10px; font-weight: 600;
+letter-spacing: 0.3em; text-transform: uppercase;
+color: var(–white-dim); margin-top: 4px;
+display: block;
+}
+
+/* ─── ABOUT ─── */
+.section {
+padding: 100px 24px;
+max-width: 1100px; margin: 0 auto;
+}
+
+.section-tag {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 10px; font-weight: 700;
+letter-spacing: 0.5em; text-transform: uppercase;
+color: var(–copper);
+display: flex; align-items: center; gap: 12px;
+margin-bottom: 20px;
+}
+.section-tag::after {
+content: ‘’; flex: 1; height: 1px;
+background: linear-gradient(to right, var(–copper-dim), transparent);
+max-width: 80px;
+}
+
+.section-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(38px, 7vw, 72px);
+letter-spacing: 0.04em; line-height: 0.95;
+margin-bottom: 32px;
+}
+
+/* About grid */
+.about-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 60px; align-items: center;
+}
+
+.about-text p {
+font-size: 15px; font-weight: 300; line-height: 1.85;
+color: var(–white-dim); margin-bottom: 16px;
+}
+
+.about-text p strong {
+color: var(–copper-bright); font-weight: 600;
+}
+
+.about-visual {
+position: relative;
+}
+
+.about-logo-display {
+width: 100%;
+aspect-ratio: 1;
+display: flex; align-items: center; justify-content: center;
+background: linear-gradient(135deg, var(–navy-mid), var(–navy));
+border: 1px solid rgba(184,115,51,0.2);
+position: relative; overflow: hidden;
+}
+
+.about-logo-display img {
+width: 65%; position: relative; z-index: 2;
+}
+
+.about-logo-display::before {
+content: ‘’;
+position: absolute; inset: 0;
+background: radial-gradient(circle at center, rgba(184,115,51,0.1) 0%, transparent 65%);
+}
+
+.about-logo-display::after {
+content: ‘NORTHLINE’;
+position: absolute; bottom: 20px; left: 50%;
+transform: translateX(-50%);
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 10px; letter-spacing: 0.6em; color: var(–copper-dim);
+font-weight: 600; z-index: 2;
+}
+
+/* Pillars */
+.pillars-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 2px;
+background: rgba(184,115,51,0.12);
+margin-top: 80px;
+}
+
+.pillar {
+background: var(–navy);
+padding: 36px 28px;
+position: relative; overflow: hidden;
+transition: background 0.3s;
+}
+
+.pillar:hover { background: var(–navy-mid); }
+
+.pillar-num {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 52px; color: rgba(184,115,51,0.12);
+position: absolute; top: 16px; right: 20px;
+line-height: 1; pointer-events: none;
+}
+
+.pillar-icon {
+font-size: 28px; margin-bottom: 16px;
+}
+
+.pillar-title {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 18px;
+letter-spacing: 0.1em; text-transform: uppercase;
+color: var(–copper-bright); margin-bottom: 10px;
+}
+
+.pillar-text {
+font-size: 13px; font-weight: 300; line-height: 1.7;
+color: var(–white-dim);
+}
+
+/* ─── JOIN CTA ─── */
+.join-section {
+background: var(–navy-mid);
+border-top: 1px solid rgba(184,115,51,0.15);
+border-bottom: 1px solid rgba(184,115,51,0.15);
+padding: 90px 24px;
+text-align: center;
+position: relative; overflow: hidden;
+}
+
+.join-section::before {
+content: ‘NORTHLINE’;
+position: absolute; top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(80px, 20vw, 200px);
+color: rgba(184,115,51,0.03);
+white-space: nowrap; pointer-events: none;
+letter-spacing: 0.1em;
+}
+
+.join-inner { position: relative; z-index: 2; }
+
+.join-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(40px, 8vw, 80px);
+line-height: 0.9; margin-bottom: 20px;
+}
+
+.join-sub {
+font-size: 15px; font-weight: 300; color: var(–white-dim);
+max-width: 420px; margin: 0 auto 40px;
+line-height: 1.7;
+}
+
+/* ─── FOOTER ─── */
+footer {
+background: var(–dark);
+border-top: 1px solid rgba(184,115,51,0.1);
+padding: 40px 40px;
+display: flex; justify-content: space-between; align-items: center;
+flex-wrap: wrap; gap: 16px;
+}
+
+.footer-brand {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 13px;
+letter-spacing: 0.3em; text-transform: uppercase;
+color: var(–copper);
+}
+
+.footer-links {
+display: flex; gap: 24px; list-style: none;
+}
+.footer-links a {
+font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+text-transform: uppercase; color: rgba(240,236,228,0.35);
+text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(–copper-bright); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 768px) {
+nav { padding: 14px 20px; }
+.nav-links { display: none; }
+.about-grid { grid-template-columns: 1fr; gap: 36px; }
+.about-visual { display: none; }
+.pillars-grid { grid-template-columns: 1fr; }
+.stat-item { padding: 12px 28px; }
+.stat-item + .stat-item::before { display: none; }
+footer { flex-direction: column; text-align: center; }
+.section { padding: 70px 20px; }
+}
+
+/* Fade-in animation */
+.fade-in {
+opacity: 0; transform: translateY(24px);
+animation: fadeUp 0.8s ease forwards;
+}
+.fade-in:nth-child(2) { animation-delay: 0.15s; }
+.fade-in:nth-child(3) { animation-delay: 0.3s; }
+.fade-in:nth-child(4) { animation-delay: 0.45s; }
+.fade-in:nth-child(5) { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Northline Logo" onerror="this.style.display='none'"/>
+    <div class="nav-logo-text">
+      Northline
+      <span>Pure Drive Society</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="basvuru.html">Başvur</a></li>
+    <li><a href="admin.html">Admin</a></li>
+  </ul>
+  <a href="basvuru.html" class="nav-cta">Başvur</a>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-in">İstanbul · Araç Kültürü</div>
+    <img src="logo.png" alt="Northline Logo" class="hero-logo-img fade-in"
+      onerror="this.outerHTML='<div style=\'width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#1a2f5a,#0d1b35);border:2px solid rgba(184,115,51,0.4);margin:0 auto 36px;display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,sans-serif;font-size:24px;color:#d4894a;letter-spacing:0.1em;\'>NL</div>'"/>
+    <h1 class="hero-title fade-in">
+      Pure
+      <span class="copper-word">Drive</span>
+      Society
+    </h1>
+    <p class="hero-subtitle fade-in">Northline · Est. İstanbul</p>
+    <p class="hero-desc fade-in">
+      Araç tutkunu insanları bir araya getiren, güvene dayalı bir topluluk.
+      Sadece sürüş değil; bir kültür, bir aidiyet.
+    </p>
+    <div class="hero-cta-group fade-in">
+      <a href="basvuru.html" class="btn-primary">Topluluğa Başvur</a>
+      <a href="#hakkimizda" class="btn-secondary">Keşfet</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Kaydır</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">84+</span>
+    <span class="stat-label">Aktif Üye</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">120+</span>
+    <span class="stat-label">Etkinlik</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">3+</span>
+    <span class="stat-label">Yıl</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">İST</span>
+    <span class="stat-label">Merkez</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+
+<section class="section" id="hakkimizda">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-tag">Biz Kimiz</div>
+      <h2 class="section-title">Araç Tutkunu<br/>Bir Topluluk</h2>
+      <p>
+        <strong>Northline Pure Drive Society</strong>, araç kültürünü bir yaşam biçimi olarak benimseyen insanları bir çatı altında buluşturan seçici bir topluluktur.
+      </p>
+      <p>
+        Haftalık sürüşler, buluşmalar ve etkinliklerle aktif bir sosyal hayat sunuyoruz. Her üyemiz titizlikle seçilir çünkü topluluğumuzun kalitesi üyelerimizin kalitesiyle doğru orantılıdır.
+      </p>
+      <p>
+        İster günlük sürücü ister tutkulu bir modifikasyon meraklısı olun; doğru adrestesiniz.
+      </p>
+    </div>
+    <div class="about-visual">
+      <div class="about-logo-display">
+        <img src="logo.png" alt="Northline"
+          onerror="this.outerHTML='<div style=\'font-family:Bebas Neue,sans-serif;font-size:72px;color:#b87333;letter-spacing:0.08em;\'>NL</div>'"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pillars -->
+
+  <div class="pillars-grid">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-icon">🛣️</div>
+      <div class="pillar-title">Haftalık Sürüşler</div>
+      <p class="pillar-text">Ekip halinde organize edilen düzenli sürüşler. Her hafta yeni rotalar, yeni deneyimler.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-icon">🤝</div>
+      <div class="pillar-title">Güçlü Ağ</div>
+      <p class="pillar-text">Araç sektöründen insanlar, mekanikler, oto uzmanları ve tutkulu sürücülerden oluşan bir ağ.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-icon">🏁</div>
+      <div class="pillar-title">Seçici Üyelik</div>
+      <p class="pillar-text">Her başvuru incelenir. Kaliteli bir topluluk için kaliteli üyeler seçilir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN CTA -->
+
+<div class="join-section">
+  <div class="join-inner">
+    <div class="section-tag" style="justify-content:center;">Aramıza Katıl</div>
+    <h2 class="join-title">Hazır Mısın?</h2>
+    <p class="join-sub">
+      Başvurunu yap, biz seninle tanışalım. Northline ailesinin bir parçası olmak için ilk adımı at.
+    </p>
+    <a href="basvuru.html" class="btn-primary">Üyelik Başvurusu Yap</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-brand">Northline Pure Drive Society</div>
+  <ul class="footer-links">
+    <li><a href="basvuru.html">Başvur</a></li>
+    <li><a href="admin.html">Yönetici</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
