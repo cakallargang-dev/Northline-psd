@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANCAVE | The Automotive Hub</title>
+    <!-- Fontlar (Stitch ile daha sonra değişebilir, geçici modern fontlar eklendi) -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* TEMEL DEĞİŞKENLER VE SIFIRLAMA */
+        :root {
+            --bg-color: #050505;
+            --surface-color: #111111;
+            --accent-neon: #ff2a2a; /* Karanlık kırmızı/neon detay */
+            --accent-gray: #303030;
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+            --font-heading: 'Teko', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* TİPOGRAFİ */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .text-neon {
+            color: var(--accent-neon);
+            text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
+        }
+
+        /* HEADER / NAVBAR */
+        .navbar {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--accent-gray);
+        }
+
+        .nav-logo {
+            font-size: 32px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-neon);
+        }
+
+        /* HERO BÖLÜMÜ */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.9)), url('mancave-bg-placeholder.jpg') center/cover;
+            /* Placeholder arka plan, Stitch üzerinde görsellerle değişebilir */
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--bg-color), transparent);
+        }
+
+        .hero-title {
+            font-size: 100px;
+            line-height: 0.9;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 500px;
+            z-index: 2;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--accent-neon);
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: var(--font-body);
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-neon);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-neon);
+        }
+
+        /* SECTIONS ORTAK A YARLAR */
+        .section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--accent-gray);
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .section-tag {
+            color: var(--accent-neon);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 56px;
+            color: var(--text-main);
+        }
+
+        /* THE CAVE (FİZİKSEL ALAN) İKİLİ IZGARA */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-img-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background-color: var(--surface-color);
+            border: 1px solid var(--accent-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            font-family: var(--font-heading);
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        /* FELLASCARD & NFC ÖZELLİKLERİ KARTLARI */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--surface-color);
+            padding: 40px 30px;
+            border: 1px solid var(--accent-gray);
+            border-top: 3px solid var(--accent-neon);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: var(--accent-neon);
+        }
+
+        .feature-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 60px 0;
+            text-align: center;
+            background-color: #020202;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-family: var(--font-heading);
+            letter-spacing: 5px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--accent-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* RESPONSIVE MİMARİ İÇİN TEMEL MEDYA SORGULARI */
+        @media(max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .hero-title { font-size: 60px; }
+            .nav-links { display: none; /* Mobilde menü gizli (hamburger menü opsiyonel sonradan eklenebilir) */ }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="container">
+        <nav class="navbar">
+            <a href="#" class="nav-logo">MAN<span class="text-neon">CAVE</span></a>
+            <ul class="nav-links">
+                <li><a href="#vision">Vizyon</a></li>
+                <li><a href="#space">Fiziksel Alan</a></li>
+                <li><a href="#fellascard">Fellascard & NFC</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO BÖLÜMÜ -->
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">Bir Oda Değil<br><span class="text-neon">Bir Deneyim</span></h1>
+                <p class="hero-subtitle">Seçici, sürüş odaklı ve uzun vadede markalaşmayı hedefleyen hibrit bir organizasyon, teknoloji ekosistemi ve erkek odası vizyonu.</p>
+                <a href="#apply" class="btn">Başvur</a>
+            </div>
+        </section>
+
+        <!-- VİZYON / KÜLTÜR -->
+        <section id="vision" class="section">
+            <div class="container grid-2">
+                <div>
+                    <div class="section-header">
+                        <span class="section-tag">Otomobil Kültürü</span>
+                        <h2 class="section-title">"Raconu Olan" Sosyal Ortam</h2>
+                    </div>
+                    <p>Klasik sosyal medya araba sayfalarından farklı olarak MANCAVE; yalnızca içerik üretmeyi değil, gerçek hayatta karşılığı olan, kalite standartlarına sahip bir ekip oluşturmayı hedefler.</p>
+                    <br>
+                    <p style="color: var(--text-muted);">Performans araçları, modifiye dünyası ve sürüş disiplinini merkeze alan izole edilmiş bir atmosfer.</p>
+                </div>
+                <div class="feature-img-placeholder">
+                    [Araç/Garaj Görseli Gelecek]
+                </div>
+            </div>
+        </section>
+
+        <!-- THE CAVE (FİZİKSEL ALAN) -->
+        <section id="space" class="section" style="background-color: var(--surface-color);">
+            <div class="container grid-2">
+                <div class="feature-img-placeholder" style="background-color: var(--bg-color);">
+                    [Endüstriyel Alan Görseli Gelecek]
+                </div>
+                <div>
+                    <div class="section-header">
+                        <span class="section-tag">Mimari & Tasarım</span>
+                        <h2 class="section-title">Endüstriyel Garaj Estetiği</h2>
+                    </div>
+                    <p>Ortalama olmaktan kaçınan "Az şey, ama doğru şey" felsefesiyle tasarlanmış maskülen bir yapı.</p>
+                    <br>
+                    <ul style="color:var(--text-muted); list-style-position: inside; font-size: 14px;">
+                        <li style="margin-bottom:10px;"><b>Neon & Siyah Uyumu:</b> Metalik yüzeyler ve neon aydınlatmalar.</li>
+                        <li style="margin-bottom:10px;"><b>Bölümlendirilmiş Alanlar:</b> Minimal bar, stüdyo arka planı, rahat oturma alanları.</li>
+                        <li style="margin-bottom:10px;"><b>Görsel Odak:</b> Çizgisel İstanbul haritası ve İstanbul Park silüetleri.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FELLASCARD & NFC -->
+        <section id="fellascard" class="section">
+            <div class="container">
+                <div class="section-header" style="align-items: center; text-align: center; margin: 0 auto 60px;">
+                    <span class="section-tag">Teknoloji & Gelecek Vizyonu</span>
+                    <h2 class="section-title">Fiziksel ile Dijitalin Birleşimi</h2>
+                </div>
+
+                <div class="grid-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">NFC</div>
+                        <h3>Akıllı Bağlantı</h3>
+                        <p>Araçlara, etkinlik alanlarına ve üye kartlarına yerleştirilen NFC çipleri ile anında erişim ve etkileşim ölçümleme.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">VIP</div>
+                        <h3>Fellascard Erişim</h3>
+                        <p>Yalnızca belirli üyelerin girişine izin veren NFC/QR tabanlı ekosistem ile seçkin etkinliklere fiziksel giriş imkanı.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">DATA</div>
+                        <h3>Sponsor Verisi</h3>
+                        <p>Fiziksel dünyadaki kullanıcı etkileşimini doğrudan sayısal verilere ve analizlere çeviren akıllı altyapı.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAŞVURU (CTA) -->
+        <section id="apply" class="section" style="text-align: center; border-bottom: none; padding-bottom: 120px;">
+            <div class="container">
+                <h2 class="section-title" style="margin-bottom: 20px;">Seçkin Topluluğa Katıl</h2>
+                <p style="color: var(--text-muted); margin-bottom: 40px;">Sadece davetiye ve onay ile girilebilen ekosistem.</p>
+                <a href="#" class="btn" style="background-color: var(--accent-neon); color: #000;">Başvuru Süreci Yakında</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">MAN<span style="color:var(--accent-neon)">CAVE</span></div>
+            <div class="footer-text">Otomobil Kültürü · Est. İstanbul</div>
+        </div>
+    </footer>
+
+</body>
+</html>
