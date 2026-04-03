@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Northline Pure Drive Society</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0d1b35;
+    --navy-mid: #1a2744;
+    --navy-light: #243356;
+    --copper: #b87333;
+    --copper-bright: #d4894a;
+    --copper-gold: #e8a856;
+    --copper-dim: #7a4c22;
+    --white: #f0ece4;
+    --white-dim: #c8c0b0;
+    --dark: #080f1e;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: ‘Barlow’, sans-serif;
+background-color: var(–dark);
+color: var(–white);
+min-height: 100vh;
+}
+
+/* ─── NAV ─── */
+#admin-nav {
+display: none;
+position: fixed; top: 0; width: 100%; z-index: 100;
+padding: 16px 40px;
+background: rgba(8,15,30,0.97);
+border-bottom: 1px solid rgba(184,115,51,0.18);
+backdrop-filter: blur(12px);
+justify-content: space-between; align-items: center;
+}
+
+.nav-brand {
+display: flex; align-items: center; gap: 14px;
+}
+.nav-brand img { width: 36px; height: 36px; border-radius: 50%; }
+.nav-brand-text {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 13px;
+letter-spacing: 0.25em; text-transform: uppercase;
+color: var(–white); line-height: 1.2;
+}
+.nav-brand-text span {
+display: block; font-size: 9px; color: var(–copper);
+letter-spacing: 0.35em; font-weight: 400;
+}
+.nav-badge {
+background: rgba(184,115,51,0.15);
+border: 1px solid rgba(184,115,51,0.3);
+color: var(–copper-bright);
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 9px; font-weight: 700;
+letter-spacing: 0.3em; text-transform: uppercase;
+padding: 4px 10px;
+}
+.nav-logout {
+background: none; border: 1px solid rgba(240,236,228,0.15);
+color: var(–white-dim); cursor: pointer;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+text-transform: uppercase; padding: 8px 20px;
+transition: all 0.2s;
+}
+.nav-logout:hover { color: var(–copper-bright); border-color: var(–copper-dim); }
+
+/* ─── LOGIN ─── */
+#login-container {
+min-height: 100vh;
+display: flex; align-items: center; justify-content: center;
+padding: 24px;
+background:
+radial-gradient(ellipse 60% 50% at 50% 50%, rgba(26,39,68,0.9) 0%, transparent 70%),
+var(–dark);
+position: relative; overflow: hidden;
+}
+
+#login-container::before {
+content: ‘’;
+position: absolute; inset: 0;
+background-image:
+linear-gradient(rgba(184,115,51,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(184,115,51,0.05) 1px, transparent 1px);
+background-size: 60px 60px;
+}
+
+.login-box {
+position: relative; z-index: 2;
+width: 100%; max-width: 420px;
+background: linear-gradient(160deg, var(–navy-mid), var(–navy));
+border: 1px solid rgba(184,115,51,0.2);
+padding: 52px 44px;
+}
+
+.login-box::before {
+content: ‘’;
+position: absolute; top: 0; left: 0; right: 0; height: 2px;
+background: linear-gradient(to right, transparent, var(–copper), transparent);
+}
+
+.login-header {
+text-align: center; margin-bottom: 40px;
+}
+.login-logo {
+width: 70px; height: 70px; border-radius: 50%;
+margin: 0 auto 20px;
+box-shadow: 0 0 40px rgba(184,115,51,0.2);
+display: block;
+}
+.login-tag {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 9px; font-weight: 700; letter-spacing: 0.5em;
+text-transform: uppercase; color: var(–copper);
+margin-bottom: 8px;
+}
+.login-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 34px; letter-spacing: 0.06em;
+color: var(–white);
+}
+
+.login-error {
+display: none;
+background: rgba(172,52,52,0.15);
+border: 1px solid rgba(172,52,52,0.4);
+color: #f87171;
+font-size: 13px; font-weight: 400;
+padding: 10px 16px; text-align: center;
+margin-bottom: 24px;
+}
+
+.login-field { margin-bottom: 18px; }
+.login-field label {
+display: block;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 9px; font-weight: 700;
+letter-spacing: 0.4em; text-transform: uppercase;
+color: var(–copper); margin-bottom: 8px;
+}
+.login-field input {
+width: 100%;
+background: rgba(8,15,30,0.8);
+border: 1px solid rgba(184,115,51,0.2);
+color: var(–white);
+font-family: ‘Barlow’, sans-serif; font-size: 15px;
+padding: 13px 16px; outline: none;
+transition: border-color 0.2s;
+}
+.login-field input::placeholder { color: rgba(200,192,176,0.3); }
+.login-field input:focus { border-color: var(–copper); }
+
+.btn-login {
+width: 100%; margin-top: 28px;
+padding: 16px;
+background: linear-gradient(135deg, var(–copper), var(–copper-gold));
+color: var(–dark); border: none; cursor: pointer;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 14px;
+letter-spacing: 0.35em; text-transform: uppercase;
+clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+transition: all 0.25s;
+box-shadow: 0 6px 24px rgba(184,115,51,0.25);
+}
+.btn-login:hover {
+transform: translateY(-1px);
+box-shadow: 0 10px 36px rgba(184,115,51,0.4);
+}
+
+/* ─── DASHBOARD ─── */
+#dashboard-container {
+display: none;
+padding-top: 88px; min-height: 100vh;
+background:
+radial-gradient(ellipse 50% 40% at 80% 0%, rgba(26,39,68,0.6) 0%, transparent 60%),
+var(–dark);
+}
+
+.dash-inner {
+max-width: 1200px; margin: 0 auto;
+padding: 40px 24px 80px;
+}
+
+.dash-header {
+margin-bottom: 36px;
+display: flex; justify-content: space-between; align-items: flex-end;
+flex-wrap: wrap; gap: 16px;
+}
+
+.dash-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 48px; letter-spacing: 0.05em; line-height: 1;
+color: var(–white);
+}
+.dash-title span { color: var(–copper-bright); }
+
+.dash-sub {
+font-size: 13px; font-weight: 300; color: var(–white-dim);
+margin-top: 4px;
+}
+
+/* Stats row */
+.dash-stats {
+display: flex; gap: 2px; margin-bottom: 32px;
+background: rgba(184,115,51,0.08);
+overflow: hidden;
+}
+
+.dash-stat {
+flex: 1; background: var(–navy-mid);
+padding: 24px 28px;
+}
+
+.dash-stat-num {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 36px; color: var(–copper-bright); letter-spacing: 0.04em;
+display: block; line-height: 1;
+}
+
+.dash-stat-label {
+font-size: 10px; font-weight: 600; letter-spacing: 0.3em;
+text-transform: uppercase; color: var(–white-dim);
+margin-top: 4px; display: block;
+}
+
+/* Tabs */
+.tabs-bar {
+display: flex; gap: 2px; margin-bottom: 24px;
+background: rgba(184,115,51,0.08);
+overflow: hidden;
+}
+
+.tab-btn {
+flex: 1; padding: 14px;
+background: var(–navy);
+color: var(–white-dim);
+border: none; cursor: pointer;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700; font-size: 12px;
+letter-spacing: 0.3em; text-transform: uppercase;
+transition: all 0.2s;
+}
+
+.tab-btn.active {
+background: var(–copper);
+color: var(–dark);
+}
+
+.tab-btn:hover:not(.active) {
+background: var(–navy-mid);
+color: var(–white);
+}
+
+/* Sheet selector */
+.sheet-bar {
+display: flex; align-items: center; gap: 16px;
+padding: 16px 20px;
+background: var(–navy-mid);
+border: 1px solid rgba(184,115,51,0.15);
+border-bottom: none;
+flex-wrap: wrap;
+}
+.sheet-bar label {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 10px; font-weight: 700; letter-spacing: 0.35em;
+text-transform: uppercase; color: var(–copper);
+flex-shrink: 0;
+}
+.sheet-select {
+background: rgba(8,15,30,0.8);
+border: 1px solid rgba(184,115,51,0.25);
+color: var(–white);
+font-family: ‘Barlow’, sans-serif; font-size: 14px;
+padding: 8px 14px; outline: none; cursor: pointer;
+flex: 1; max-width: 300px;
+appearance: none; -webkit-appearance: none;
+}
+.sheet-select option { background: var(–navy-mid); }
+.sheet-select:focus { border-color: var(–copper); }
+
+/* Iframe container */
+.iframe-wrap {
+position: relative;
+border: 1px solid rgba(184,115,51,0.15);
+height: 640px;
+overflow: hidden;
+background: var(–navy);
+}
+
+.iframe-loading {
+position: absolute; inset: 0; z-index: 5;
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+gap: 12px;
+background: var(–navy);
+}
+
+.spinner {
+width: 28px; height: 28px; border-radius: 50%;
+border: 2px solid rgba(184,115,51,0.15);
+border-top-color: var(–copper);
+animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+text-transform: uppercase; color: var(–white-dim);
+}
+
+.iframe-wrap iframe {
+position: absolute; inset: 0;
+width: 100%; height: 100%;
+border: none; z-index: 10;
+}
+
+/* Tab panels */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Drive panel */
+.drive-note {
+padding: 16px 20px;
+background: var(–navy-mid);
+border: 1px solid rgba(184,115,51,0.15);
+border-bottom: none;
+display: flex; align-items: center; gap: 10px;
+}
+.drive-note span {
+font-size: 12px; font-weight: 300; color: var(–white-dim);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+#admin-nav { padding: 14px 20px; }
+.login-box { padding: 36px 24px; }
+.dash-inner { padding: 24px 16px 60px; }
+.dash-stats { flex-direction: column; gap: 2px; }
+.dash-title { font-size: 36px; }
+.tabs-bar { flex-direction: column; gap: 2px; }
+.iframe-wrap { height: 500px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ADMIN NAV -->
+
+<nav id="admin-nav">
+  <div class="nav-brand">
+    <img src="logo.png" alt="Northline"
+      onerror="this.style.display='none'"/>
+    <div class="nav-brand-text">
+      Northline
+      <span>Yönetici Paneli</span>
+    </div>
+    <div class="nav-badge">Admin</div>
+  </div>
+  <button class="nav-logout" onclick="logout()">Çıkış Yap ×</button>
+</nav>
+
+<!-- LOGIN -->
+
+<div id="login-container">
+  <div class="login-box">
+    <div class="login-header">
+      <img src="logo.png" alt="Northline" class="login-logo"
+        onerror="this.outerHTML='<div style=\'width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#1a2f5a,#0d1b35);border:2px solid rgba(184,115,51,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:Bebas Neue,sans-serif;font-size:22px;color:#d4894a;\'>NL</div>'"/>
+      <div class="login-tag">Yetkili Girişi</div>
+      <div class="login-title">Pure Drive Society</div>
+    </div>
+
+```
+<div class="login-error" id="login-error">
+  Hatalı kullanıcı adı veya şifre.
+</div>
+
+<form id="login-form">
+  <div class="login-field">
+    <label>Kullanıcı Adı</label>
+    <input type="text" id="username" placeholder="kullaniciadiniz" autocomplete="off" required/>
+  </div>
+  <div class="login-field">
+    <label>Şifre</label>
+    <input type="password" id="password" placeholder="••••••••" required/>
+  </div>
+  <button type="submit" class="btn-login">Giriş Yap</button>
+</form>
+```
+
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard-container">
+  <div class="dash-inner">
+
+```
+<div class="dash-header">
+  <div>
+    <h1 class="dash-title">Başvuru <span>Paneli</span></h1>
+    <p class="dash-sub">Northline üyelik başvurularını buradan yönetebilirsiniz.</p>
+  </div>
+  <a href="index.html" style="
+    font-family:'Barlow Condensed',sans-serif; font-weight:700;
+    font-size:11px; letter-spacing:0.3em; text-transform:uppercase;
+    padding:10px 22px; background:transparent;
+    color:var(--white-dim); border:1px solid rgba(240,236,228,0.15);
+    text-decoration:none; display:inline-block;
+    transition:all 0.2s;
+  ">← Ana Sayfa</a>
+</div>
+
+<!-- Stats -->
+<div class="dash-stats" id="dashStats" style="display:none;">
+  <div class="dash-stat">
+    <span class="dash-stat-num" id="statTotal">—</span>
+    <span class="dash-stat-label">Toplam Başvuru</span>
+  </div>
+  <div class="dash-stat">
+    <span class="dash-stat-num" style="color:var(--copper-gold);">Bu Ay</span>
+    <span class="dash-stat-label">İnceleniyor</span>
+  </div>
+  <div class="dash-stat">
+    <span class="dash-stat-num">NL</span>
+    <span class="dash-stat-label">Aktif Form</span>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs-bar">
+  <button class="tab-btn active" id="tab-btn-basvuru" onclick="switchTab('basvuru')">
+    Başvuru Listesi
+  </button>
+  <button class="tab-btn" id="tab-btn-drive" onclick="switchTab('drive')">
+    Dosyalar & Anılar
+  </button>
+</div>
+
+<!-- Başvuru Tab -->
+<div class="tab-panel active" id="tab-basvuru">
+  <div class="sheet-bar">
+    <label>Form Görünümü</label>
+    <select class="sheet-select" id="sheet-selector" onchange="switchSheet(this.value)">
+      <option value="main">Başvuru Formu</option>
+    </select>
+  </div>
+  <div class="iframe-wrap">
+    <div class="iframe-loading" id="loading-main">
+      <div class="spinner"></div>
+      <div class="loading-text">Tablo Yükleniyor</div>
+      <p style="font-size:11px; color:rgba(200,192,176,0.4); text-align:center; max-width:240px; margin-top:4px; line-height:1.6;">
+        Görünmüyorsa Google hesabınızla giriş yapmanız veya tabloyu herkese açık yapmanız gerekebilir.
+      </p>
+    </div>
+    <!-- !! BURAYA GOOGLE SHEET IFRAME LİNKİNİZİ YAPIŞTIRINIZ !! -->
+    <iframe
+      id="iframe-main"
+      src="GOOGLE_SHEET_EMBED_URL_BURAYA"
+      onload="document.getElementById('loading-main').style.display='none'">
+    </iframe>
+  </div>
+</div>
+
+<!-- Drive Tab -->
+<div class="tab-panel" id="tab-drive">
+  <div class="drive-note">
+    <span>📂</span>
+    <span>Dosyalar Google Drive üzerinden görüntülenir. Görünmüyorsa Drive hesabınızla giriş yapmış olmanız gerekir.</span>
+  </div>
+  <div class="iframe-wrap">
+    <div class="iframe-loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Drive Yükleniyor</div>
+    </div>
+    <!-- !! BURAYA GOOGLE DRIVE KLASÖR EMBED LİNKİNİZİ YAPIŞTIRINIZ !! -->
+    <iframe src="GOOGLE_DRIVE_EMBED_URL_BURAYA"></iframe>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<script>
+  // ── Credentials ──
+  const CREDENTIALS = [
+    { user: 'northline', pass: 'northline2025', canDrive: true },
+    { user: 'admin', pass: 'admin123', canDrive: false },
+  ];
+
+  document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('username').value.trim().toLowerCase();
+    const pass = document.getElementById('password').value.trim();
+    const errorEl = document.getElementById('login-error');
+
+    const match = CREDENTIALS.find(c => c.user === user && c.pass === pass);
+
+    if (match) {
+      errorEl.style.display = 'none';
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('admin-nav').style.display = 'flex';
+      document.getElementById('dashboard-container').style.display = 'block';
+      document.getElementById('dashStats').style.display = 'flex';
+
+      // Hide drive tab if not permitted
+      if (!match.canDrive) {
+        document.getElementById('tab-btn-drive').style.display = 'none';
+      }
+
+      switchTab('basvuru');
+    } else {
+      errorEl.style.display = 'block';
+      document.getElementById('password').value = '';
+    }
+  });
+
+  function logout() {
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('dashboard-container').style.display = 'none';
+    document.getElementById('admin-nav').style.display = 'none';
+    document.getElementById('login-container').style.display = 'flex';
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById('tab-' + tab).classList.add('active');
+    document.getElementById('tab-btn-' + tab).classList.add('active');
+  }
+
+  function switchSheet(val) {
+    document.querySelectorAll('[id^="iframe-"]').forEach(f => f.style.display = 'none');
+    const target = document.getElementById('iframe-' + val);
+    if (target) target.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
