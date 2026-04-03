@@ -1,8 +1,6 @@
 FROM nginx:alpine
-
 RUN rm -rf /usr/share/nginx/html/*
-
 COPY . /usr/share/nginx/html/
-COPY nginx.conf /etc/nginx/templates/default.conf.template
-
-CMD ["/bin/sh", "-c", "envsubst '${PORT}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+RUN echo 'server { listen 80; location / { root /usr/share/nginx/html; index index.html; try_files $uri $uri.html $uri/ =404; } }' > /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
