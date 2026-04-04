@@ -342,7 +342,7 @@
 <script>
   const SHEET_ID = "1Wi0S0ZS-3Mcv_GwbqRMcuoZkCGBBK2zMflR-4WgeOaw";
   const GVZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxeBToNYK8j_6XJa-5IB9nPUPLxCnTJ74d0dVVO_qdd5qQ0Yl-A7glRhyAwKazqNlqYAQ/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYYKIFtUu3Ae8fmdvYxLwm4JevdKfcp4JTLr9FWMmkt9Hl0tf_RR2aN3S7N5I4G2RU0g/exec";
 
   let allApps = [];
   let filtered = [];
@@ -564,7 +564,13 @@
     // Fotoğraf
     const photoEl = document.getElementById("d-photo-wrap");
     if (app.photo) {
-      document.getElementById("d-photo-img").src = app.photo;
+      // Drive uc?id= linkini thumbnail URL'sine çevir (tarayıcı bloklamaz)
+      let photoUrl = app.photo;
+      const idMatch = photoUrl.match(/[?&]id=([^&]+)/);
+      if (idMatch) {
+        photoUrl = "https://drive.google.com/thumbnail?id=" + idMatch[1] + "&sz=w800";
+      }
+      document.getElementById("d-photo-img").src = photoUrl;
       photoEl.classList.remove("hidden");
     } else {
       photoEl.classList.add("hidden");
