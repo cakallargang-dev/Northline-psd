@@ -351,9 +351,9 @@
         </div>
         <div>
            <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1 flex justify-between">
-              GÖRSEL LİNKİ <span>(OPSİYONEL)</span>
+              ETKİNLİK GÖRSELİ YÜKLE <span>(OPSİYONEL)</span>
            </label>
-           <input type="url" id="ev-photo" placeholder="Resim URL (Drive vs.)" class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2.5 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
+           <input type="file" accept="image/*" id="ev-photo" class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2 text-sm text-[#e5e2e1] file:mr-4 file:py-1 file:px-4 file:border-0 file:text-xs file:font-['Space_Grotesk'] file:font-bold file:bg-[#ff2a2a] file:text-[#131313] hover:file:bg-[#e8bcb7] transition-colors focus:outline-none file:transition-colors cursor-pointer text-[rgba(232,188,183,0.5)]">
         </div>
         <button id="ev-submit-btn" type="submit" class="w-full mt-4 bg-[#ff2a2a]/10 hover:bg-[#ff2a2a]/20 border border-[#ff2a2a]/40 text-[#ff2a2a] font-['Space_Grotesk'] uppercase tracking-widest text-xs py-3 transition-colors">
             ETKİNLİĞİ YAYINLA
@@ -450,8 +450,27 @@
       }
       
       const btn = document.getElementById('ev-submit-btn');
-      btn.textContent = "YAYINLANIYOR...";
+      btn.textContent = "YÜKLENİYOR... LÜTFEN BEKLEYİN";
       btn.disabled = true;
+
+      // Fotoğraf Base64 çevirme işlemi
+      const fileInput = document.getElementById('ev-photo');
+      let photoBase64 = "";
+      let photoType = "";
+      let photoName = "";
+
+      if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          photoType = file.type;
+          photoName = file.name;
+          photoBase64 = await new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                  resolve(e.target.result.split(',')[1]); 
+              };
+              reader.readAsDataURL(file);
+          });
+      }
 
       // Tarih formatını güzelleştir
       const rawDate = document.getElementById('ev-date').value;
@@ -464,7 +483,9 @@
           location: document.getElementById('ev-loc').value,
           mapsUrl: document.getElementById('ev-mapurl').value,
           details: document.getElementById('ev-details').value,
-          photo: document.getElementById('ev-photo').value
+          photoBase64: photoBase64,
+          photoType: photoType,
+          photoName: photoName
       };
 
       try {
