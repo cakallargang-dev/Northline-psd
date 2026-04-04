@@ -3,7 +3,7 @@
 <html class="dark" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MANCAVE | MANCAVECARD</title>
+<title>MANCAVE | GİRİŞ YAP</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -107,116 +107,91 @@
 <main class="min-h-screen pb-32">
 <!-- Hero Context -->
 <section class="px-6 pt-12 pb-8">
-<div class="max-w-4xl mx-auto">
-<span class="font-label text-primary uppercase tracking-[0.3em] text-xs font-bold block mb-2">GÜVENLİ ERİŞİM PROTOKOLÜ</span>
-<h2 class="font-headline text-4xl font-extrabold uppercase tracking-tighter leading-none mb-4">MANCAVECARD TERMİNALİ</h2>
-<div class="h-1 w-24 bg-primary-container"></div>
+<div class="max-w-md mx-auto text-center">
+<span class="font-label text-[#ff2a2a] uppercase tracking-[0.3em] text-[10px] font-bold block mb-2">GÜVENLİ ERİŞİM PROTOKOLÜ</span>
+<h2 class="font-headline text-3xl font-extrabold uppercase tracking-tighter leading-none mb-4 text-[#e5e2e1]">ÜYE PORTALI</h2>
+<div class="h-1 w-16 bg-[#ff2a2a] mx-auto"></div>
 </div>
 </section>
-<!-- NFC Card Visual -->
-<section class="px-6 flex flex-col items-center justify-center">
-<div class="relative w-full max-w-sm aspect-[1.586/1] group">
-<!-- Card Shadow/Glow -->
-<div class="absolute inset-0 bg-primary/5 blur-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-<!-- Main Card Body -->
-<div class="relative h-full w-full bg-surface-container-high border border-outline-variant/30 overflow-hidden shadow-2xl">
-<!-- High-tech texture background -->
-<div class="absolute inset-0 bg-gradient-to-br from-surface-container-highest/20 to-transparent"></div>
-<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-<!-- Card Content -->
-<div class="absolute inset-0 p-8 flex flex-col justify-between">
-<div class="flex justify-between items-start">
-<div class="flex flex-col">
-<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest opacity-60">SEÇKİN ÜYELİK</span>
-<span class="font-headline text-lg font-bold text-on-surface tracking-widest">MANCAVECARD</span>
-</div>
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="nfc">nfc</span>
-</div>
-<div class="mt-auto space-y-4">
-<div class="flex items-center gap-2">
-<div class="w-10 h-7 bg-gradient-to-r from-on-secondary-fixed-variant to-secondary-container/40 border border-outline-variant/20"></div>
-<div class="h-px flex-1 bg-outline-variant/20"></div>
-</div>
-<div>
-<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">YETKİLENDİRME KİMLİĞİ</p>
-<p class="font-headline text-xl font-bold tracking-wider text-on-surface">Üye Kimliği: MC-0492-INDUSTRIAL</p>
-</div>
-</div>
-</div>
-<!-- Scanline effect -->
-<div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent h-1/2 w-full -translate-y-full group-hover:translate-y-[200%] transition-transform duration-[2000ms] ease-in-out pointer-events-none"></div>
-</div>
-</div>
-<!-- Interaction Zone -->
-<div class="mt-12 w-full max-w-sm text-center">
-<button id="nfc-scan-btn" class="relative w-full py-6 bg-surface-container-lowest border border-primary/20 hover:border-primary transition-colors group">
-<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-<div class="flex flex-col items-center gap-4">
-<div class="relative">
-<div class="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
-<div class="relative w-16 h-16 flex items-center justify-center bg-surface-container-high border border-primary/40">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="contactless">contactless</span>
-</div>
-</div>
-<span class="font-label text-sm font-bold tracking-[0.4em] uppercase text-on-surface group-hover:text-primary transition-colors">GİRİŞ İÇİN DOKUNDURUN</span>
-</div>
-</button>
-<p id="nfc-status-message" class="mt-8 text-on-surface-variant font-body text-xs uppercase tracking-widest leading-relaxed opacity-60 px-4">
-                Atölye katına erişimi doğrulamak için fiziksel ManCaveCard'ınızı veya mobil NFC cihazınızı terminal okuyucusuna yaklaştırın.
-            </p>
-</div>
-</section>
-<!-- Status Grid (Bento Style) -->
-<section class="px-6 mt-16 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-1">
-<div class="bg-surface-container-low p-6 flex flex-col justify-between h-40">
-<span class="font-label text-[10px] text-primary uppercase tracking-widest font-bold">Terminal Durumu</span>
-<div>
-<h4 class="font-headline text-2xl font-bold uppercase">AKTİF</h4>
-<p class="text-on-surface-variant text-xs font-medium">Yayın için hazır</p>
-</div>
-</div>
-<div class="bg-surface-container-high p-6 flex flex-col justify-between h-40">
-<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">GEÇİŞ BÖLGESİ</span>
-<div>
-<h4 class="font-headline text-2xl font-bold uppercase">A-01</h4>
-<p class="text-on-surface-variant text-xs font-medium">Güney Endüstriyel Kanat</p>
-</div>
-</div>
-<div class="bg-surface-container-low p-6 flex flex-col justify-between h-40">
-<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">SİNYAL</span>
-<div class="flex items-end justify-between">
-<div>
-<h4 class="font-headline text-2xl font-bold uppercase">ŞİFRELİ</h4>
-<p class="text-on-surface-variant text-xs font-medium">AES-256 Protokolü</p>
-</div>
-<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+
+<!-- Login Form Section -->
+<section class="px-6 flex flex-col items-center justify-center mt-4">
+<div class="w-full max-w-md bg-[#0e0e0e] border border-[#2a2a2a] p-8 shadow-2xl relative overflow-hidden group">
+<!-- Glow effect background -->
+<div class="absolute -inset-1 bg-gradient-to-br from-[#ff2a2a]/5 to-transparent blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
+
+<div class="relative z-10">
+    <div class="text-center mb-8">
+        <span class="material-symbols-outlined text-[#ff2a2a] text-4xl mb-2">lock_open</span>
+        <p class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest text-[rgba(232,188,183,0.6)]">KİMLİK DOĞRULAMA GEREKİYOR</p>
+    </div>
+
+    <form id="login-form" class="space-y-6">
+        <div>
+            <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">KAYITLI E-POSTA</label>
+            <input required type="email" id="login-email" placeholder="ornek@gmail.com" class="w-full bg-[#131313] border border-[#2a2a2a] px-4 py-3 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
+        </div>
+        <div>
+            <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">MANCAVE ŞİFRESİ</label>
+            <input required type="password" id="login-pass" placeholder="••••••••" class="w-full bg-[#131313] border border-[#2a2a2a] px-4 py-3 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors tracking-widest">
+        </div>
+
+        <button type="submit" id="login-btn" class="w-full relative py-4 bg-[#ff2a2a]/10 border border-[#ff2a2a]/40 hover:bg-[#ff2a2a]/20 transition-all group flex items-center justify-center gap-3 active:scale-[0.98]">
+            <span class="font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase text-[#ff2a2a]">SİSTEME GİRİŞ YAP</span>
+            <span class="material-symbols-outlined text-[#ff2a2a] text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+    </form>
+    
+    <p id="login-error" class="hidden mt-4 text-center text-[10px] text-[#ff2a2a] font-['Space_Grotesk'] uppercase tracking-widest bg-[#ff2a2a]/10 p-2 border border-[#ff2a2a]/30">
+        Hatalı giriş denemesi.
+    </p>
+
+    <!-- Scanline effect -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#ff2a2a]/5 to-transparent h-1/2 w-full -translate-y-full group-hover:translate-y-[200%] transition-transform duration-[2000ms] ease-in-out pointer-events-none"></div>
 </div>
 </div>
 </section>
-<!-- Manual Scan Option -->
-<section class="px-6 mt-8 max-w-4xl mx-auto">
-<button onclick="window.location.href='mancave.html'" class="w-full py-4 border border-outline-variant/20 hover:bg-surface-container-high transition-colors flex items-center justify-center gap-3">
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="login">login</span>
-<span class="font-label text-xs font-bold uppercase tracking-widest text-[#ff2a2a]">HIZLI GİRİŞ (TEST İÇİN)</span>
-</button>
+
+<!-- Demo Login Info -->
+<section class="max-w-md mx-auto px-6 mt-6">
+    <div class="bg-[#1c1b1b] p-4 text-center border-l-2 border-[#e8bcb7]/30">
+        <p class="text-[9px] text-[#e8bcb7]/60 font-['Space_Grotesk'] uppercase tracking-widest leading-relaxed">
+            DİKKAT: ŞU AN DEMO MODUNDASINIZ.<br>FORMU DOLDURUP GİRİŞ YAPTIĞINIZDA SİMÜLASYON VERİSİ İLE UYGULAMAYA GİRECEKSİNİZ. ONAYLI ÜYELER İÇİN APP SCRIPT ENTEGRASYONU SONRAKİ AŞAMADA DEVREYE ALINACAKTIR.
+        </p>
+    </div>
 </section>
-</main>
-<!-- NFC JS (Geçici Olarak Test İçin Devre Dışı Bırakıldı - Direkt Yönlendirme) -->
+<!-- Auth System Simulation JS -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const scanBtn = document.getElementById('nfc-scan-btn');
+    const form = document.getElementById('login-form');
+    const btn = document.getElementById('login-btn');
+    const errorMsg = document.getElementById('login-error');
     
-    // Test amaçlı NFC simülasyonunu atlayıp direkt mancave'e geçiyoruz
-    scanBtn.addEventListener('click', () => {
-        const statusMsg = document.getElementById('nfc-status-message');
-        statusMsg.innerHTML = '<span style="color:#ffb4ab">TEST: YÖNLENDİRİLİYOR...</span>';
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
         
-        scanBtn.classList.replace('bg-surface-container-lowest', 'bg-primary/20');
-        scanBtn.classList.replace('border-primary/20', 'border-primary');
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-pass').value;
+        
+        btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm text-[#ff2a2a]">sync</span><span class="font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase text-[#ff2a2a]">DOĞRULANIYOR...</span>`;
+        btn.disabled = true;
 
+        // Simulate network delay
         setTimeout(() => {
+            // Fake Backend Auth bypass
+            localStorage.setItem('mancave_auth', 'true');
+            // Mock DB data that will eventually come from Google Sheet
+            const fakeUserData = {
+                name: "Egemen Tutmuş",
+                car: "BMW G20",
+                vault: "2025 Haziran 1Gr Altın, 2025 Eylül 1Gr Altın",
+                photoUrl: "https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=500"
+            };
+            localStorage.setItem('mancave_user', JSON.stringify(fakeUserData));
+            
+            // Redirect to Events Dashboard
             window.location.href = 'mancave.html';
-        }, 500);
+        }, 1500);
     });
 });
 </script>

@@ -299,8 +299,16 @@ function renderDemoEvents(container) {
 }
 
 // Sayfa yüklendiğinde veriyi çek
-document.addEventListener("DOMContentLoaded", fetchEvents);
-
+document.addEventListener("DOMContentLoaded", () => {
+    // GÜVENLİK KORİDORU: Giriş yapmamışsa Login'e at!
+    const userStr = localStorage.getItem('mancave_user');
+    if (!userStr) {
+        window.location.href = 'mancavecard.html';
+        return;
+    }
+    
+    fetchEvents();
+});
 </script>
 </body>
 </html>

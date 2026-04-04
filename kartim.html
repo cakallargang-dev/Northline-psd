@@ -138,10 +138,10 @@
                 <!-- Center Profile -->
                 <div class="flex-1 flex flex-col items-center justify-center relative z-10 px-6">
                     <div class="w-24 h-24 rounded-full border-2 border-[#ff2a2a]/30 p-1 mb-4 shadow-[0_0_20px_rgba(255,42,42,0.2)]">
-                        <img src="https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=200&h=200" alt="Avatar" class="w-full h-full object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500">
+                        <img id="card-photo" src="https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=200&h=200" alt="Avatar" class="w-full h-full object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500">
                     </div>
-                    <h3 class="font-headline text-2xl font-black uppercase tracking-widest text-[#e5e2e1] text-center w-full truncate">TGT-R</h3>
-                    <p class="font-label text-[10px] uppercase tracking-[0.3em] text-[#ff2a2a] mt-1">NISSSAN GTR R35</p>
+                    <h3 id="card-name" class="font-headline text-2xl font-black uppercase tracking-widest text-[#e5e2e1] text-center w-full truncate">...</h3>
+                    <p id="card-car" class="font-label text-[10px] uppercase tracking-[0.3em] text-[#ff2a2a] mt-1">...</p>
                 </div>
 
                 <!-- Footer details -->
@@ -159,23 +159,27 @@
                 <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#ff2a2a] to-[#5c0004]"></div>
             </div>
 
-            <!-- BACK OF CARD (QR CODE) -->
-            <div class="card-back absolute inset-0 bg-[#0e0e0e] border border-[#ff2a2a]/50 shadow-[0_0_50px_rgba(255,42,42,0.2)] rounded-sm overflow-hidden flex flex-col">
-                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#ff2a2a]/10 via-transparent to-transparent"></div>
+            <!-- BACK OF CARD (KASA/VAULT) -->
+            <div class="card-back absolute inset-0 bg-[#0e0e0e] border border-[#ffb400]/30 shadow-[0_0_50px_rgba(255,180,0,0.1)] rounded-sm overflow-hidden flex flex-col">
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#ffb400]/5 via-transparent to-transparent"></div>
                 
-                <div class="p-6 flex flex-col items-center justify-center h-full relative z-10 w-full">
-                    <span class="material-symbols-outlined text-[#ff2a2a] text-4xl mb-6">qr_code_scanner</span>
-                    
-                    <div class="bg-white p-4 rounded-sm shadow-xl w-48 h-48 flex items-center justify-center" id="qrcode">
-                        <!-- QR Code JS will inject here -->
+                <div class="p-6 flex flex-col h-full relative z-10 w-full">
+                    <div class="flex items-center gap-3 mb-6 border-b border-[#2a2a2a] pb-4">
+                        <span class="material-symbols-outlined text-[#ffb400] text-2xl">account_balance</span>
+                        <div>
+                            <h3 class="font-headline text-[14px] font-bold tracking-widest text-[#e8bcb7] uppercase">KASA RAPORU</h3>
+                            <p class="font-label text-[8px] uppercase tracking-[0.2em] text-[rgba(232,188,183,0.5)] mt-1">GÜNCEL DURUM</p>
+                        </div>
                     </div>
-
-                    <p class="font-label text-[9px] uppercase tracking-[0.3em] text-[#e8bcb7] mt-8 text-center px-4 leading-relaxed">
-                        TERMİNALDEN GEÇİŞ İÇİN BU KODU OKUTUNUZ.
-                    </p>
                     
-                    <button class="mt-6 font-label text-[10px] text-[#ff2a2a] border border-[#ff2a2a]/30 px-4 py-2 uppercase tracking-widest hover:bg-[#ff2a2a]/10 transition-colors">
-                        ARKAYI ÇEVİR
+                    <div id="vault-list" class="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-hide flex flex-col gap-2">
+                        <!-- Vault items inject via JS -->
+                        <div class="animate-pulse bg-[#1c1b1b] h-8 w-full"></div>
+                        <div class="animate-pulse bg-[#1c1b1b] h-8 w-full opacity-70"></div>
+                    </div>
+                    
+                    <button class="mt-6 w-full font-label text-[10px] text-[#ffb400] border border-[#ffb400]/30 px-4 py-3 uppercase tracking-widest hover:bg-[#ffb400]/10 transition-colors">
+                        ÖN YÜZE DÖN
                     </button>
                 </div>
             </div>
@@ -211,14 +215,53 @@
 </nav>
 
 <script>
-    // QR Kodu Oluştur
-    new QRCode(document.getElementById("qrcode"), {
-        text: "MC-8472-AUTH-TOKEN-X", // Test datası. Gerçek kodda localStorage'dan çekilebilir.
-        width: 160,
-        height: 160,
-        colorDark : "#131313",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
+    document.addEventListener('DOMContentLoaded', () => {
+        // GÜVENLİK KORİDORU: Giriş yapmamışsa Login'e at!
+        const userStr = localStorage.getItem('mancave_user');
+        if (!userStr) {
+            window.location.href = 'mancavecard.html';
+            return;
+        }
+
+        try {
+            const user = JSON.parse(userStr);
+            
+            // Ön Yüz Verileri Doldur
+            document.getElementById('card-name').textContent = user.name || "BİLİNMEYEN MİSAFİR";
+            document.getElementById('card-car').textContent = user.car || "LİSTE DIŞI ARAÇ";
+            if(user.photoUrl && user.photoUrl.trim() !== "") {
+                document.getElementById('card-photo').src = user.photoUrl;
+            }
+
+            // Kasa Verisi Doldur (Virgülle veya Nokta ile ayrıldığını varsayıyoruz, 
+            // Veya satır satır basıyoruz)
+            const vaultContainer = document.getElementById('vault-list');
+            const vaultData = user.vault || "";
+            
+            if (vaultData.trim() === "") {
+                vaultContainer.innerHTML = `<div class="text-center mt-4">
+                    <span class="material-symbols-outlined text-[rgba(232,188,183,0.3)] text-3xl mb-2">money_off</span>
+                    <p class="text-[9px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(232,188,183,0.4)]">KASA BİLGİSİ BULUNAMADI</p>
+                </div>`;
+            } else {
+                // Virgül ayracı ile bölüp kutulara yerleştir
+                const items = vaultData.split(',');
+                let html = '';
+                items.forEach(i => {
+                   if(i.trim().length > 0) {
+                       html += `
+                        <div class="bg-[#131313] border border-[#2a2a2a] p-3 border-l-2 border-l-[#ffb400]">
+                            <p class="font-['Space_Grotesk'] text-[10px] text-[#e5e2e1] uppercase tracking-widest">${i.trim()}</p>
+                        </div>
+                       `;
+                   }
+                });
+                vaultContainer.innerHTML = html;
+            }
+
+        } catch(e) {
+            console.error("User data parse error", e);
+        }
     });
 
     // Kart çevirme efekti
