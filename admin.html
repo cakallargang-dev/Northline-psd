@@ -529,8 +529,11 @@
     const app = allApps.find(a => a.id === id);
     if (!app) return;
 
-    // Render cards to update selected state
-    renderCards();
+    // Sadece selected CSS class'ını güncelle, innerHTML yeniden oluşturma
+    document.querySelectorAll(".app-card").forEach(el => el.classList.remove("selected"));
+    const cards = document.querySelectorAll(".app-card");
+    const idx = filtered.findIndex(a => a.id === id);
+    if (idx !== -1 && cards[idx]) cards[idx].classList.add("selected");
 
     // Fill detail
     fillDetail(app);
@@ -609,7 +612,21 @@
     updateBadge("d-status-badge", st);
     updateBadge("m-status-badge", st);
     updateStats();
-    filterCards();
+
+    // Listedeki ilgili kartın badge'ini yerinde güncelle (innerHTML yeniden oluşturmadan)
+    const idx = filtered.findIndex(a => a.id === selectedIndex);
+    if (idx !== -1) {
+      const cards = document.querySelectorAll(".app-card");
+      if (cards[idx]) {
+        const badge = cards[idx].querySelector(".badge");
+        if (badge) {
+          badge.className = "badge";
+          if (st === "approved") { badge.classList.add("badge-approved"); badge.textContent = "ONAYLANDI"; }
+          else if (st === "rejected") { badge.classList.add("badge-rejected"); badge.textContent = "REDDEDİLDİ"; }
+          else { badge.classList.add("badge-pending"); badge.textContent = "BEKLEMEDE"; }
+        }
+      }
+    }
 
     // Detail paneli koru - seçili başvuruyu yeniden doldur
     const app = allApps.find(a => a.id === selectedIndex);
