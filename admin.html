@@ -356,12 +356,11 @@
   // Sheets'e yaz
   async function saveToSheet(rowIndex, status) {
     try {
-      const params = new URLSearchParams();
-      params.append("rowIndex", rowIndex);
-      params.append("status", status);
-      await fetch(SCRIPT_URL + "?" + params.toString(), {
-        method: "GET",
+      await fetch(SCRIPT_URL, {
+        method: "POST",
         mode: "no-cors",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({ rowIndex, status }),
       });
     } catch(e) {
       console.error("Sheets yazma hatası:", e);
