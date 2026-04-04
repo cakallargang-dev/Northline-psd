@@ -397,7 +397,7 @@
           job:       cells[7]?.v || "—",
           car:       cells[8]?.v || "—",
           reason:    cells[9]?.v || "—",
-          sheetStatus: cells[10]?.v || "",
+          sheetStatus: cells[11]?.v || "",
         };
       });
 
@@ -471,7 +471,7 @@
   function filterCards() {
     const q = (document.getElementById("search-input").value || "").toLowerCase();
     filtered = allApps.filter(a => {
-      const matchFilter = currentFilter === "all" || (statuses[a.id]||"pending") === currentFilter;
+      const matchFilter = currentFilter === "all" || (statuses[String(a.id)]||"pending") === currentFilter;
       const matchSearch = !q ||
         a.name.toLowerCase().includes(q) ||
         a.car.toLowerCase().includes(q) ||
@@ -610,6 +610,10 @@
     updateBadge("m-status-badge", st);
     updateStats();
     filterCards();
+
+    // Detail paneli koru - seçili başvuruyu yeniden doldur
+    const app = allApps.find(a => a.id === selectedIndex);
+    if (app) fillDetail(app);
 
     // Sheets'e yaz
     const statusText = st === "approved" ? "ONAYLANDI" : st === "rejected" ? "REDDEDİLDİ" : "BEKLEMEDE";
