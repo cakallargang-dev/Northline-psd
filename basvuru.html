@@ -371,14 +371,15 @@ body { min-height: max(884px, 100dvh); }
   <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
     <span class="step-num">10</span>
     <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">ARACININ FOTOĞRAFI</label>
-    <p class="text-xs text-[#e8bcb7] mb-6 font-light leading-relaxed">
-      Fotoğrafı Google Form üzerinden yükleyebilirsin. Gönder butonuna bastıktan sonra Google Form açılacak — orada fotoğrafını ekleyip gönderebilirsin.
-    </p>
-    <div class="border border-dashed border-[#5e3f3b] p-8 flex flex-col items-center justify-center gap-3 hover:border-[#ff2a2a] transition-colors cursor-pointer" id="drop-zone">
+    <input type="file" id="f-photo" accept="image/*" class="hidden" onchange="previewPhoto(this)"/>
+    <div class="border border-dashed border-[#5e3f3b] p-8 flex flex-col items-center justify-center gap-3 hover:border-[#ff2a2a] transition-colors cursor-pointer" id="drop-zone" onclick="document.getElementById('f-photo').click()">
       <span class="material-symbols-outlined text-[#ffb4ab] text-4xl">photo_camera</span>
-      <span class="text-xs font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.5)]">İSTEĞE BAĞLI</span>
+      <span class="text-xs font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.5)]">İSTEĞE BAĞLI — DOKUNMAK İÇİN TIKla</span>
     </div>
-    <p class="hint mt-4">Fotoğraf yüklemek için Google Form adımında devam edebilirsin</p>
+    <div id="photo-preview" class="hidden mt-4">
+      <img id="photo-img" src="" class="w-full max-h-48 object-cover border border-[#5e3f3b]"/>
+      <p id="photo-name" class="hint mt-2"></p>
+    </div>
     <div class="flex gap-4 mt-8">
       <button onclick="submitForm()" class="flex-1 bg-[#ff2a2a] text-white px-8 py-4 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(255,42,42,0.5)] active:scale-95 transition-all">
         BAŞVURUYU GÖNDER ↗
@@ -529,9 +530,38 @@ body { min-height: max(884px, 100dvh); }
 
   let isSubmitting = false;
 
+  function previewPhoto(input) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById("photo-img").src = e.target.result;
+      document.getElementById("photo-name").textContent = file.name;
+      document.getElementById("photo-preview").classList.remove("hidden");
+      document.getElementById("drop-zone").classList.add("hidden");
+    };
+    reader.readAsDataURL(file);
+  }
+
   async function submitForm() {
     if (isSubmitting) return;
     isSubmitting = true;
+
+    // Fotoğrafı base64'e çevir
+    let photoBase64 = "";
+    let photoType = "";
+    let photoName = "";
+    const photoFile = document.getElementById("f-photo").files[0];
+    if (photoFile) {
+      photoBase64 = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result.split(",")[1]);
+        reader.readAsDataURL(photoFile);
+      });
+      photoType = photoFile.type;
+      photoName = photoFile.name;
+    }
+
     const data = {
       action: "submit",
       email:  document.getElementById("f-email").value.trim(),
@@ -543,6 +573,9 @@ body { min-height: max(884px, 100dvh); }
       job:    document.getElementById("f-job").value.trim(),
       car:    document.getElementById("f-car").value.trim(),
       reason: document.getElementById("f-reason").value.trim(),
+      photo:     photoBase64,
+      photoType: photoType,
+      photoName: photoName,
     };
 
     try {

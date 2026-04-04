@@ -292,6 +292,10 @@
             <p class="field-label">KATILMA AMACI</p>
             <p id="d-reason" class="field-value text-sm leading-relaxed font-light text-[#e8bcb7]">—</p>
           </div>
+          <div class="md:col-span-2 hidden" id="d-photo-wrap">
+            <p class="field-label">ARAÇ FOTOĞRAFI</p>
+            <img id="d-photo-img" src="" class="mt-2 w-full max-h-72 object-cover border border-[#2a2a2a]"/>
+          </div>
         </div>
 
       </div>
@@ -397,6 +401,7 @@
           job:       cells[7]?.v || "—",
           car:       cells[8]?.v || "—",
           reason:    cells[9]?.v || "—",
+          photo:       cells[10]?.v || "",
           sheetStatus: cells[11]?.v || "",
         };
       });
@@ -555,6 +560,15 @@
     document.getElementById("d-ig").textContent    = app.ig || "—";
     document.getElementById("d-job").textContent   = app.job.toUpperCase();
     document.getElementById("d-reason").textContent= app.reason;
+
+    // Fotoğraf
+    const photoEl = document.getElementById("d-photo-wrap");
+    if (app.photo) {
+      document.getElementById("d-photo-img").src = app.photo;
+      photoEl.classList.remove("hidden");
+    } else {
+      photoEl.classList.add("hidden");
+    }
 
     // Date format
     const rawDate = app.timestamp;
