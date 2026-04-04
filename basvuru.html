@@ -429,7 +429,7 @@ body { min-height: max(884px, 100dvh); }
 
 <script>
   // ── Apps Script config ──
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxeBToNYK8j_6XJa-5IB9nPUPLxCnTJ74d0dVVO_qdd5qQ0Yl-A7glRhyAwKazqNlqYAQ/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYYKIFtUu3Ae8fmdvYxLwm4JevdKfcp4JTLr9FWMmkt9Hl0tf_RR2aN3S7N5I4G2RU0g/exec";
 
   // ── State ──
   const TOTAL_STEPS = 10; // 0 = start, 1-10 = questions
@@ -578,20 +578,28 @@ body { min-height: max(884px, 100dvh); }
     reader.readAsDataURL(file);
   }
 
+  async function postData(payload) {
+    return fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload),
+    });
+  }
+
   async function submitForm() {
     if (isSubmitting) return;
     isSubmitting = true;
 
-    // Gönder butonunu devre dışı bırak
-    const submitBtn = document.querySelector("#step-10 button[onclick='submitForm()']");
-    if (submitBtn) {
-      submitBtn.textContent = "GÖNDERİLİYOR...";
-      submitBtn.disabled = true;
-    }
+    const submitBtn = document.querySelector("#step-10 button[onclick=\'submitForm()\']");
+    if (submitBtn) { submitBtn.textContent = "GÖNDERİLİYOR..."; submitBtn.disabled = true; }
 
-    const data = {
+    const email = document.getElementById("f-email").value.trim();
+
+    // ── 1. Adım: Metin verilerini gönder (fotoğrafsız) ──
+    const textData = {
       action: "submit",
-      email:  document.getElementById("f-email").value.trim(),
+      email,
       name:   document.getElementById("f-name").value.trim(),
       phone:  document.getElementById("f-phone").value.trim(),
       dob:    document.getElementById("f-dob").value.trim(),
@@ -600,23 +608,25 @@ body { min-height: max(884px, 100dvh); }
       job:    document.getElementById("f-job").value.trim(),
       car:    document.getElementById("f-car").value.trim(),
       reason: document.getElementById("f-reason").value.trim(),
-      photo:     compressedPhotoBase64,   // Global değişkenden al
-      photoType: compressedPhotoBase64 ? "image/jpeg" : "",
-      photoName: compressedPhotoName,
+      photo: "", photoType: "", photoName: "",
     };
 
-    try {
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify(data),
-      });
-    } catch(e) {
-      console.error("Gönderme hatası:", e);
+    try { await postData(textData); } catch(e) { console.error("Metin gönderme hatası:", e); }
+
+    // ── 2. Adım: Fotoğrafı ayrıca gönder (varsa) ──
+    if (compressedPhotoBase64) {
+      try {
+        await postData({
+          action: "update_photo",
+          email,
+          photo:     compressedPhotoBase64,
+          photoType: "image/jpeg",
+          photoName: compressedPhotoName,
+        });
+      } catch(e) { console.warn("Fotoğraf gönderme hatası:", e); }
     }
 
-    // Show success
+    // ── Başarı ekranını göster ──
     current = TOTAL_STEPS + 1;
     document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
     const suc = document.getElementById("step-success");
