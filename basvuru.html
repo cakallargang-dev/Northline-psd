@@ -527,7 +527,11 @@ body { min-height: max(884px, 100dvh); }
     showStep(current, "backward");
   }
 
+  let isSubmitting = false;
+
   async function submitForm() {
+    if (isSubmitting) return;
+    isSubmitting = true;
     const data = {
       action: "submit",
       email:  document.getElementById("f-email").value.trim(),
@@ -565,6 +569,7 @@ body { min-height: max(884px, 100dvh); }
   // ── Enter key navigation ──
   document.addEventListener("keydown", function(e) {
     if (e.key !== "Enter") return;
+    if (isSubmitting) { e.preventDefault(); return; }
     const active = document.querySelector(".step.active");
     if (!active) return;
     const tag = document.activeElement ? document.activeElement.tagName : "";
