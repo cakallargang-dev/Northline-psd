@@ -195,53 +195,28 @@
 </section>
 <!-- Manual Scan Option -->
 <section class="px-6 mt-8 max-w-4xl mx-auto">
-<button class="w-full py-4 border border-outline-variant/20 hover:bg-surface-container-high transition-colors flex items-center justify-center gap-3">
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="qr_code_scanner">qr_code_scanner</span>
-<span class="font-label text-xs font-bold uppercase tracking-widest">YEDEK QR TARAYICIYI AÇ</span>
+<button onclick="window.location.href='mancave.html'" class="w-full py-4 border border-outline-variant/20 hover:bg-surface-container-high transition-colors flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="login">login</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-[#ff2a2a]">HIZLI GİRİŞ (TEST İÇİN)</span>
 </button>
 </section>
 </main>
-<!-- NFC JS -->
+<!-- NFC JS (Geçici Olarak Test İçin Devre Dışı Bırakıldı - Direkt Yönlendirme) -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const scanBtn = document.getElementById('nfc-scan-btn');
-    const statusMsg = document.getElementById('nfc-status-message');
+    
+    // Test amaçlı NFC simülasyonunu atlayıp direkt mancave'e geçiyoruz
+    scanBtn.addEventListener('click', () => {
+        const statusMsg = document.getElementById('nfc-status-message');
+        statusMsg.innerHTML = '<span style="color:#ffb4ab">TEST: YÖNLENDİRİLİYOR...</span>';
+        
+        scanBtn.classList.replace('bg-surface-container-lowest', 'bg-primary/20');
+        scanBtn.classList.replace('border-primary/20', 'border-primary');
 
-    scanBtn.addEventListener('click', async () => {
-        if (!("NDEFReader" in window)) {
-            statusMsg.innerHTML = '<span style="color:#ff2a2a; font-weight:bold;">HATA: CİHAZINIZ veya TARAYICINIZ WEB NFC DESTEKLEMİYOR.<br>SADECE ANDROID VE HTTPS ÜZERİNDE ÇALIŞIR.</span>';
-            return;
-        }
-
-        try {
-            statusMsg.innerHTML = '<span style="color:#e8bcb7">SİSTEM HAZIR. LÜTFEN MANCAVECARD\'I YAKLAŞTIRIN...</span>';
-            const ndef = new NDEFReader();
-            await ndef.scan();
-            
-            ndef.addEventListener("readingerror", () => {
-                statusMsg.innerHTML = '<span style="color:#ff2a2a">OKUMA HATASI. Lütfen kartı tekrar konumlandırın.</span>';
-            });
-
-            ndef.addEventListener("reading", ({ message, serialNumber }) => {
-                let textData = "BOŞ NDEF VERİSİ";
-                // Read inside the NTAG216
-                for (const record of message.records) {
-                    if (record.recordType === "text" || record.recordType === "url") {
-                        const textDecoder = new TextDecoder(record.encoding || "utf-8");
-                        textData = textDecoder.decode(record.data);
-                    }
-                }
-                
-                statusMsg.innerHTML = `<span style="color:#ffb4ab; font-size:14px; font-weight:bold;">ERİŞİM ONAYLANDI</span><br><br>Seri No: ${serialNumber}<br>Kart Verisi: ${textData}`;
-                
-                // Visual success pulse
-                scanBtn.classList.replace('bg-surface-container-lowest', 'bg-primary/20');
-                scanBtn.classList.replace('border-primary/20', 'border-primary');
-            });
-
-        } catch (error) {
-            statusMsg.innerHTML = `<span style="color:#ff2a2a">BAŞLATMA HATASI: ${error.message}</span>`;
-        }
+        setTimeout(() => {
+            window.location.href = 'mancave.html';
+        }, 500);
     });
 });
 </script>
