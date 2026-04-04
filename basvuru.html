@@ -404,11 +404,11 @@
       // Sheets'teki durum varsa onu kullan, yoksa localStorage'a bak, o da yoksa pending
       allApps.forEach(a => {
         if (a.sheetStatus) {
-          // Sheets'ten gelen değeri normalize et (Türkçe İ/i sorunu için toUpperCase kullan)
-          const raw = a.sheetStatus.toString().toUpperCase().trim();
-          if (raw.includes("ONAYLA") || raw === "APPROVED") {
+          // Sheets'ten gelen değeri normalize et
+          const raw = a.sheetStatus.toString().trim().toLowerCase();
+          if (raw === "approved" || raw.includes("onayla")) {
             statuses[String(a.id)] = "approved";
-          } else if (raw.includes("REDDET") || raw === "REJECTED") {
+          } else if (raw === "rejected" || raw.includes("reddet")) {
             statuses[String(a.id)] = "rejected";
           } else {
             statuses[String(a.id)] = "pending";
@@ -631,7 +631,7 @@
     if (app) fillDetail(app);
 
     // Sheets'e yaz
-    const statusText = st === "approved" ? "ONAYLANDI" : st === "rejected" ? "REDDEDİLDİ" : "BEKLEMEDE";
+    const statusText = st; // "approved" / "rejected" / "pending" — İngilizce sabit değer
     showToast("Sheets'e kaydediliyor...", false);
     await saveToSheet(selectedIndex, statusText);
     showToast("✓ Kaydedildi", true);
