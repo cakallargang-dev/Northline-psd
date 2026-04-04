@@ -317,16 +317,16 @@
 </div>
 
 <!-- Events Panel -->
-<div id="events-panel" class="hidden h-[calc(100dvh-64px)] flex-col lg:flex-row overflow-hidden w-full">
-  <!-- Left/Top: Google Form -->
-  <div class="w-full lg:w-[45%] h-full flex flex-col border-r border-[#1c1b1b]">
+<div id="events-panel" class="hidden h-[calc(100dvh-64px)] flex-col lg:flex-row overflow-y-auto lg:overflow-hidden w-full">
+  <!-- Left/Top: Custom Form -->
+  <div class="w-full lg:w-[45%] lg:h-full shrink-0 flex flex-col border-b lg:border-b-0 lg:border-r border-[#1c1b1b]">
     <div class="px-6 py-4 border-b border-[#1c1b1b] bg-[#1c1b1b]">
       <h2 class="font-['Space_Grotesk'] text-[#e5e2e1] uppercase tracking-widest font-bold text-sm">YENİ ETKİNLİK YAYINLA (GOOGLE FORM)</h2>
       <p class="text-[10px] text-[rgba(232,188,183,0.5)] mt-1 tracking-wider uppercase">Buradan girilen etkinlikler anında üyelere yansır.</p>
     </div>
-    <div class="flex-1 bg-[#131313] relative overflow-hidden">
+    <div class="lg:flex-1 bg-[#131313] relative lg:overflow-hidden pb-8 lg:pb-0">
       <!-- Custom HTML Form -->
-      <form id="custom-event-form" onsubmit="submitCustomEvent(event)" class="h-full flex flex-col p-6 space-y-4 overflow-y-auto">
+      <form id="custom-event-form" onsubmit="submitCustomEvent(event)" class="h-auto lg:h-full flex flex-col p-6 space-y-4 lg:overflow-y-auto">
         <div>
            <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">BAŞLIK</label>
            <input required type="text" id="ev-title" placeholder="Etkinlik Başlığı" class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2.5 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
@@ -363,7 +363,7 @@
   </div>
 
   <!-- Right/Bottom: Events List Preview -->
-  <div class="w-full lg:w-[55%] h-full flex flex-col bg-[#0e0e0e]">
+  <div class="w-full lg:w-[55%] lg:h-full shrink-0 flex flex-col bg-[#0e0e0e] min-h-[500px]">
     <div class="px-6 py-4 border-b border-[#1c1b1b] bg-[#1c1b1b] flex justify-between items-center">
       <h2 class="font-['Space_Grotesk'] text-[#e5e2e1] uppercase tracking-widest font-bold text-sm">YAYINDAKİ ETKİNLİKLER (ÖNİZLEME)</h2>
       <button onclick="fetchAdminEvents()" class="flex items-center gap-2 text-[10px] text-[#e8bcb7] hover:text-[#ff2a2a] transition-colors font-['Space_Grotesk'] uppercase tracking-widest">
