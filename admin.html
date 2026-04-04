@@ -338,12 +338,34 @@
 <script>
   const SHEET_ID = "1Wi0S0ZS-3Mcv_GwbqRMcuoZkCGBBK2zMflR-4WgeOaw";
   const GVZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3BIFMZRdJJ9IftuDYbEpr2N7W7sA9-Wk03aQnmvkYX2AFlYBedtmQ-GuF2EY6WJqB1Q/exec";
 
   let allApps = [];
   let filtered = [];
   let selectedIndex = null;
   let currentFilter = "all";
-  let statuses = {}; // stored locally per session
+
+  // localStorage'dan yükle, yoksa boş obje
+  let statuses = {};
+  try { statuses = JSON.parse(localStorage.getItem("mancave_statuses") || "{}"); } catch(e) {}
+
+  function saveStatuses() {
+    try { localStorage.setItem("mancave_statuses", JSON.stringify(statuses)); } catch(e) {}
+  }
+
+  // Sheets'e yaz
+  async function saveToSheet(rowIndex, status) {
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({ rowIndex, status }),
+      });
+    } catch(e) {
+      console.error("Sheets yazma hatası:", e);
+    }
+  }
 
   // ── Fetch & parse ──
   async function loadData() {
@@ -375,11 +397,29 @@
           job:       cells[7]?.v || "—",
           car:       cells[8]?.v || "—",
           reason:    cells[9]?.v || "—",
+          sheetStatus: cells[10]?.v || "",
         };
       });
 
-      // Init statuses
-      allApps.forEach(a => { if (!statuses[a.id]) statuses[a.id] = "pending"; });
+      // Sheets'teki durum varsa onu kullan, yoksa localStorage'a bak, o da yoksa pending
+      allApps.forEach(a => {
+        if (a.sheetStatus) {
+          // Sheets'ten gelen değeri normalize et
+          const raw = a.sheetStatus.toString().toLowerCase().trim();
+          if (raw === "onaylandi" || raw === "onaylı" || raw === "approved" || raw === "onayla" || raw.includes("onayla")) {
+            statuses[String(a.id)] = "approved";
+          } else if (raw === "reddedildi" || raw === "rejected" || raw === "reddet" || raw.includes("reddet")) {
+            statuses[String(a.id)] = "rejected";
+          } else if (raw === "beklemede" || raw === "pending" || raw === "beklet" || raw.includes("bekle")) {
+            statuses[String(a.id)] = "pending";
+          } else {
+            statuses[String(a.id)] = "pending";
+          }
+        } else if (!(String(a.id) in statuses)) {
+          statuses[String(a.id)] = "pending";
+        }
+      });
+      saveStatuses();
 
       updateStats();
       filterCards();
@@ -404,9 +444,9 @@
 
   // ── Stats ──
   function updateStats() {
-    const pending  = allApps.filter(a => (statuses[a.id]||"pending") === "pending").length;
-    const approved = allApps.filter(a => statuses[a.id] === "approved").length;
-    const rejected = allApps.filter(a => statuses[a.id] === "rejected").length;
+    const pending  = allApps.filter(a => (statuses[String(a.id)]||"pending") === "pending").length;
+    const approved = allApps.filter(a => statuses[String(a.id)] === "approved").length;
+    const rejected = allApps.filter(a => statuses[String(a.id)] === "rejected").length;
     document.getElementById("stat-pending").textContent  = pending;
     document.getElementById("stat-approved").textContent = approved;
     document.getElementById("stat-rejected").textContent = rejected;
@@ -456,7 +496,7 @@
     }
 
     list.innerHTML = filtered.map((app, i) => {
-      const st = statuses[app.id] || "pending";
+      const st = statuses[String(app.id)] || "pending";
       const badgeClass = st === "approved" ? "badge-approved" : st === "rejected" ? "badge-rejected" : "badge-pending";
       const badgeText  = st === "approved" ? "ONAYLANDI" : st === "rejected" ? "REDDEDİLDİ" : "BEKLEMEDE";
       const isSelected = selectedIndex === app.id;
@@ -502,7 +542,7 @@
   }
 
   function fillDetail(app) {
-    const st = statuses[app.id] || "pending";
+    const st = statuses[String(app.id)] || "pending";
     document.getElementById("d-appnum").textContent = `BAŞVURU #${String(app.id+1).padStart(3,"0")}`;
     document.getElementById("d-name").textContent  = app.name.toUpperCase();
     document.getElementById("d-car").textContent   = app.car.toUpperCase();
@@ -562,19 +602,42 @@
   }
 
   // ── Status update ──
-  function setStatus(st) {
+  async function setStatus(st) {
     if (selectedIndex === null) return;
-    statuses[selectedIndex] = st;
+    statuses[String(selectedIndex)] = st;
+    saveStatuses();
     updateBadge("d-status-badge", st);
     updateBadge("m-status-badge", st);
     updateStats();
-    filterCards(); // re-render list with new badge
+    filterCards();
+
+    // Sheets'e yaz
+    const statusText = st === "approved" ? "ONAYLANDI" : st === "rejected" ? "REDDEDİLDİ" : "BEKLEMEDE";
+    showToast("Sheets'e kaydediliyor...", false);
+    await saveToSheet(selectedIndex, statusText);
+    showToast("✓ Kaydedildi", true);
+  }
+
+  function showToast(msg, success) {
+    let toast = document.getElementById("toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast";
+      toast.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:10px 24px;border:1px solid;transition:opacity 0.3s;";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.background = success ? "rgba(0,200,100,0.15)" : "rgba(255,180,0,0.15)";
+    toast.style.borderColor = success ? "rgba(0,200,100,0.4)" : "rgba(255,180,0,0.4)";
+    toast.style.color = success ? "#00c864" : "#ffb400";
+    toast.style.opacity = "1";
+    if (success) setTimeout(() => { toast.style.opacity = "0"; }, 2000);
   }
 
   // ── Mobile modal ──
   function openMobileModal(app) {
     document.getElementById("m-name").textContent = app.name.toUpperCase();
-    updateBadge("m-status-badge", statuses[app.id] || "pending");
+    updateBadge("m-status-badge", statuses[String(app.id)] || "pending");
 
     const fields = [
       ["E-POSTA", app.email],
