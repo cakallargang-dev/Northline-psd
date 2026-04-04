@@ -429,19 +429,8 @@ body { min-height: max(884px, 100dvh); }
 <iframe name="hidden-submit" id="hidden-submit" style="display:none;"></iframe>
 
 <script>
-  // ── Google Form config ──
-  const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSeoIJzEZWJjNkOz06exnDrOVAXbXTbqu31qgGYz22snqiualw/formResponse";
-  const ENTRY = {
-    email:  "entry.376765771",
-    name:   "entry.601642214",
-    phone:  "entry.285656886",
-    dob:    "entry.362353081",
-    city:   "entry.2022252448",
-    ig:     "entry.627966213",
-    job:    "entry.675402125",
-    car:    "entry.1756205604",
-    reason: "entry.667152134"
-  };
+  // ── Apps Script config ──
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxx8hTbNIUF_Xohwu1q4T0Efla-bxj0R0GGxdHnoWy9SgfPoZhECjJjPVApLOvqGtYn5A/exec";
 
   // ── State ──
   const TOTAL_STEPS = 10; // 0 = start, 1-10 = questions
@@ -538,37 +527,30 @@ body { min-height: max(884px, 100dvh); }
     showStep(current, "backward");
   }
 
-  function submitForm() {
+  async function submitForm() {
     const data = {
-      [ENTRY.email]:  document.getElementById("f-email").value.trim(),
-      [ENTRY.name]:   document.getElementById("f-name").value.trim(),
-      [ENTRY.phone]:  document.getElementById("f-phone").value.trim(),
-      [ENTRY.dob]:    document.getElementById("f-dob").value.trim(),
-      [ENTRY.city]:   document.getElementById("f-city").value.trim(),
-      [ENTRY.ig]:     document.getElementById("f-ig").value.trim(),
-      [ENTRY.job]:    document.getElementById("f-job").value.trim(),
-      [ENTRY.car]:    document.getElementById("f-car").value.trim(),
-      [ENTRY.reason]: document.getElementById("f-reason").value.trim(),
+      action: "submit",
+      email:  document.getElementById("f-email").value.trim(),
+      name:   document.getElementById("f-name").value.trim(),
+      phone:  document.getElementById("f-phone").value.trim(),
+      dob:    document.getElementById("f-dob").value.trim(),
+      city:   document.getElementById("f-city").value.trim(),
+      ig:     document.getElementById("f-ig").value.trim(),
+      job:    document.getElementById("f-job").value.trim(),
+      car:    document.getElementById("f-car").value.trim(),
+      reason: document.getElementById("f-reason").value.trim(),
     };
 
-    // Build and submit hidden form
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = FORM_ACTION;
-    form.target = "hidden-submit";
-    form.style.display = "none";
-
-    Object.entries(data).forEach(([name, value]) => {
-      const inp = document.createElement("input");
-      inp.type = "hidden";
-      inp.name = name;
-      inp.value = value;
-      form.appendChild(inp);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(data),
+      });
+    } catch(e) {
+      console.error("Gönderme hatası:", e);
+    }
 
     // Show success
     current = TOTAL_STEPS + 1;
