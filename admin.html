@@ -356,11 +356,12 @@
   // Sheets'e yaz
   async function saveToSheet(rowIndex, status) {
     try {
-      await fetch(SCRIPT_URL, {
-        method: "POST",
+      const params = new URLSearchParams();
+      params.append("rowIndex", rowIndex);
+      params.append("status", status);
+      await fetch(SCRIPT_URL + "?" + params.toString(), {
+        method: "GET",
         mode: "no-cors",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({ rowIndex, status }),
       });
     } catch(e) {
       console.error("Sheets yazma hatası:", e);
@@ -405,13 +406,11 @@
       allApps.forEach(a => {
         if (a.sheetStatus) {
           // Sheets'ten gelen değeri normalize et
-          const raw = a.sheetStatus.toString().toLowerCase().trim();
-          if (raw === "onaylandi" || raw === "onaylı" || raw === "approved" || raw === "onayla" || raw.includes("onayla")) {
+          const raw = a.sheetStatus.toString().trim().toLowerCase();
+          if (raw === "approved" || raw.includes("onayla")) {
             statuses[String(a.id)] = "approved";
-          } else if (raw === "reddedildi" || raw === "rejected" || raw === "reddet" || raw.includes("reddet")) {
+          } else if (raw === "rejected" || raw.includes("reddet")) {
             statuses[String(a.id)] = "rejected";
-          } else if (raw === "beklemede" || raw === "pending" || raw === "beklet" || raw.includes("bekle")) {
-            statuses[String(a.id)] = "pending";
           } else {
             statuses[String(a.id)] = "pending";
           }
@@ -633,7 +632,7 @@
     if (app) fillDetail(app);
 
     // Sheets'e yaz
-    const statusText = st === "approved" ? "ONAYLANDI" : st === "rejected" ? "REDDEDİLDİ" : "BEKLEMEDE";
+    const statusText = st; // "approved" / "rejected" / "pending" — İngilizce sabit değer
     showToast("Sheets'e kaydediliyor...", false);
     await saveToSheet(selectedIndex, statusText);
     showToast("✓ Kaydedildi", true);
