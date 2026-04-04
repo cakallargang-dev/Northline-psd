@@ -324,16 +324,41 @@
       <h2 class="font-['Space_Grotesk'] text-[#e5e2e1] uppercase tracking-widest font-bold text-sm">YENİ ETKİNLİK YAYINLA (GOOGLE FORM)</h2>
       <p class="text-[10px] text-[rgba(232,188,183,0.5)] mt-1 tracking-wider uppercase">Buradan girilen etkinlikler anında üyelere yansır.</p>
     </div>
-    <div class="flex-1 bg-[#131313] relative">
-      <div id="form-placeholder" class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center text-[rgba(232,188,183,0.4)]">
-          <span class="material-symbols-outlined text-4xl mb-4">post_add</span>
-          <p class="text-xs font-['Space_Grotesk'] uppercase tracking-widest mb-2 text-[#ff2a2a]">GOOGLE FORM LİNKİ BEKLENİYOR</p>
-          <p class="text-[10px] uppercase font-['Inter'] max-w-sm mt-2 opacity-80">
-            TBD: Henüz Google Etkinlik Formu linkini sisteme eklemediğiniz için bu alan boş. 
-            <code>admin.html</code> içerisindeki <b>EVENT_FORM_URL</b> değişkenine embed linkini koyduğunuzda form burada açılacak.
-          </p>
-      </div>
-      <iframe id="event-form-iframe" src="" class="w-full h-full hidden border-none" style="background:transparent;"></iframe>
+    <div class="flex-1 bg-[#131313] relative overflow-hidden">
+      <!-- Custom HTML Form -->
+      <form id="custom-event-form" onsubmit="submitCustomEvent(event)" class="h-full flex flex-col p-6 space-y-4 overflow-y-auto">
+        <div>
+           <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">BAŞLIK</label>
+           <input required type="text" id="ev-title" placeholder="Etkinlik Başlığı" class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2.5 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
+        </div>
+        <div>
+           <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">TARİH & SAAT</label>
+           <input required type="datetime-local" id="ev-date" class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2.5 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors accent-[#ff2a2a]">
+        </div>
+        <div>
+           <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">KONUM (MEKAN ADI)</label>
+           <input required type="text" id="ev-loc" placeholder="Maslak Oto Sanayi" class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2.5 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
+        </div>
+        <div>
+           <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1 flex justify-between">
+              GOOGLE MAPS LİNKİ <span>(OPSİYONEL)</span>
+           </label>
+           <input type="url" id="ev-mapurl" placeholder="https://maps.app.goo.gl/..." class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2.5 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
+        </div>
+        <div>
+           <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">PROGRAM DETAYLARI</label>
+           <textarea required id="ev-details" rows="3" placeholder="Sadece resmi Mancave katılımcıları içeri alınacaktır..." class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors resize-none"></textarea>
+        </div>
+        <div>
+           <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1 flex justify-between">
+              GÖRSEL LİNKİ <span>(OPSİYONEL)</span>
+           </label>
+           <input type="url" id="ev-photo" placeholder="Resim URL (Drive vs.)" class="w-full bg-[#0e0e0e] border border-[#2a2a2a] px-3 py-2.5 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
+        </div>
+        <button id="ev-submit-btn" type="submit" class="w-full mt-4 bg-[#ff2a2a]/10 hover:bg-[#ff2a2a]/20 border border-[#ff2a2a]/40 text-[#ff2a2a] font-['Space_Grotesk'] uppercase tracking-widest text-xs py-3 transition-colors">
+            ETKİNLİĞİ YAYINLA
+        </button>
+      </form>
     </div>
   </div>
 
@@ -378,8 +403,9 @@
 
 <script>
   // --- ETKİNLİKLER SİSTEMİ EKLENTİSİ ---
-  const EVENT_FORM_URL = ""; 
-  const EVENT_SHEET_ID_ADMIN = "BURAYA_ETKINLIK_SHEET_ID_GELECEK";
+  // Google Form linki kısmı tamamen iptal edildi (Yerine kendi HTML formumuzu koyduk)
+  const EVENT_SHEET_ID_ADMIN = "1j6U0DlGw3OEhQj6zvrZl3SbIleZDbo4mVBIs4_pJgos";
+  const EVENT_SCRIPT_URL_ADMIN = "https://script.google.com/macros/s/AKfycbwfKhe4GYMjt48yxnVI2E7NDDFhlogj2i994nGX7pviZbR051JfhLhK_E-cwX7WHGSm/exec";
 
   function switchAdminTab(tab) {
     const appPanel = document.getElementById('applications-panel');
@@ -412,14 +438,52 @@
   }
 
   function initEventPanel() {
-    const iframe = document.getElementById('event-form-iframe');
-    const placeholder = document.getElementById('form-placeholder');
-    if (EVENT_FORM_URL) {
-      iframe.src = EVENT_FORM_URL;
-      iframe.classList.remove('hidden');
-      placeholder.classList.add('hidden');
-    }
     fetchAdminEvents();
+  }
+
+  async function submitCustomEvent(e) {
+      e.preventDefault();
+      
+      if (EVENT_SCRIPT_URL_ADMIN === "BURAYA_APPSCRIPT_URL_GELECEK") {
+          alert("SİSTEM UYARISI: Google App Script URL'nizi admin.html içinden henüz tanımlamadınız.");
+          return;
+      }
+      
+      const btn = document.getElementById('ev-submit-btn');
+      btn.textContent = "YAYINLANIYOR...";
+      btn.disabled = true;
+
+      // Tarih formatını güzelleştir
+      const rawDate = document.getElementById('ev-date').value;
+      const formattedDate = new Date(rawDate).toLocaleString("tr-TR", {day:'numeric', month:'long', hour:'2-digit', minute:'2-digit'});
+
+      const payload = {
+          action: "add_event",
+          title: document.getElementById('ev-title').value,
+          datetime: formattedDate, 
+          location: document.getElementById('ev-loc').value,
+          mapsUrl: document.getElementById('ev-mapurl').value,
+          details: document.getElementById('ev-details').value,
+          photo: document.getElementById('ev-photo').value
+      };
+
+      try {
+          await fetch(EVENT_SCRIPT_URL_ADMIN, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "text/plain" },
+              body: JSON.stringify(payload)
+          });
+          
+          showToast("✓ Etkinlik başarıyla yayınlandı", true);
+          document.getElementById('custom-event-form').reset();
+          setTimeout(fetchAdminEvents, 1500);
+      } catch(err) {
+          showToast("Hata: " + err.message, false);
+      } finally {
+          btn.textContent = "ETKİNLİĞİ YAYINLA";
+          btn.disabled = false;
+      }
   }
 
   async function fetchAdminEvents() {
@@ -429,10 +493,10 @@
       <div class="skeleton h-24 w-full"></div>
     `;
 
-    if (EVENT_SHEET_ID_ADMIN === "BURAYA_ETKINLIK_SHEET_ID_GELECEK") {
+    if (!EVENT_SHEET_ID_ADMIN || EVENT_SHEET_ID_ADMIN.includes("BURAYA")) {
       list.innerHTML = `
         <div class="p-6 border border-[rgba(232,188,183,0.2)] text-[rgba(232,188,183,0.6)] text-xs font-['Space_Grotesk'] uppercase text-center tracking-widest">
-           SİSTEM MESAJI: <br>ETKİNLİK SHEET ID EKLENMEDİĞİ İÇİN ANLIK GÖSTERİM YAPILAMIYOR. <br><br> (Not: Mancave üye sayfasında tasarım testi için fake veriler kullanılmıştır.)
+           SİSTEM MESAJI: <br>ETKİNLİK SHEET ID GİRİLMEDİĞİ İÇİN ANLIK GÖSTERİM YAPILAMIYOR. <br><br> (Not: Mancave üye sayfasında tasarım testi için fake veriler kullanılmıştır.)
         </div>
       `;
       return;
@@ -461,18 +525,23 @@
          const rawPhoto = cells[5]?.v || "";
          
          html += `
-         <div class="bg-[#1c1b1b] border border-[#2a2a2a] border-l-4 border-l-[#ff2a2a] p-5 flex flex-col gap-3">
+         <div class="bg-[#1c1b1b] border border-[#2a2a2a] border-l-4 border-l-[#ff2a2a] p-5 flex flex-col gap-3 relative group">
             <div class="flex justify-between items-start gap-4">
               <div>
-                <h3 class="font-['Space_Grotesk'] text-[#e5e2e1] uppercase font-bold tracking-widest text-sm mb-1">${title}</h3>
+                <h3 class="font-['Space_Grotesk'] text-[#e5e2e1] uppercase font-bold tracking-widest text-sm mb-1 pr-6">${title}</h3>
                 <div class="flex items-center gap-4 text-[10px] text-[rgba(232,188,183,0.6)] font-['Space_Grotesk'] uppercase tracking-widest flex-wrap mt-2">
                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">schedule</span> ${datetime}</span>
                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">my_location</span> ${location}</span>
                 </div>
               </div>
-              <div class="text-[#00c864] text-[9px] font-['Space_Grotesk'] uppercase tracking-widest px-2 py-1 bg-[#00c864]/10 border border-[#00c864]/30 rounded-sm">YAYINDA</div>
+              <div class="flex flex-col gap-2 items-end">
+                  <div class="text-[#00c864] text-[9px] font-['Space_Grotesk'] uppercase tracking-widest px-2 py-1 bg-[#00c864]/10 border border-[#00c864]/30 rounded-sm">YAYINDA</div>
+                  <button onclick="deleteEvent('${title.replace(/'/g, "\\'")}', '${datetime.replace(/'/g, "\\'")}')" class="opacity-0 group-hover:opacity-100 flex items-center gap-1 text-[9px] text-[#ff2a2a] hover:bg-[#ff2a2a]/10 px-2 py-1 border border-[#ff2a2a]/30 transition-all uppercase font-['Space_Grotesk'] tracking-widest">
+                     <span class="material-symbols-outlined text-[12px]">delete</span> SİL
+                  </button>
+              </div>
             </div>
-            <div class="h-px w-full bg-[#2a2a2a]"></div>
+            <div class="h-px w-full bg-[#2a2a2a] mt-1"></div>
             <p class="text-[11px] font-['Inter'] text-[#e8bcb7] leading-relaxed line-clamp-2">${details}</p>
          </div>
          `;
@@ -484,6 +553,37 @@
            Bağlantı Hatası: ${e.message}
         </div>`;
     }
+  }
+
+  async function deleteEvent(title, datetime) {
+      if (!confirm("Bu etkinliği silmek istediğine emin misin? Mancave ekranından anında kaldırılacaktır!")) return;
+      
+      if (EVENT_SCRIPT_URL_ADMIN === "BURAYA_APPSCRIPT_URL_GELECEK") {
+          alert("SİSTEM UYARISI: Google App Script URL'nizi admin.html içinden henüz tanımlamadınız.");
+          return;
+      }
+  
+      showToast("Etkinlik siliniyor...", false);
+      try {
+          const payload = {
+              action: "delete_event",
+              title: title,
+              datetime: datetime
+          };
+  
+          const res = await fetch(EVENT_SCRIPT_URL_ADMIN, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "text/plain" },
+              body: JSON.stringify(payload)
+          });
+          
+          showToast("✓ Etkinlik başarıyla silindi", true);
+          // 1 saniye bekle ve listeyi güncelle
+          setTimeout(fetchAdminEvents, 1200);
+      } catch(e) {
+          showToast("Hatta oluştu: " + e.message, false);
+      }
   }
 
   const SHEET_ID = "1Wi0S0ZS-3Mcv_GwbqRMcuoZkCGBBK2zMflR-4WgeOaw";

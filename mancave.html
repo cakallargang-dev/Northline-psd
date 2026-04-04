@@ -123,7 +123,7 @@
 <script>
 // --- GOOGLE SHEETS AYARLARI ---
 // Google form'un bağlı olduğu Etkinlik Sheets ID'sini buraya yapıştırın
-const EVENT_SHEET_ID = "BURAYA_ETKINLIK_SHEET_ID_GELECEK"; 
+const EVENT_SHEET_ID = "1j6U0DlGw3OEhQj6zvrZl3SbIleZDbo4mVBIs4_pJgos"; 
 
 // Eğer Form yanıtları Sheet içindeki 2. sekmedeyse (GID), o zaman URL sonuna '&gid=xxxx' eklemek gerekebilir.
 // Şimdilik sadece tqx=out:json kullanarak ilk tab'ı çekiyoruz.
@@ -133,7 +133,7 @@ async function fetchEvents() {
     const container = document.getElementById('events-container');
 
     // Eğer ID değiştirilmemişse (Henüz Google Form kurulmamışsa) DEMO veriler ile sayfayı süsle
-    if (EVENT_SHEET_ID === "BURAYA_ETKINLIK_SHEET_ID_GELECEK") {
+    if (!EVENT_SHEET_ID || EVENT_SHEET_ID.includes("BURAYA")) {
         renderDemoEvents(container);
         return;
     }
@@ -177,6 +177,11 @@ async function fetchEvents() {
             const details = cells[4]?.v || "Detaylar sadece onaylanmış üyelere toplantı esnasında aktarılacaktır.";
             
             let rawPhoto = cells[5]?.v || "";
+            let mapsUrlRaw = cells[6]?.v || ""; 
+            
+            // Konum linki oluştur (Kendi yazdıysa onu, yoksa google maps araması)
+            let mapsFinalUrl = mapsUrlRaw.startsWith("http") ? mapsUrlRaw : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+
             let imgUrl = "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=1200"; // Lüks koyu varsayılan görsel
             
             if (rawPhoto && rawPhoto.startsWith("http")) {
@@ -211,10 +216,10 @@ async function fetchEvents() {
                         
                         <h3 class="font-['Space_Grotesk'] text-3xl sm:text-4xl font-black uppercase tracking-tighter text-[#e5e2e1] mb-6 drop-shadow-lg">${title}</h3>
                         
-                        <div class="flex items-center justify-center gap-2 text-[#ff2a2a] mb-8">
+                        <a href="${mapsFinalUrl}" target="_blank" class="inline-flex items-center justify-center gap-2 text-[#ff2a2a] hover:text-[#e8bcb7] transition-colors mb-8 cursor-pointer underline underline-offset-4 decoration-[#ff2a2a]/40 hover:decoration-[#e8bcb7]">
                             <span class="material-symbols-outlined text-sm">location_on</span>
                             <span class="text-xs font-['Space_Grotesk'] uppercase tracking-[0.2em] font-semibold">${location}</span>
-                        </div>
+                        </a>
 
                         <div class="h-px w-24 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent mx-auto mb-8"></div>
                         
@@ -271,10 +276,10 @@ function renderDemoEvents(container) {
                 
                 <h3 class="font-['Space_Grotesk'] text-3xl sm:text-5xl font-black uppercase tracking-tighter text-[#e5e2e1] mb-6 drop-shadow-xl text-balance">MASLAK UNDERGROUND RUN</h3>
                 
-                <div class="flex items-center justify-center gap-2 text-[#ff2a2a] mb-8">
+                <a href="https://www.google.com/maps/search/?api=1&query=Maslak+Oto+Sanayi" target="_blank" class="inline-flex items-center justify-center gap-2 text-[#ff2a2a] hover:text-[#e8bcb7] transition-colors mb-8 cursor-pointer underline underline-offset-4 decoration-[#ff2a2a]/40 hover:decoration-[#e8bcb7]">
                     <span class="material-symbols-outlined text-sm">location_on</span>
                     <span class="text-xs font-['Space_Grotesk'] uppercase tracking-[0.2em] font-semibold">MASLAK OTO SANAYİ - GARAJ A (LOKASYON GİZLİ)</span>
-                </div>
+                </a>
 
                 <div class="h-px w-24 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent mx-auto mb-8"></div>
                 
