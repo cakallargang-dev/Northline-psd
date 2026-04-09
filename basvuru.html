@@ -241,7 +241,9 @@ body { min-height: max(884px, 100dvh); }
   <div class="bg-surface-container-low p-8 border-l-4 border-[#3b9eff] relative overflow-hidden">
     <span class="step-num">01</span>
     <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(147,180,212,0.9)] mb-6">E-POSTA ADRESİN</label>
-    <input id="f-email" type="email" class="mc-input" placeholder="ornek@email.com" autocomplete="email" />
+    <input id="f-email" type="email" class="mc-input" placeholder="ornek@email.com" autocomplete="email" style="margin-bottom:20px;" />
+    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(147,180,212,0.9)] mb-6 mt-6">PORTALA GİRİŞ İÇİN ŞİFRE BELİRLE</label>
+    <input id="f-password" type="password" class="mc-input" placeholder="EN AZ 6 KARAKTER" />
     <p class="hint">Enter'a basarak devam et</p>
     <div id="err-1" class="text-[#3b9eff] text-xs font-['Space_Grotesk'] mt-3 hidden">Geçerli bir e-posta adresi gir.</div>
     <button onclick="nextStep()" class="mt-8 bg-[#3b9eff] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(59,158,255,0.3)] active:scale-95 transition-all">
@@ -427,7 +429,26 @@ body { min-height: max(884px, 100dvh); }
 
 <iframe name="hidden-submit" id="hidden-submit" style="display:none;"></iframe>
 
-<script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDL2BT0zawaeVREbD9i0wDenTurxjjgkkg",
+    authDomain: "bosphorus-fellas-8a8c4.firebaseapp.com",
+    projectId: "bosphorus-fellas-8a8c4",
+    storageBucket: "bosphorus-fellas-8a8c4.firebasestorage.app",
+    messagingSenderId: "334699713519",
+    appId: "1:334699713519:web:02a1ab4aaac6e7ad891c1a"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
   // ── Apps Script config ──
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYYKIFtUu3Ae8fmdvYxLwm4JevdKfcp4JTLr9FWMmkt9Hl0tf_RR2aN3S7N5I4G2RU0g/exec";
 
@@ -439,7 +460,8 @@ body { min-height: max(884px, 100dvh); }
   const validators = {
     1: () => {
       const v = document.getElementById("f-email").value.trim();
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      const p = document.getElementById("f-password").value.trim();
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) && p.length >= 6;
     },
     2: () => document.getElementById("f-name").value.trim().length > 1,
     3: () => document.getElementById("f-phone").value.trim().length > 5,
@@ -497,7 +519,7 @@ body { min-height: max(884px, 100dvh); }
     updateProgress();
   }
 
-  function nextStep() {
+  window.nextStep = function nextStep() {
     // Validate current step
     if (current > 0 && current <= TOTAL_STEPS) {
       const errEl = document.getElementById("err-" + current);
@@ -520,7 +542,7 @@ body { min-height: max(884px, 100dvh); }
     showStep(current, "forward");
   }
 
-  function prevStep() {
+  window.prevStep = function prevStep() {
     if (current <= 1) return;
     current--;
     showStep(current, "backward");
@@ -532,7 +554,7 @@ body { min-height: max(884px, 100dvh); }
   let compressedPhotoBase64 = "";
   let compressedPhotoName = "";
 
-  function previewPhoto(input) {
+  window.previewPhoto = function previewPhoto(input) {
     if (!input.files || !input.files[0]) return;
     const file = input.files[0];
 
@@ -587,7 +609,7 @@ body { min-height: max(884px, 100dvh); }
     });
   }
 
-  async function submitForm() {
+  window.submitForm = async function submitForm() {
     if (isSubmitting) return;
     isSubmitting = true;
 
@@ -597,33 +619,38 @@ body { min-height: max(884px, 100dvh); }
     const email = document.getElementById("f-email").value.trim();
 
     // ── 1. Adım: Metin verilerini gönder (fotoğrafsız) ──
-    const textData = {
-      action: "submit",
-      email,
-      name:   document.getElementById("f-name").value.trim(),
-      phone:  document.getElementById("f-phone").value.trim(),
-      dob:    document.getElementById("f-dob").value.trim(),
-      city:   document.getElementById("f-city").value.trim(),
-      ig:     document.getElementById("f-ig").value.trim(),
-      job:    document.getElementById("f-job").value.trim(),
-      car:    document.getElementById("f-car").value.trim(),
-      reason: document.getElementById("f-reason").value.trim(),
-      photo: "", photoType: "", photoName: "",
-    };
-
-    try { await postData(textData); } catch(e) { console.error("Metin gönderme hatası:", e); }
-
-    // ── 2. Adım: Fotoğrafı ayrıca gönder (varsa) ──
-    if (compressedPhotoBase64) {
-      try {
-        await postData({
-          action: "update_photo",
-          email,
-          photo:     compressedPhotoBase64,
-          photoType: "image/jpeg",
-          photoName: compressedPhotoName,
-        });
-      } catch(e) { console.warn("Fotoğraf gönderme hatası:", e); }
+    
+    const pass = document.getElementById("f-password").value.trim();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+      const user = userCredential.user;
+      
+      const userData = {
+        email: email,
+        name: document.getElementById("f-name").value.trim(),
+        phone: document.getElementById("f-phone").value.trim(),
+        dob: document.getElementById("f-dob").value.trim(),
+        city: document.getElementById("f-city").value.trim(),
+        ig: document.getElementById("f-ig").value.trim(),
+        job: document.getElementById("f-job").value.trim(),
+        car: document.getElementById("f-car").value.trim(),
+        reason: document.getElementById("f-reason").value.trim(),
+        photoUrl: compressedPhotoBase64 ? ("data:image/jpeg;base64," + compressedPhotoBase64) : "",
+        photoName: "",
+        status: "Bekliyor",
+        createdAt: serverTimestamp(),
+      };
+      
+      await setDoc(doc(db, "users", user.uid), userData);
+      await signOut(auth);
+      
+    } catch(err) {
+      console.error(err);
+      alert("Hata oluştu: " + err.message);
+      isSubmitting = false;
+      const submitBtn = document.querySelector("#step-10 button");
+      if (submitBtn) { submitBtn.textContent = "BAŞVURUYU GÖNDER ↗"; submitBtn.disabled = false; }
+      return;
     }
 
     // ── Başarı ekranını göster ──

@@ -164,7 +164,26 @@
     </a>
 </nav>
 
-<script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDL2BT0zawaeVREbD9i0wDenTurxjjgkkg",
+    authDomain: "bosphorus-fellas-8a8c4.firebaseapp.com",
+    projectId: "bosphorus-fellas-8a8c4",
+    storageBucket: "bosphorus-fellas-8a8c4.firebasestorage.app",
+    messagingSenderId: "334699713519",
+    appId: "1:334699713519:web:02a1ab4aaac6e7ad891c1a"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('login-form');
     const btn = document.getElementById('login-btn');
@@ -179,17 +198,37 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm text-[#3b9eff]">sync</span><span class="font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase text-[#3b9eff]">DOĞRULANIYOR...</span>`;
         btn.disabled = true;
 
-        setTimeout(() => {
-            localStorage.setItem('mancave_auth', 'true');
-            const fakeUserData = {
-                name: "Egemen Tutmuş",
-                car: "BMW G20",
-                vault: "2025 Haziran 1Gr Altın, 2025 Eylül 1Gr Altın",
-                photoUrl: "https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=500"
-            };
-            localStorage.setItem('mancave_user', JSON.stringify(fakeUserData));
-            window.location.href = 'mancave.html';
-        }, 1500);
+        
+        signInWithEmailAndPassword(auth, email, pass)
+          .then(async (userCredential) => {
+             const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+             if (userDoc.exists() && userDoc.data().status === "Onaylandı") {
+                 localStorage.setItem('mancave_auth', 'true');
+                 // Create fake basic data for session memory (or real data)
+                 const realData = userDoc.data();
+                 const sessionData = {
+                     name: realData.name || "ÜYE",
+                     car: realData.car || "BMV M5",
+                     vault: "",
+                     photoUrl: realData.photoUrl || "https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=500"
+                 };
+                 localStorage.setItem('mancave_user', JSON.stringify(sessionData));
+                 window.location.href = 'mancave.html';
+             } else {
+                 await signOut(auth);
+                 errorMsg.innerHTML = "Başvurunuz henüz onaylanmamış! Konsey Onayını Bekleyin.";
+                 errorMsg.classList.remove('hidden');
+                 btn.innerHTML = `<span class="font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase text-[#3b9eff]">TEKRAR DENE</span>`;
+                 btn.disabled = false;
+             }
+          })
+          .catch((error) => {
+             errorMsg.innerHTML = "Hatalı e-posta veya şifre.";
+             errorMsg.classList.remove('hidden');
+             btn.innerHTML = `<span class="font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase text-[#3b9eff]">TEKRAR DENE</span>`;
+             btn.disabled = false;
+          });
+
     });
 });
 </script>

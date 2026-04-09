@@ -392,13 +392,35 @@
   </div>
 </div>
 
-<script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDL2BT0zawaeVREbD9i0wDenTurxjjgkkg",
+    authDomain: "bosphorus-fellas-8a8c4.firebaseapp.com",
+    projectId: "bosphorus-fellas-8a8c4",
+    storageBucket: "bosphorus-fellas-8a8c4.firebasestorage.app",
+    messagingSenderId: "334699713519",
+    appId: "1:334699713519:web:02a1ab4aaac6e7ad891c1a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.getDoc = getDoc;
+window.doc = doc;
+window.updateDoc = updateDoc;
+
   // --- ETKİNLİKLER SİSTEMİ EKLENTİSİ ---
   // Google Form linki kısmı tamamen iptal edildi (Yerine kendi HTML formumuzu koyduk)
   const EVENT_SHEET_ID_ADMIN = "1j6U0DlGw3OEhQj6zvrZl3SbIleZDbo4mVBIs4_pJgos";
   const EVENT_SCRIPT_URL_ADMIN = "https://script.google.com/macros/s/AKfycbwfKhe4GYMjt48yxnVI2E7NDDFhlogj2i994nGX7pviZbR051JfhLhK_E-cwX7WHGSm/exec";
 
-  function switchAdminTab(tab) {
+  window.switchAdminTab = function switchAdminTab(tab) {
     const appPanel = document.getElementById('applications-panel');
     const evPanel = document.getElementById('events-panel');
     const tabApp = document.getElementById('tab-applications');
@@ -432,7 +454,7 @@
     fetchAdminEvents();
   }
 
-  async function submitCustomEvent(e) {
+  async window.submitCustomEvent = function submitCustomEvent(e) {
       e.preventDefault();
       
       if (EVENT_SCRIPT_URL_ADMIN === "BURAYA_APPSCRIPT_URL_GELECEK") {
@@ -599,7 +621,7 @@
   }
 
   const SHEET_ID = "1Wi0S0ZS-3Mcv_GwbqRMcuoZkCGBBK2zMflR-4WgeOaw";
-  const GVZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+  
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYYKIFtUu3Ae8fmdvYxLwm4JevdKfcp4JTLr9FWMmkt9Hl0tf_RR2aN3S7N5I4G2RU0g/exec";
 
   let allApps = [];
@@ -630,7 +652,7 @@
   }
 
   // ── Fetch & parse ──
-  async function loadData() {
+  window.loadData = async function loadData() {
     document.getElementById("card-list").innerHTML = `
       <div class="skeleton h-24 w-full"></div>
       <div class="skeleton h-24 w-full"></div>
@@ -638,50 +660,36 @@
       <div class="skeleton h-24 w-full opacity-60"></div>`;
 
     try {
-      const res = await fetch(GVZ_URL + "&t=" + Date.now());
-      const text = await res.text();
-      // Strip Google's JSONP wrapper
-      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-      const rows = json.table.rows;
-      const cols = json.table.cols;
-
-      allApps = rows.map((row, i) => {
-        const cells = row.c;
-        return {
-          id: i,
-          timestamp: cells[0]?.v || "",
-          email:     cells[1]?.v || "—",
-          name:      cells[2]?.v || "—",
-          phone:     cells[3]?.v || "—",
-          dob:       cells[4]?.v || "—",
-          city:      cells[5]?.v || "—",
-          ig:        cells[6]?.v || "",
-          job:       cells[7]?.v || "—",
-          car:       cells[8]?.v || "—",
-          reason:    cells[9]?.v || "—",
-          photo:       cells[10]?.v || "",
-          sheetStatus: cells[11]?.v || "",
-        };
+      const qRef = collection(db, "users");
+      const querySnapshot = await getDocs(qRef);
+      allApps = [];
+      querySnapshot.forEach((docSnap) => {
+        const d = docSnap.data();
+        allApps.push({
+          uid: docSnap.id,
+          id: docSnap.id,
+          timestamp: d.createdAt ? d.createdAt.toDate().toLocaleString() : "Tarih Yok",
+          email: d.email || "—",
+          name: d.name || "—",
+          phone: d.phone || "—",
+          dob: d.dob || "—",
+          city: d.city || "—",
+          ig: d.ig || "",
+          job: d.job || "—",
+          car: d.car || "—",
+          reason: d.reason || "—",
+          photo: d.photoUrl || "",
+          sheetStatus: d.status || "Bekliyor"
+        });
       });
 
-      // Sheets'teki durum varsa onu kullan, yoksa localStorage'a bak, o da yoksa pending
+      // Update statuses mapped internally
       allApps.forEach(a => {
-        if (a.sheetStatus) {
-          // Sheets'ten gelen değeri normalize et
-          const raw = a.sheetStatus.toString().trim().toLowerCase();
-          if (raw === "approved" || raw.includes("onayla")) {
-            statuses[String(a.id)] = "approved";
-          } else if (raw === "rejected" || raw.includes("reddet")) {
-            statuses[String(a.id)] = "rejected";
-          } else {
-            statuses[String(a.id)] = "pending";
-          }
-        } else if (!(String(a.id) in statuses)) {
-          statuses[String(a.id)] = "pending";
-        }
+          if (a.sheetStatus === "Onaylandı") statuses[a.id] = "approved";
+          else if (a.sheetStatus === "Reddedildi") statuses[a.id] = "rejected";
+          else statuses[a.id] = "pending";
       });
-      saveStatuses();
-
+      
       updateStats();
       filterCards();
 
@@ -690,16 +698,8 @@
       document.getElementById("stats-bar").classList.remove("hidden");
 
     } catch(e) {
-      document.getElementById("card-list").innerHTML = `
-        <div class="border border-[#3b9eff]/20 p-6 text-center">
-          <span class="material-symbols-outlined text-[#3b9eff] text-3xl mb-2 block">error</span>
-          <p class="text-xs font-['Space_Grotesk'] uppercase tracking-widest text-[#93b4d4]">Veri çekilemedi.</p>
-          <p class="text-[10px] text-[rgba(147,180,212,0.4)] mt-1">Sheets erişim iznini kontrol et.</p>
-          <button onclick="loadData()" class="mt-4 text-[9px] font-['Space_Grotesk'] uppercase tracking-widest text-[#3b9eff] border border-[#3b9eff]/30 px-4 py-2 hover:bg-[#3b9eff]/10 transition-all">
-            TEKRAR DENE
-          </button>
-        </div>`;
       console.error(e);
+      document.getElementById("card-list").innerHTML = `<div class="p-6 text-center text-[#93b4d4]">Hata oluştu. Firebase ayarlarınızı kontrol edin.</div>`;
     }
   }
 
@@ -714,7 +714,7 @@
   }
 
   // ── Filter ──
-  function setFilter(f) {
+  window.setFilter = function setFilter(f) {
     currentFilter = f;
     document.querySelectorAll(".filter-btn").forEach(b => {
       b.classList.remove("border-[#3b9eff]","text-[#3b9eff]","border-[#ffb400]","text-[#ffb400]","border-[#00c864]","text-[#00c864]");
@@ -729,7 +729,7 @@
     filterCards();
   }
 
-  function filterCards() {
+  window.filterCards = function filterCards() {
     const q = (document.getElementById("search-input").value || "").toLowerCase();
     filtered = allApps.filter(a => {
       const matchFilter = currentFilter === "all" || (statuses[String(a.id)]||"pending") === currentFilter;
@@ -785,7 +785,7 @@
   }
 
   // ── Select app ──
-  function selectApp(id) {
+  window.selectApp = function selectApp(id) {
     selectedIndex = id;
     const app = allApps.find(a => a.id === id);
     if (!app) return;
@@ -973,7 +973,7 @@
     document.body.style.overflow = "hidden";
   }
 
-  function closeMobileModal() {
+  window.closeMobileModal = function closeMobileModal() {
     document.getElementById("mobile-modal").classList.add("hidden");
     document.body.style.overflow = "";
   }
