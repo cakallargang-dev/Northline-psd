@@ -1,0 +1,250 @@
+    const btn = document.getElementById("filter-" + f);
+    btn.classList.remove("border-[#1e2d42]","text-[rgba(147,180,212,0.4)]");
+    if (f === "all")      btn.classList.add("border-[#3b9eff]","text-[#3b9eff]");
+    if (f === "pending")  btn.classList.add("border-[#ffb400]","text-[#ffb400]");
+    if (f === "approved") btn.classList.add("border-[#00c864]","text-[#00c864]");
+    if (f === "rejected") btn.classList.add("border-[#3b9eff]","text-[#3b9eff]");
+    filterCards();
+  }
+
+  window.filterCards = function filterCards() {
+    const q = (document.getElementById("search-input").value || "").toLowerCase();
+    filtered = allApps.filter(a => {
+      const matchFilter = currentFilter === "all" || (statuses[String(a.id)]||"pending") === currentFilter;
+      const matchSearch = !q ||
+        a.name.toLowerCase().includes(q) ||
+        a.car.toLowerCase().includes(q) ||
+        a.city.toLowerCase().includes(q) ||
+        a.email.toLowerCase().includes(q) ||
+        a.ig.toLowerCase().includes(q);
+      return matchFilter && matchSearch;
+    });
+    renderCards();
+  }
+
+  // ── Render cards ──
+  function renderCards() {
+    const list = document.getElementById("card-list");
+
+    if (filtered.length === 0) {
+      list.innerHTML = `<div class="flex flex-col items-center justify-center py-16 opacity-40">
+        <span class="material-symbols-outlined text-[#3b9eff] text-4xl mb-3">search_off</span>
+        <p class="text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[#93b4d4]">Sonuç bulunamadı</p>
+      </div>`;
+      return;
+    }
+
+    list.innerHTML = filtered.map((app, i) => {
+      const st = statuses[String(app.id)] || "pending";
+      const badgeClass = st === "approved" ? "badge-approved" : st === "rejected" ? "badge-rejected" : "badge-pending";
+      const badgeText  = st === "approved" ? "ONAYLANDI" : st === "rejected" ? "REDDEDİLDİ" : "BEKLEMEDE";
+      const isSelected = selectedIndex === app.id;
+      return `
+        <div class="app-card p-5 fade-up ${isSelected ? "selected" : ""}" 
+             style="animation-delay:${i * 0.04}s"
+             onclick="selectApp('${app.id}')">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <p class="app-number mb-0.5">BAŞVURU #${String(app.id + 1).padStart(3,"0")}</p>
+              <h3 class="font-['Space_Grotesk'] font-bold uppercase tracking-wide text-[#e8edf5] text-sm">${app.name}</h3>
+            </div>
+            <span class="badge ${badgeClass}">${badgeText}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[#3b9eff] text-sm">directions_car</span>
+            <p class="font-['Space_Grotesk'] text-xs uppercase tracking-wider text-[rgba(147,180,212,0.6)] truncate">${app.car}</p>
+          </div>
+          <div class="flex items-center gap-3 mt-1.5">
+            <span class="material-symbols-outlined text-[rgba(147,180,212,0.3)] text-sm">location_on</span>
+            <p class="text-[10px] font-['Space_Grotesk'] uppercase tracking-wider text-[rgba(147,180,212,0.35)] truncate">${app.city}</p>
+          </div>
+        </div>`;
+    }).join("");
+  }
+
+  // ── Select app ──
+  window.selectApp = function selectApp(id) {
+    selectedIndex = id;
+    const app = allApps.find(a => a.id === id);
+    if (!app) return;
+
+    // Sadece selected CSS class'ını güncelle, innerHTML yeniden oluşturma
+    document.querySelectorAll(".app-card").forEach(el => el.classList.remove("selected"));
+    const cards = document.querySelectorAll(".app-card");
+    const idx = filtered.findIndex(a => a.id === id);
+    if (idx !== -1 && cards[idx]) cards[idx].classList.add("selected");
+
+    // Fill detail
+    fillDetail(app);
+
+    // Mobile: open modal
+    if (window.innerWidth < 1024) {
+      openMobileModal(app);
+    }
+  }
+
+  function fillDetail(app) {
+    const st = statuses[String(app.id)] || "pending";
+    document.getElementById("d-appnum").textContent = `BAŞVURU #${String(app.id+1).padStart(3,"0")}`;
+    document.getElementById("d-name").textContent  = app.name.toUpperCase();
+    document.getElementById("d-car").textContent   = app.car.toUpperCase();
+    document.getElementById("d-car2").textContent  = app.car.toUpperCase();
+    document.getElementById("d-email").textContent = app.email;
+    document.getElementById("d-phone").textContent = app.phone;
+    document.getElementById("d-dob").textContent   = app.dob;
+    document.getElementById("d-city").textContent  = app.city.toUpperCase();
+    document.getElementById("d-ig").textContent    = app.ig || "—";
+    document.getElementById("d-job").textContent   = app.job.toUpperCase();
+    document.getElementById("d-reason").textContent= app.reason;
+
+    // Fotoğraf
+    const photoEl = document.getElementById("d-photo-wrap");
+    if (app.photo) {
+      // Drive uc?id= linkini thumbnail URL'sine çevir (tarayıcı bloklamaz)
+      let photoUrl = app.photo;
+      const idMatch = photoUrl.match(/[?&]id=([^&]+)/);
+      if (idMatch) {
+        photoUrl = "https://drive.google.com/thumbnail?id=" + idMatch[1] + "&sz=w800";
+      }
+      document.getElementById("d-photo-img").src = photoUrl;
+      photoEl.classList.remove("hidden");
+    } else {
+      photoEl.classList.add("hidden");
+    }
+
+    // Date format
+    const rawDate = app.timestamp;
+    document.getElementById("d-date").textContent = rawDate ? formatDate(rawDate) : "—";
+
+    // Status badge
+    updateBadge("d-status-badge", st);
+
+    // Instagram link
+    const igLink = document.getElementById("d-ig-link");
+    if (app.ig && app.ig !== "—") {
+      const igHandle = app.ig.replace("@","");
+      igLink.href = `https://instagram.com/${igHandle}`;
+      igLink.classList.remove("hidden");
+    } else {
+      igLink.classList.add("hidden");
+    }
+
+    // Show detail content
+    document.getElementById("empty-state").classList.add("hidden");
+    document.getElementById("detail-content").classList.remove("hidden");
+    document.getElementById("detail-content").classList.add("flex");
+  }
+
+  function formatDate(raw) {
+    try {
+      if (typeof raw === "string") {
+        return new Date(raw).toLocaleDateString("tr-TR", { day:"2-digit", month:"long", year:"numeric" });
+      }
+      // Google gviz date format: Date(year,month,day,...)
+      const match = String(raw).match(/Date\((\d+),(\d+),(\d+)/);
+      if (match) {
+        const d = new Date(+match[1], +match[2], +match[3]);
+        return d.toLocaleDateString("tr-TR", { day:"2-digit", month:"long", year:"numeric" });
+      }
+      return raw;
+    } catch { return raw; }
+  }
+
+  function updateBadge(id, st) {
+    const el = document.getElementById(id);
+    el.className = "badge";
+    if (st === "approved") { el.classList.add("badge-approved"); el.textContent = "ONAYLANDI"; }
+    else if (st === "rejected") { el.classList.add("badge-rejected"); el.textContent = "REDDEDİLDİ"; }
+    else { el.classList.add("badge-pending"); el.textContent = "BEKLEMEDE"; }
+  }
+
+  // ── Status update ──
+  window.setStatus = async function setStatus(st) {
+    if (selectedIndex === null) return;
+    const previous = statuses[selectedIndex];
+    statuses[selectedIndex] = st;
+    updateStats();
+    filterCards();
+
+    const app = allApps.find(a => a.id === selectedIndex);
+    if(app) fillDetail(app);
+
+    const statusMap = {"approved": "Onaylandı", "rejected": "Reddedildi", "pending": "Bekliyor"};
+    try {
+      await updateDoc(doc(db, "users", app.uid), {
+          status: statusMap[st]
+      });
+      showToast("✓ Kaydedildi", true);
+    } catch(e) {
+      console.error(e);
+      showToast("Hata oluştu", false);
+    }
+  }
+
+  function showToast(msg, success) {
+    let toast = document.getElementById("toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast";
+      toast.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;font-family:'Space Grotesk',sans-serif;font-size:10px;padding:10px;border:1px;transition:opacity 0.3s;";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.background = success ? "rgba(0,200,100,0.15)" : "rgba(255,180,0,0.15)";
+    toast.style.color = success ? "#00c864" : "#ffb400";
+    toast.style.opacity = "1";
+    if (success) setTimeout(() => { toast.style.opacity = "0"; }, 2000);
+  }
+
+  // ── Mobile modal ──
+  function openMobileModal(app) {
+    document.getElementById("m-name").textContent = app.name.toUpperCase();
+    updateBadge("m-status-badge", statuses[String(app.id)] || "pending");
+
+    const fields = [
+      ["E-POSTA", app.email],
+      ["TELEFON", app.phone],
+      ["DOĞUM TARİHİ", app.dob],
+      ["KONUM", app.city],
+      ["INSTAGRAM", app.ig || "—"],
+      ["MESLEK / BÖLÜM", app.job],
+      ["ARAÇ", app.car],
+      ["KATILMA AMACI", app.reason],
+    ];
+
+    // Fotoğraf URL'sini thumbnail formatına çevir
+    let photoHtml = "";
+    if (app.photo) {
+      let photoUrl = app.photo;
+      const idMatch = photoUrl.match(/[?&]id=([^&]+)/);
+      if (idMatch) {
+        photoUrl = "https://drive.google.com/thumbnail?id=" + idMatch[1] + "&sz=w800";
+      }
+      photoHtml = `
+      <div>
+        <p class="field-label">ARAÇ FOTOĞRAFI</p>
+        <img src="${photoUrl}" class="mt-2 w-full max-h-64 object-cover border border-[#1e2d42]"
+             onerror="this.parentElement.style.display='none'"/>
+      </div>`;
+    }
+
+    document.getElementById("m-fields").innerHTML = fields.map(([label, val]) => `
+      <div>
+        <p class="field-label">${label}</p>
+        <p class="field-value text-sm">${val || "—"}</p>
+      </div>`).join("") + photoHtml;
+
+    document.getElementById("mobile-modal").classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  window.closeMobileModal = function closeMobileModal() {
+    document.getElementById("mobile-modal").classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  // Init
+  window.loadData();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e9ce289ec84b67c',t:'MTc3NTc3MzA3OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
