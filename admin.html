@@ -661,7 +661,7 @@ window.updateDoc = updateDoc;
 
     try {
       const qRef = collection(db, "users");
-      const querySnapshot = await getDocs(qRef); alert('Sistem Mesajı: Firebase verisi başarıyla çekildi. Bulunan kişi sayısı: ' + querySnapshot.size);
+      const querySnapshot = await getDocs(qRef);
       allApps = [];
       querySnapshot.forEach((docSnap) => {
         const d = docSnap.data();
@@ -693,12 +693,11 @@ window.updateDoc = updateDoc;
       updateStats();
       filterCards();
 
-      document.getElementById("total-badge").classList.remove("hidden");
-      document.getElementById("total-count").textContent = allApps.length;
+      // removed
+      // removed
       document.getElementById("stats-bar").classList.remove("hidden");
 
     } catch(e) {
-      alert("Kritik Hata: " + e.message);
       console.error(e);
       document.getElementById("card-list").innerHTML = `<div class="p-6 text-center text-[#93b4d4]">Hata oluştu. Firebase ayarlarınızı kontrol edin.</div>`;
     }
