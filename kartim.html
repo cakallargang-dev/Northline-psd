@@ -1,317 +1,274 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="tr"><head>
+<html class="dark" lang="tr">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Bosphorus Fellas Üye Kartı</title>
+<title>MANCAVE | KARTIM</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            blue: '#0099FF',
-                            dark: '#0A0A0A',
-                            gray: '#1A1A1A'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
-                    },
-                    borderRadius: {
-                        'none': '0',
-                        'sm': '2px',
-                        'DEFAULT': '4px',
-                        'md': '4px',
-                        'lg': '4px',
-                        'xl': '4px',
-                        '2xl': '4px',
-                        '3xl': '4px',
-                        'full': '9999px',
-                    }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    background: "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-high": "#2a2a2a",
+                    "on-surface": "#e5e2e1",
+                    "on-surface-variant": "#e8bcb7",
+                    primary: "#ffb4ab",
+                    "outline-variant": "#5e3f3b"
+                },
+                fontFamily: {
+                    headline: ["Space Grotesk"],
+                    body: ["Inter"],
+                    label: ["Space Grotesk"]
                 }
             }
         }
-    </script>
+    }
+</script>
 <style>
-        body {
-            background-color: #0A0A0A;
-            color: #FFFFFF;
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-        }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+    }
+    .grain-overlay {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+    }
+    body {
+        min-height: max(884px, 100dvh);
+        overflow-x: hidden;
+    }
+    
+    /* 3D Card Effects */
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+    .card-3d-wrapper {
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .card-3d-wrapper:hover {
+        transform: rotateY(15deg) rotateX(5deg);
+    }
+    .card-front, .card-back {
+        backface-visibility: hidden;
+    }
+    .card-back {
+        transform: rotateY(180deg);
+    }
+    .flipped {
+        transform: rotateY(180deg) !important;
+    }
 
-        .card-perspective {
-            perspective: 2000px;
-        }
+    /* Holographic shine */
+    .hologram-effect {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(135deg, rgba(255,42,42,0) 0%, rgba(255,42,42,0.1) 40%, rgba(255,255,255,0.4) 50%, rgba(255,42,42,0.1) 60%, rgba(255,42,42,0) 100%);
+        background-size: 200% 200%;
+        animation: shine 4s ease-in-out infinite alternate;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+    }
 
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
+    @keyframes shine {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
 
-        .card-inner.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-        }
-
-        .holographic-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(0, 153, 255, 0) 0%,
-                rgba(0, 153, 255, 0.05) 25%,
-                rgba(0, 153, 255, 0.1) 50%,
-                rgba(0, 153, 255, 0.05) 75%,
-                rgba(0, 153, 255, 0) 100%
-            );
-            background-size: 400% 400%;
-            animation: holoShift 8s ease infinite;
-            pointer-events: none;
-        }
-
-        @keyframes holoShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .glass-effect {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .card-glow {
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background: radial-gradient(circle at center, rgba(0, 153, 255, 0.15) 0%, transparent 70%);
-            top: -25%;
-            left: -25%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .shimmer {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shimmer::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 45%,
-                rgba(0, 153, 255, 0.1) 50%,
-                transparent 55%
-            );
-            transform: rotate(45deg);
-            animation: shimmerEffect 6s infinite;
-        }
-
-        @keyframes shimmerEffect {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            20%, 100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .fellas-pattern {
-            background-image: radial-gradient(rgba(0, 153, 255, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-    </style>
+    #qrcode img {
+        margin: auto;
+        border: 4px solid #fff;
+    }
+</style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 md:p-8 fellas-pattern">
-<div class="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-<!-- Left: Text Info -->
-<div class="space-y-6">
-<div>
-<h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-2">Bosphorus Fellas <span class="text-brand-blue">Üye Kartı</span></h1>
-<p class="text-zinc-400 text-lg">Özel sürüş topluluğumuzun dijital kimliği. Kartınızı incelemek için üzerine tıklayın.</p>
-</div>
-<div class="space-y-4">
-<div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800">
-<span class="material-symbols-outlined text-brand-blue">verified_user</span>
-<div>
-<h3 class="font-semibold">Dijital Doğrulama</h3>
-<p class="text-sm text-zinc-500">QR kod ile etkinliklerde hızlı giriş ve kimlik doğrulama.</p>
-</div>
-</div>
-<div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800">
-<span class="material-symbols-outlined text-brand-blue">military_tech</span>
-<div>
-<h3 class="font-semibold">Üyelik Seviyesi</h3>
-<p class="text-sm text-zinc-500">Sürüş puanlarınıza göre dinamik olarak güncellenen statü.</p>
-</div>
-</div>
-</div>
-<button class="w-full md:w-auto px-8 py-3 bg-brand-blue text-white font-bold rounded uppercase tracking-wider hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
-<span>KARTIMI İNDİR (CÜZDAN)</span>
-<span class="material-symbols-outlined">download</span>
-</button>
-</div>
-<!-- Right: 3D Card -->
-<div class="card-perspective w-full aspect-[1.586/1] relative group">
-<div class="card-inner shadow-2xl" id="idCard">
-<!-- Front Side -->
-<div class="card-face bg-brand-dark glass-effect border-brand-blue/30">
-<div class="holographic-overlay"></div>
-<div class="card-glow"></div>
-<!-- Content -->
-<div class="p-6 h-full flex flex-col justify-between relative z-10">
-<div class="flex justify-between items-start">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-brand-blue flex items-center justify-center rounded">
-<span class="material-symbols-outlined text-black font-bold">directions_car</span>
-</div>
-<div>
-<h2 class="font-bold text-lg leading-tight uppercase tracking-widest">Bosphorus Fellas</h2>
-<p class="text-[10px] text-brand-blue font-semibold tracking-[0.2em] uppercase">Üye Kartı</p>
-</div>
-</div>
-<div class="text-right">
-<span class="material-symbols-outlined text-brand-blue text-4xl opacity-50">nfc</span>
-</div>
-</div>
-<div class="flex gap-6 items-end">
-<div class="w-32 h-40 bg-zinc-800 rounded-lg overflow-hidden border border-zinc-700 relative shimmer">
-<img alt="Profil" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv5MAQkrQnchgKNl1YXmIwIedfh9-_pC6J9iYMEeKAk3FipfpzQX0zQ_b9OhW-RMe9C6p27Z5WHbsBSNadCuQw0ccbrI0ruJ_cgwlfuarhS1K2d_yo3oJGGRu4wih4aSu1KhJU4myzG9MaLhVz7jYmi5_kaUDikMSGD7xx6XTYA_fIryasjSi2baIvTgJhojH_bNIeu7CONEmSLvpE7rhcvV22g_7n2Qikd7liG5_QVHeKD-OgSXsgi_lsVkE3YCegbUssr9HGr326"/>
-<div class="absolute bottom-0 left-0 right-0 h-1 bg-brand-blue"></div>
-</div>
-<div class="flex-1 pb-2">
-<div class="mb-4">
-<p class="text-[9px] text-zinc-500 uppercase tracking-widest mb-0.5">ÜYE ADI SOYADI</p>
-<p class="text-xl font-bold tracking-tight uppercase" id="display-name">KEREM CAN ÖZTÜRK</p>
-</div>
-<div class="grid grid-cols-2 gap-4">
-<div>
-<p class="text-[9px] text-zinc-500 uppercase tracking-widest mb-0.5">ÜYELİK NO</p>
-<p class="font-mono text-sm tracking-widest">#BF-2024-089</p>
-</div>
-<div>
-<p class="text-[9px] text-zinc-500 uppercase tracking-widest mb-0.5">SEVİYE</p>
-<p class="text-brand-blue font-bold text-sm">FOUNDER</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Decorative stripe -->
-<div class="absolute top-0 right-0 bottom-0 w-1.5 bg-brand-blue opacity-50"></div>
-</div>
-<!-- Back Side -->
-<div class="card-face card-back bg-brand-dark glass-effect border-zinc-800">
-<div class="p-6 h-full flex flex-col justify-between">
-<div>
-<div class="w-full h-12 bg-black -mx-6 mt-4 opacity-80 mb-6"></div>
-<div class="space-y-4">
-<div>
-<p class="text-[10px] text-zinc-500 uppercase tracking-widest">KULLANIM ŞARTLARI</p>
-<p class="text-[9px] text-zinc-400 leading-tight">Bu kart Bosphorus Fellas üyelerine özeldir ve devredilemez. Tüm etkinliklerde ibraz edilmesi zorunludur. Kaybolması durumunda kulüp yönetimine bildirilmelidir.</p>
-</div>
-<div class="flex justify-between items-center bg-zinc-900/80 p-3 rounded border border-zinc-800">
-<div class="flex flex-col">
-<span class="text-[8px] text-zinc-500">DÜZENLENME TARİHİ</span>
-<span class="text-xs font-mono">01/2024</span>
-</div>
-<div class="flex flex-col text-right">
-<span class="text-[8px] text-zinc-500">GEÇERLİLİK</span>
-<span class="text-xs font-mono">SÜRESİZ</span>
-</div>
-</div>
-</div>
-</div>
-<div class="flex justify-between items-end">
-<div class="w-20 h-20 bg-white p-1 rounded-sm">
-<!-- Placeholder QR -->
-<div class="w-full h-full bg-[url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=BosphorusFellas_BF2024089')] bg-cover"></div>
-</div>
-<div class="text-right">
-<p class="text-[10px] text-zinc-500 mb-1">MÜŞTERİ HİZMETLERİ</p>
-<p class="text-xs font-bold text-brand-blue tracking-tighter">+90 212 555 44 33</p>
-<p class="text-[8px] text-zinc-500 mt-2 italic">© 2024 Bosphorus Fellas Social Club</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Hidden Input for Logic Demonstration -->
-<input id="userNameInput" type="hidden" value="KEREM CAN ÖZTÜRK"/>
-<script>
-        // Flip Logic
-        const card = document.getElementById('idCard');
-        card.addEventListener('click', () => {
-            card.classList.toggle('flipped');
-        });
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-[#410002]">
+<div class="grain-overlay fixed inset-0 z-50"></div>
 
-        // Data Population Logic (Preserved as requested)
-        function updateCardData() {
-            const nameInput = document.getElementById('userNameInput');
-            const displayElements = document.querySelectorAll('#display-name');
+<!-- TopAppBar -->
+<header class="bg-[#131313] w-full top-0 sticky flex justify-between items-center px-6 h-16 z-40 border-b border-[#2a2a2a]">
+    <div class="flex items-center gap-3">
+        <button onclick="window.history.back()" class="text-[#e8bcb7] hover:text-[#ff2a2a] transition-colors flex items-center">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <span class="material-symbols-outlined text-[#ff2a2a]" data-icon="precision_manufacturing">precision_manufacturing</span>
+        <h1 class="font-['Space_Grotesk'] uppercase tracking-tighter font-bold text-xl text-[#ff2a2a]">MANCAVE</h1>
+        <div class="h-4 w-px bg-[#2a2a2a] mx-2"></div>
+        <span class="text-[10px] font-label uppercase tracking-widest text-[#e8bcb7]">DİJİTAL KİMLİK</span>
+    </div>
+</header>
+
+<main class="min-h-screen pb-32 flex flex-col items-center">
+
+    <div class="w-full max-w-sm px-6 pt-10 text-center">
+        <span class="font-label text-primary/70 uppercase tracking-[0.3em] text-[10px] font-bold block mb-2">ERİŞİM SEVİYESİ 1</span>
+        <h2 class="font-headline text-3xl font-extrabold uppercase tracking-tighter text-[#e5e2e1] mb-2">MANCAVE<br>SÜRÜCÜ KARTI</h2>
+        <p class="text-xs font-body text-on-surface-variant opacity-60">Terminal geçişleri ve buluşmalar için resmi dijital kimliğiniz.</p>
+    </div>
+
+    <!-- 3D Card Container -->
+    <div class="mt-12 w-full max-w-[340px] aspect-[1/1.586] perspective-1000 cursor-pointer" onclick="flipCard()">
+        <div id="id-card" class="card-3d-wrapper relative w-full h-full">
             
-            if (nameInput && displayElements.length > 0) {
-                displayElements.forEach(el => {
-                    el.textContent = nameInput.value;
-                });
-            }
+            <!-- FRONT OF CARD -->
+            <div class="card-front absolute inset-0 bg-[#0e0e0e] border border-[#2a2a2a] shadow-[0_0_50px_rgba(255,42,42,0.15)] rounded-sm overflow-hidden flex flex-col justify-between">
+                <!-- Glossy / texture -->
+                <div class="absolute inset-0 bg-gradient-to-br from-[#2a2a2a]/30 to-transparent"></div>
+                <div class="hologram-effect"></div>
+                <div class="absolute -right-16 -top-16 w-48 h-48 bg-[#ff2a2a]/10 rounded-full blur-2xl"></div>
+
+                <!-- Header -->
+                <div class="p-6 relative z-10 flex justify-between items-start">
+                    <div>
+                        <span class="font-label text-[8px] text-[#e8bcb7] tracking-[0.3em] uppercase opacity-70 block mb-1">MEMBER ID</span>
+                        <span class="font-headline text-lg font-bold tracking-widest text-[#e5e2e1]">MC-8472</span>
+                    </div>
+                    <span class="material-symbols-outlined text-[#ff2a2a] text-3xl opacity-80" data-icon="precision_manufacturing">precision_manufacturing</span>
+                </div>
+
+                <!-- Center Profile -->
+                <div class="flex-1 flex flex-col items-center justify-center relative z-10 px-6">
+                    <div class="w-24 h-24 rounded-full border-2 border-[#ff2a2a]/30 p-1 mb-4 shadow-[0_0_20px_rgba(255,42,42,0.2)]">
+                        <img id="card-photo" src="https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=200&h=200" alt="Avatar" class="w-full h-full object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h3 id="card-name" class="font-headline text-2xl font-black uppercase tracking-widest text-[#e5e2e1] text-center w-full truncate">...</h3>
+                    <p id="card-car" class="font-label text-[10px] uppercase tracking-[0.3em] text-[#ff2a2a] mt-1">...</p>
+                </div>
+
+                <!-- Footer details -->
+                <div class="p-6 relative z-10 bg-[#131313]/50 backdrop-blur-sm border-t border-[#2a2a2a]">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="font-label text-[8px] text-[#e8bcb7] tracking-[0.3em] uppercase opacity-60 block">KATILIM TARİHİ</span>
+                            <span class="font-body text-xs font-semibold text-[#e5e2e1]">2023 - İSTANBUL</span>
+                        </div>
+                        <span class="material-symbols-outlined text-[#e8bcb7] opacity-50 text-2xl" data-icon="nfc">nfc</span>
+                    </div>
+                </div>
+
+                <!-- Left Edge Red Bar -->
+                <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#ff2a2a] to-[#5c0004]"></div>
+            </div>
+
+            <!-- BACK OF CARD (KASA/VAULT) -->
+            <div class="card-back absolute inset-0 bg-[#0e0e0e] border border-[#ffb400]/30 shadow-[0_0_50px_rgba(255,180,0,0.1)] rounded-sm overflow-hidden flex flex-col">
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#ffb400]/5 via-transparent to-transparent"></div>
+                
+                <div class="p-6 flex flex-col h-full relative z-10 w-full">
+                    <div class="flex items-center gap-3 mb-6 border-b border-[#2a2a2a] pb-4">
+                        <span class="material-symbols-outlined text-[#ffb400] text-2xl">account_balance</span>
+                        <div>
+                            <h3 class="font-headline text-[14px] font-bold tracking-widest text-[#e8bcb7] uppercase">KASA RAPORU</h3>
+                            <p class="font-label text-[8px] uppercase tracking-[0.2em] text-[rgba(232,188,183,0.5)] mt-1">GÜNCEL DURUM</p>
+                        </div>
+                    </div>
+                    
+                    <div id="vault-list" class="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-hide flex flex-col gap-2">
+                        <!-- Vault items inject via JS -->
+                        <div class="animate-pulse bg-[#1c1b1b] h-8 w-full"></div>
+                        <div class="animate-pulse bg-[#1c1b1b] h-8 w-full opacity-70"></div>
+                    </div>
+                    
+                    <button class="mt-6 w-full font-label text-[10px] text-[#ffb400] border border-[#ffb400]/30 px-4 py-3 uppercase tracking-widest hover:bg-[#ffb400]/10 transition-colors">
+                        ÖN YÜZE DÖN
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <p class="mt-8 text-[10px] font-label uppercase tracking-widest text-on-surface-variant/50 flex items-center gap-2">
+        <span class="material-symbols-outlined text-[14px]">touch_app</span> KARTA DOKUNARAK ÇEVİR
+    </p>
+
+</main>
+
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-[#0e0e0e] border-t border-[#2a2a2a]">
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">ANA SAYFA</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="mancave.html">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">MANCAVE ÜS</span>
+</a>
+<!-- Aktif Sekme -->
+<a class="flex flex-col items-center justify-center text-[#ff2a2a] border-t-2 border-[#ff2a2a] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="kartim.html">
+<span class="material-symbols-outlined material-symbols-outlined-fill">badge</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">KARTIM</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="basvuru.html">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">BAŞVURU</span>
+</a>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // GÜVENLİK KORİDORU: Giriş yapmamışsa Login'e at!
+        const userStr = localStorage.getItem('mancave_user');
+        if (!userStr) {
+            window.location.href = 'mancavecard.html';
+            return;
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', updateCardData);
-
-        // Interactive mouse tilt effect
-        const cardContainer = document.querySelector('.card-perspective');
-        cardContainer.addEventListener('mousemove', (e) => {
-            if (card.classList.contains('flipped')) return;
+        try {
+            const user = JSON.parse(userStr);
             
-            const rect = cardContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 15;
-            const rotateY = (centerX - x) / 15;
-            
-            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        cardContainer.addEventListener('mouseleave', () => {
-            if (card.classList.contains('flipped')) {
-                card.style.transform = 'rotateY(180deg)';
-            } else {
-                card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            // Ön Yüz Verileri Doldur
+            document.getElementById('card-name').textContent = user.name || "BİLİNMEYEN MİSAFİR";
+            document.getElementById('card-car').textContent = user.car || "LİSTE DIŞI ARAÇ";
+            if(user.photoUrl && user.photoUrl.trim() !== "") {
+                document.getElementById('card-photo').src = user.photoUrl;
             }
-        });
-    </script>
-</body></html>
+
+            // Kasa Verisi Doldur (Virgülle veya Nokta ile ayrıldığını varsayıyoruz, 
+            // Veya satır satır basıyoruz)
+            const vaultContainer = document.getElementById('vault-list');
+            const vaultData = user.vault || "";
+            
+            if (vaultData.trim() === "") {
+                vaultContainer.innerHTML = `<div class="text-center mt-4">
+                    <span class="material-symbols-outlined text-[rgba(232,188,183,0.3)] text-3xl mb-2">money_off</span>
+                    <p class="text-[9px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(232,188,183,0.4)]">KASA BİLGİSİ BULUNAMADI</p>
+                </div>`;
+            } else {
+                // Virgül ayracı ile bölüp kutulara yerleştir
+                const items = vaultData.split(',');
+                let html = '';
+                items.forEach(i => {
+                   if(i.trim().length > 0) {
+                       html += `
+                        <div class="bg-[#131313] border border-[#2a2a2a] p-3 border-l-2 border-l-[#ffb400]">
+                            <p class="font-['Space_Grotesk'] text-[10px] text-[#e5e2e1] uppercase tracking-widest">${i.trim()}</p>
+                        </div>
+                       `;
+                   }
+                });
+                vaultContainer.innerHTML = html;
+            }
+
+        } catch(e) {
+            console.error("User data parse error", e);
+        }
+    });
+
+    // Kart çevirme efekti
+    function flipCard() {
+        const card = document.getElementById('id-card');
+        card.classList.toggle('flipped');
+    }
+</script>
+</body>
+</html>

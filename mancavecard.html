@@ -3,186 +3,211 @@
 <html class="dark" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Bosphorus Fellas | Giriş Yap</title>
+<title>MANCAVE | GİRİŞ YAP</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script>
+<script id="tailwind-config">
         tailwind.config = {
-            darkMode: 'class',
+            darkMode: "class",
             theme: {
                 extend: {
-                    colors: {
-                        brand: {
-                            DEFAULT: '#0099FF',
-                            dark: '#007ACC',
-                            glow: 'rgba(0, 153, 255, 0.4)'
-                        },
-                        midnight: {
-                            950: '#020617',
-                            900: '#0f172a',
-                            800: '#1e293b'
-                        }
+                    "colors": {
+                        "on-secondary-fixed-variant": "#474747",
+                        "on-secondary-container": "#b6b5b4",
+                        "surface": "#131313",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "background": "#131313",
+                        "error-container": "#93000a",
+                        "surface-bright": "#393939",
+                        "primary": "#ffb4ab",
+                        "secondary-container": "#474747",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-primary-fixed": "#410002",
+                        "on-tertiary-container": "#292a2a",
+                        "on-surface": "#e5e2e1",
+                        "inverse-primary": "#c00011",
+                        "on-primary-fixed-variant": "#93000a",
+                        "surface-variant": "#353534",
+                        "on-tertiary": "#2f3131",
+                        "primary-container": "#ff5449",
+                        "outline": "#af8783",
+                        "tertiary-container": "#909191",
+                        "secondary-fixed": "#e4e2e1",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "tertiary-fixed": "#e3e2e2",
+                        "on-surface-variant": "#e8bcb7",
+                        "on-primary": "#690005",
+                        "tertiary": "#c7c6c6",
+                        "primary-fixed": "#ffdad6",
+                        "surface-container-high": "#2a2a2a",
+                        "on-background": "#e5e2e1",
+                        "outline-variant": "#5e3f3b",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#c8c6c5",
+                        "on-secondary": "#303030",
+                        "inverse-surface": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#ffb4ab",
+                        "surface-container": "#201f1f",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-container": "#5c0004",
+                        "tertiary-fixed-dim": "#c7c6c6"
                     },
-                    fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
                     },
-                    borderRadius: {
-                        'none': '0',
-                        'sm': '0.125rem',
-                        DEFAULT: '4px',
-                        'md': '0.375rem',
-                        'lg': '0.5rem',
-                        'full': '9999px',
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
                     }
-                }
-            }
+                },
+            },
         }
     </script>
 <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
         body {
-            background-color: #020617;
-            color: #f8fafc;
-        }
-        .brand-glow {
-            text-shadow: 0 0 15px rgba(0, 153, 255, 0.6);
-        }
-        .card-blur {
-            backdrop-filter: blur(12px);
-            background-color: rgba(15, 23, 42, 0.8);
-        }
-        .input-focus:focus {
-            box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.2);
-            border-color: #0099FF;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #0099FF;
-            border-radius: 2px;
+            min-height: max(884px, 100dvh);
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 selection:bg-brand selection:text-white">
-<!-- Background elements -->
-<div class="fixed inset-0 overflow-hidden pointer-events-none">
-<div class="absolute -top-24 -left-24 w-96 h-96 bg-brand/10 rounded-full blur-[100px] animate-pulse-slow"></div>
-<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand/5 rounded-full blur-[100px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<div class="grain-overlay fixed inset-0 z-50"></div>
+<!-- TopAppBar -->
+<header class="bg-[#131313] dark:bg-[#131313] rounded-none w-full top-0 sticky flex justify-between items-center px-6 h-16 w-full z-40 border-none">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ff2a2a]" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h1 class="font-['Space_Grotesk'] uppercase tracking-tighter font-bold text-xl font-black tracking-widest text-[#ff2a2a]">MANCAVE</h1>
 </div>
-<!-- Login Container -->
-<div class="w-full max-w-md z-10">
-<div class="text-center mb-10 animate-float">
-<div class="inline-flex items-center justify-center w-16 h-16 rounded-lg bg-midnight-900 border border-brand/30 mb-4 shadow-[0_0_20px_rgba(0,153,255,0.15)]">
-<span class="material-symbols-outlined text-brand text-4xl font-light">sailing</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#e8bcb7] hover:text-[#ff2a2a] transition-colors duration-300 active:scale-95 transition-transform" data-icon="account_circle">account_circle</span>
 </div>
-<h1 class="text-3xl font-bold tracking-tight text-white mb-2 uppercase">Bosphorus <span class="text-brand brand-glow">Fellas</span></h1>
-<p class="text-slate-400 font-light tracking-wide uppercase text-xs">Seçkinlerin Gece Kulübü &amp; Topluluğu</p>
+</header>
+<main class="min-h-screen pb-32">
+<!-- Hero Context -->
+<section class="px-6 pt-12 pb-8">
+<div class="max-w-md mx-auto text-center">
+<span class="font-label text-[#ff2a2a] uppercase tracking-[0.3em] text-[10px] font-bold block mb-2">GÜVENLİ ERİŞİM PROTOKOLÜ</span>
+<h2 class="font-headline text-3xl font-extrabold uppercase tracking-tighter leading-none mb-4 text-[#e5e2e1]">ÜYE PORTALI</h2>
+<div class="h-1 w-16 bg-[#ff2a2a] mx-auto"></div>
 </div>
-<div class="card-blur border border-slate-800 rounded-lg p-8 shadow-2xl relative group">
-<!-- Decorative corner accent -->
-<div class="absolute -top-[1px] -right-[1px] w-8 h-8 border-t border-r border-brand rounded-tr-lg opacity-50"></div>
-<div class="absolute -bottom-[1px] -left-[1px] w-8 h-8 border-b border-l border-brand rounded-bl-lg opacity-50"></div>
-<form class="space-y-6" id="loginForm">
-<div>
-<label class="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2" for="id-number">Kimlik Numarası</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">badge</span>
-<input class="w-full bg-midnight-950 border border-slate-700 rounded-sm py-3 pl-10 pr-4 text-white placeholder:text-slate-600 focus:outline-none input-focus transition-all duration-300 uppercase tracking-wider" id="id-number" placeholder="Üyelik Kodunuz" required="" type="text"/>
-</div>
-</div>
-<div>
-<label class="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2" for="access-key">Erişim Anahtarı</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">key</span>
-<input class="w-full bg-midnight-950 border border-slate-700 rounded-sm py-3 pl-10 pr-4 text-white placeholder:text-slate-600 focus:outline-none input-focus transition-all duration-300" id="access-key" placeholder="••••••••" required="" type="password"/>
-</div>
-</div>
-<div class="flex items-center justify-between">
-<label class="flex items-center group cursor-pointer">
-<input class="w-4 h-4 rounded-sm border-slate-700 bg-midnight-950 text-brand focus:ring-brand focus:ring-offset-midnight-900 focus:ring-offset-2" type="checkbox"/>
-<span class="ml-2 text-xs text-slate-400 group-hover:text-slate-300 transition-colors">Beni Hatırla</span>
-</label>
-<a class="text-xs text-brand hover:text-brand-dark transition-colors font-medium" href="#">Anahtarı mı Unuttun?</a>
-</div>
-<button class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3.5 rounded-sm transition-all duration-300 shadow-[0_4px_15px_rgba(0,153,255,0.3)] hover:shadow-[0_4px_25px_rgba(0,153,255,0.5)] active:scale-[0.98] uppercase tracking-widest flex items-center justify-center gap-2" id="submitBtn" type="submit">
-<span>Giriş İzni İste</span>
-<span class="material-symbols-outlined text-sm">login</span>
-</button>
-</form>
-<div class="mt-6 text-center text-sm font-medium hidden" id="statusMessage"></div>
-</div>
-<div class="mt-8 text-center">
-<p class="text-slate-500 text-xs">
-                Hesabınız yok mu? <a class="text-brand hover:underline" href="#">Üyelik başvurusu yapın</a>
-</p>
-<div class="mt-8 flex justify-center gap-6">
-<a class="text-slate-600 hover:text-brand transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
-<a class="text-slate-600 hover:text-brand transition-colors" href="#"><span class="material-symbols-outlined">support_agent</span></a>
-<a class="text-slate-600 hover:text-brand transition-colors" href="#"><span class="material-symbols-outlined">help_outline</span></a>
+</section>
+
+<!-- Login Form Section -->
+<section class="px-6 flex flex-col items-center justify-center mt-4">
+<div class="w-full max-w-md bg-[#0e0e0e] border border-[#2a2a2a] p-8 shadow-2xl relative overflow-hidden group">
+<!-- Glow effect background -->
+<div class="absolute -inset-1 bg-gradient-to-br from-[#ff2a2a]/5 to-transparent blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
+
+<div class="relative z-10">
+    <div class="text-center mb-8">
+        <span class="material-symbols-outlined text-[#ff2a2a] text-4xl mb-2">lock_open</span>
+        <p class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest text-[rgba(232,188,183,0.6)]">KİMLİK DOĞRULAMA GEREKİYOR</p>
+    </div>
+
+    <form id="login-form" class="space-y-6">
+        <div>
+            <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">KAYITLI E-POSTA</label>
+            <input required type="email" id="login-email" placeholder="ornek@gmail.com" class="w-full bg-[#131313] border border-[#2a2a2a] px-4 py-3 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors">
+        </div>
+        <div>
+            <label class="text-[9px] font-['Space_Grotesk'] text-[rgba(232,188,183,0.5)] uppercase tracking-widest block mb-1">MANCAVE ŞİFRESİ</label>
+            <input required type="password" id="login-pass" placeholder="••••••••" class="w-full bg-[#131313] border border-[#2a2a2a] px-4 py-3 text-sm text-[#e5e2e1] focus:border-[#ff2a2a] outline-none transition-colors tracking-widest">
+        </div>
+
+        <button type="submit" id="login-btn" class="w-full relative py-4 bg-[#ff2a2a]/10 border border-[#ff2a2a]/40 hover:bg-[#ff2a2a]/20 transition-all group flex items-center justify-center gap-3 active:scale-[0.98]">
+            <span class="font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase text-[#ff2a2a]">SİSTEME GİRİŞ YAP</span>
+            <span class="material-symbols-outlined text-[#ff2a2a] text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+    </form>
+    
+    <p id="login-error" class="hidden mt-4 text-center text-[10px] text-[#ff2a2a] font-['Space_Grotesk'] uppercase tracking-widest bg-[#ff2a2a]/10 p-2 border border-[#ff2a2a]/30">
+        Hatalı giriş denemesi.
+    </p>
+
+    <!-- Scanline effect -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#ff2a2a]/5 to-transparent h-1/2 w-full -translate-y-full group-hover:translate-y-[200%] transition-transform duration-[2000ms] ease-in-out pointer-events-none"></div>
 </div>
 </div>
-</div>
-<!-- Auth Simulation Logic -->
+</section>
+
+<!-- Demo Login Info -->
+<section class="max-w-md mx-auto px-6 mt-6">
+    <div class="bg-[#1c1b1b] p-4 text-center border-l-2 border-[#e8bcb7]/30">
+        <p class="text-[9px] text-[#e8bcb7]/60 font-['Space_Grotesk'] uppercase tracking-widest leading-relaxed">
+            DİKKAT: ŞU AN DEMO MODUNDASINIZ.<br>FORMU DOLDURUP GİRİŞ YAPTIĞINIZDA SİMÜLASYON VERİSİ İLE UYGULAMAYA GİRECEKSİNİZ. ONAYLI ÜYELER İÇİN APP SCRIPT ENTEGRASYONU SONRAKİ AŞAMADA DEVREYE ALINACAKTIR.
+        </p>
+    </div>
+</section>
+<!-- Auth System Simulation JS -->
 <script>
-        const loginForm = document.getElementById('loginForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const statusMessage = document.getElementById('statusMessage');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('login-form');
+    const btn = document.getElementById('login-btn');
+    const errorMsg = document.getElementById('login-error');
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-pass').value;
+        
+        btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm text-[#ff2a2a]">sync</span><span class="font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase text-[#ff2a2a]">DOĞRULANIYOR...</span>`;
+        btn.disabled = true;
 
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        // Simulate network delay
+        setTimeout(() => {
+            // Fake Backend Auth bypass
+            localStorage.setItem('mancave_auth', 'true');
+            // Mock DB data that will eventually come from Google Sheet
+            const fakeUserData = {
+                name: "Egemen Tutmuş",
+                car: "BMW G20",
+                vault: "2025 Haziran 1Gr Altın, 2025 Eylül 1Gr Altın",
+                photoUrl: "https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=500"
+            };
+            localStorage.setItem('mancave_user', JSON.stringify(fakeUserData));
             
-            // UI state: Processing
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `
-                <span class="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                <span class="ml-2">KİMLİK DOĞRULANIYOR...</span>
-            `;
-            statusMessage.classList.add('hidden');
-
-            // Simulate server-side verification
-            setTimeout(() => {
-                const idValue = document.getElementById('id-number').value;
-                
-                // Demo logic: Accept any valid-looking ID
-                if (idValue.length >= 4) {
-                    statusMessage.textContent = "ERİŞİM ONAYLANDI. YÖNLENDİRİLİYORSUNUZ...";
-                    statusMessage.className = "mt-6 text-center text-sm font-medium text-emerald-400 block";
-                    submitBtn.classList.remove('bg-brand');
-                    submitBtn.classList.add('bg-emerald-600');
-                    submitBtn.innerHTML = `
-                        <span class="material-symbols-outlined text-sm">check_circle</span>
-                        <span class="ml-2">GİRİŞ BAŞARILI</span>
-                    `;
-                    
-                    // Proceed to membership card
-                    setTimeout(() => {
-                        // Assuming the destination file exists in the deployment environment
-                        window.location.href = 'mancavecard.html';
-                    }, 1200);
-                } else {
-                    statusMessage.textContent = "HATA: GEÇERSİZ KİMLİK BİLGİSİ.";
-                    statusMessage.className = "mt-6 text-center text-sm font-medium text-rose-500 block";
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = `
-                        <span>TEKRAR DENE</span>
-                        <span class="material-symbols-outlined text-sm">refresh</span>
-                    `;
-                }
-            }, 1800);
-        });
-    </script>
+            // Redirect to Events Dashboard
+            window.location.href = 'mancave.html';
+        }, 1500);
+    });
+});
+</script>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-[#0e0e0e] dark:bg-[#0e0e0e] rounded-none border-t border-[#2a2a2a]">
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Space_Grotesk'] uppercase text-[10px] tracking-widest font-bold mt-1">ANA SAYFA</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#ff2a2a] border-t-2 border-[#ff2a2a] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="kartim.html">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-['Space_Grotesk'] uppercase text-[10px] tracking-widest font-bold mt-1">KARTIM</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="basvuru.html">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+<span class="font-['Space_Grotesk'] uppercase text-[10px] tracking-widest font-bold mt-1">BAŞVURU</span>
+</a>
+</nav>
 </body></html>

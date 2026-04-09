@@ -1,281 +1,314 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="tr"><head>
+<html class="dark" lang="tr">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Bosphorus Fellas - Üye Merkezi</title>
+<title>MANCAVE | ÜS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0099FF',
-                        brand: {
-                            50: '#E6F5FF',
-                            100: '#B3E0FF',
-                            200: '#80CCFF',
-                            300: '#4DB8FF',
-                            400: '#1AA3FF',
-                            500: '#0099FF',
-                            600: '#007ACC',
-                            700: '#005C99',
-                            800: '#003D66',
-                            900: '#001F33',
-                        },
-                        dark: {
-                            DEFAULT: '#0A0A0A',
-                            lighter: '#121212',
-                            elevated: '#1A1A1A'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
-                    },
-                    borderRadius: {
-                        'brand': '4px',
-                    }
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    background: "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-high": "#2a2a2a",
+                    "on-surface": "#e5e2e1",
+                    "on-surface-variant": "#e8bcb7",
+                    primary: "#ffb4ab",
+                    "outline-variant": "#5e3f3b"
+                },
+                fontFamily: {
+                    headline: ["Space Grotesk"],
+                    body: ["Inter"],
+                    label: ["Space Grotesk"]
                 }
             }
         }
-    </script>
+    }
+</script>
 <style>
-        .glass-panel {
-            background: rgba(18, 18, 18, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .text-gradient {
-            background: linear-gradient(to right, #0099FF, #00E5FF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .neon-border {
-            box-shadow: 0 0 15px rgba(0, 153, 255, 0.2);
-        }
-        .noise-bg {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-        }
-        body {
-            background-color: #0A0A0A;
-            color: #FFFFFF;
-        }
-    </style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+    }
+    .grain-overlay {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+    }
+    body {
+        min-height: max(884px, 100dvh);
+    }
+    /* Event card hover effect */
+    .event-card {
+        transition: all 0.3s ease;
+        border-left: 2px solid transparent;
+    }
+    .event-card:hover {
+        background-color: #201f1f;
+        border-left-color: #ff2a2a;
+        transform: translateX(4px);
+    }
+</style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden">
-<!-- Noise Layer -->
-<div class="fixed inset-0 pointer-events-none noise-bg z-50"></div>
-<!-- Navigation -->
-<nav class="fixed top-0 w-full z-40 glass-panel border-b border-white/5">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between h-20 items-center">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-brand-500 rounded-brand flex items-center justify-center neon-border">
-<span class="material-symbols-outlined text-white">sailing</span>
-</div>
-<span class="text-xl font-bold tracking-tighter uppercase italic">Bosphorus <span class="text-brand-500">Fellas</span></span>
-</div>
-<div class="hidden md:flex items-center space-x-8">
-<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#dashboard">Panel</a>
-<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#inventory">Ekipman</a>
-<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#missions">Görevler</a>
-<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#stats">İstatistikler</a>
-</div>
-<div class="flex items-center gap-4">
-<button class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold rounded-brand transition-all neon-border flex items-center gap-2" id="loginBtn">
-<span class="material-symbols-outlined text-sm">lock_open</span>
-                        GİRİŞ YAP
-                    </button>
-</div>
-</div>
-</div>
-</nav>
-<!-- Main Content -->
-<main class="pt-24 pb-12">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<!-- Hero Section -->
-<div class="mb-12 relative overflow-hidden rounded-brand h-64 flex items-center p-8 bg-gradient-to-r from-dark-lighter to-dark-elevated border border-white/5">
-<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545463322-c47af6c92437?auto=format&amp;fit=crop&amp;q=80')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
-<div class="relative z-10 max-w-2xl">
-<h1 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">Hoş Geldin, Kaptan</h1>
-<p class="text-gray-400 text-lg">Bosphorus Fellas operasyonel üssüne erişim sağladın. Tüm sistemler aktif ve optimize edildi.</p>
-</div>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<!-- Sidebar / Quick Stats -->
-<div class="lg:col-span-1 space-y-6">
-<div class="glass-panel p-6 rounded-brand">
-<h2 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
-<span class="material-symbols-outlined text-brand-500">analytics</span>
-                            OPERASYON DURUMU
-                        </h2>
-<div class="space-y-4">
-<div class="flex justify-between items-center p-3 rounded-brand bg-white/5 border border-white/5">
-<span class="text-gray-400 text-sm">Aktif Görevler</span>
-<span class="text-brand-500 font-bold">12</span>
-</div>
-<div class="flex justify-between items-center p-3 rounded-brand bg-white/5 border border-white/5">
-<span class="text-gray-400 text-sm">Üye Sayısı</span>
-<span class="text-brand-500 font-bold">156</span>
-</div>
-<div class="flex justify-between items-center p-3 rounded-brand bg-white/5 border border-white/5">
-<span class="text-gray-400 text-sm">Sistem Durumu</span>
-<span class="text-green-500 font-bold flex items-center gap-1">
-<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                    Çevrimiçi
-                                </span>
-</div>
-</div>
-</div>
-<!-- Member Access Form -->
-<div class="glass-panel p-6 rounded-brand">
-<h2 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
-<span class="material-symbols-outlined text-brand-500">key</span>
-                            ERİŞİM PANELİ
-                        </h2>
-<form class="space-y-4" id="accessForm">
-<div>
-<label class="block text-xs text-gray-500 mb-2 font-bold uppercase">Üye Kimlik Numarası</label>
-<input class="w-full bg-black/40 border-white/10 rounded-brand focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white p-3" placeholder="ID-XXXX-XXXX" type="text"/>
-</div>
-<button class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-brand transition-all flex justify-center items-center gap-2" type="submit">
-<span class="material-symbols-outlined text-sm">verified_user</span>
-                                KİMLİK DOĞRULA
-                            </button>
-</form>
-</div>
-</div>
-<!-- Main Feed / Data Display -->
-<div class="lg:col-span-2 space-y-8">
-<!-- Dynamic Data Section (Google Sheets Integration Point) -->
-<div class="glass-panel rounded-brand overflow-hidden">
-<div class="p-6 border-b border-white/5 flex justify-between items-center">
-<h2 class="text-lg font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-brand-500">database</span>
-                                Üye Veri Akışı
-                            </h2>
-<div class="flex gap-2">
-<span class="px-3 py-1 bg-brand-500/10 text-brand-500 text-[10px] font-bold rounded-full border border-brand-500/20 uppercase tracking-widest">Canlı Veri</span>
-</div>
-</div>
-<div class="p-0" id="dataContainer">
-<!-- Placeholder for Google Sheets Data -->
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-white/5 text-xs text-gray-500 uppercase tracking-widest">
-<th class="p-4 border-b border-white/5 font-medium">Pozisyon</th>
-<th class="p-4 border-b border-white/5 font-medium">Takma Ad</th>
-<th class="p-4 border-b border-white/5 font-medium">Bölge</th>
-<th class="p-4 border-b border-white/5 font-medium">Durum</th>
-</tr>
-</thead>
-<tbody class="text-sm" id="sheetDataBody">
-<!-- Simulating data while waiting for JS load -->
-<tr class="hover:bg-white/5 border-b border-white/5 transition-colors group">
-<td class="p-4 font-mono text-brand-500">01</td>
-<td class="p-4 font-medium">DenizKurdu</td>
-<td class="p-4 text-gray-400">İstanbul / Boğaz</td>
-<td class="p-4"><span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] rounded border border-green-500/20">AKTİF</span></td>
-</tr>
-<tr class="hover:bg-white/5 border-b border-white/5 transition-colors group">
-<td class="p-4 font-mono text-brand-500">02</td>
-<td class="p-4 font-medium">MaviGözcü</td>
-<td class="p-4 text-gray-400">Kadıköy</td>
-<td class="p-4"><span class="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-[10px] rounded border border-yellow-500/20">BEKLEMEDE</span></td>
-</tr>
-<tr class="hover:bg-white/5 border-b border-white/5 transition-colors group">
-<td class="p-4 font-mono text-brand-500">03</td>
-<td class="p-4 font-medium">GeceFeneri</td>
-<td class="p-4 text-gray-400">Beşiktaş</td>
-<td class="p-4"><span class="px-2 py-1 bg-brand-500/10 text-brand-500 text-[10px] rounded border border-brand-500/20">GÖREVDE</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<!-- Visual Assets Section -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="glass-panel p-6 rounded-brand group cursor-pointer hover:border-brand-500/30 transition-all">
-<div class="flex justify-between items-start mb-4">
-<div class="w-12 h-12 bg-brand-500/10 rounded-brand flex items-center justify-center text-brand-500">
-<span class="material-symbols-outlined text-3xl">map</span>
-</div>
-<span class="material-symbols-outlined text-gray-600 group-hover:text-brand-500 transition-colors">open_in_new</span>
-</div>
-<h3 class="font-bold text-lg mb-2">Görev Haritası</h3>
-<p class="text-sm text-gray-500">Operasyon bölgelerini ve stratejik noktaları detaylı olarak inceleyin.</p>
-</div>
-<div class="glass-panel p-6 rounded-brand group cursor-pointer hover:border-brand-500/30 transition-all">
-<div class="flex justify-between items-start mb-4">
-<div class="w-12 h-12 bg-brand-500/10 rounded-brand flex items-center justify-center text-brand-500">
-<span class="material-symbols-outlined text-3xl">shield</span>
-</div>
-<span class="material-symbols-outlined text-gray-600 group-hover:text-brand-500 transition-colors">open_in_new</span>
-</div>
-<h3 class="font-bold text-lg mb-2">Güvenlik Protokolü</h3>
-<p class="text-sm text-gray-500">Sistem bütünlüğü ve üyelik gizliliği için güncellenmiş talimatlar.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-[#410002]">
+<div class="grain-overlay fixed inset-0 z-50"></div>
+
+<!-- TopAppBar -->
+<header class="bg-[#131313] w-full top-0 sticky flex justify-between items-center px-6 h-16 z-40">
+    <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[#ff2a2a]" data-icon="precision_manufacturing">precision_manufacturing</span>
+        <h1 class="font-['Space_Grotesk'] uppercase tracking-tighter font-bold text-xl text-[#ff2a2a]">MANCAVE</h1>
+        <div class="h-4 w-px bg-[#2a2a2a] mx-2"></div>
+        <span class="text-[10px] font-label uppercase tracking-widest text-[#e8bcb7]">GİZLİ ÜS</span>
+    </div>
+</header>
+
+<main class="min-h-screen pb-32">
+    <!-- Hero Context -->
+    <section class="px-6 pt-12 pb-8">
+        <div class="max-w-4xl mx-auto">
+            <span class="font-label text-primary uppercase tracking-[0.3em] text-xs font-bold block mb-2">ERİŞİM ONAYLANDI</span>
+            <h2 class="font-headline text-4xl font-extrabold uppercase tracking-tighter leading-none mb-4">GİZLİ ETKİNLİKLER</h2>
+            <div class="h-1 w-24 bg-[#ff5449]"></div>
+            <p class="mt-4 text-sm text-[#e8bcb7] max-w-lg leading-relaxed">
+                ManCave üyelerine özel yaklaşan gizli buluşmalar, sürüşler ve atölye toplantıları.
+            </p>
+        </div>
+    </section>
+
+    <!-- Events Feed -->
+    <section class="px-6 max-w-4xl mx-auto space-y-4" id="events-container">
+        <!-- Skeleton Loading Loader -->
+        <div class="animate-pulse bg-surface-container-low p-6 flex flex-col gap-4">
+            <div class="h-4 bg-surface-container-high w-1/4"></div>
+            <div class="h-6 bg-surface-container-high w-3/4"></div>
+            <div class="h-16 bg-surface-container-high w-full"></div>
+        </div>
+        <div class="animate-pulse bg-surface-container-low p-6 flex flex-col gap-4 opacity-70">
+            <div class="h-4 bg-surface-container-high w-1/4"></div>
+            <div class="h-6 bg-surface-container-high w-3/4"></div>
+            <div class="h-16 bg-surface-container-high w-full"></div>
+        </div>
+    </section>
 </main>
-<!-- Footer -->
-<footer class="border-t border-white/5 py-12 mt-12 bg-dark-lighter">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 bg-brand-500 rounded-brand flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-sm">sailing</span>
-</div>
-<span class="font-bold tracking-tighter uppercase italic text-sm">Bosphorus <span class="text-brand-500">Fellas</span></span>
-</div>
-<div class="text-xs text-gray-600 flex gap-8">
-<span>© 2024 OPERASYON MERKEZİ</span>
-<a class="hover:text-brand-500" href="#">GİZLİLİK POLİTİKASI</a>
-<a class="hover:text-brand-500" href="#">İLETİŞİM</a>
-</div>
-<div class="flex gap-4">
-<button class="w-8 h-8 rounded-brand bg-white/5 flex items-center justify-center hover:bg-brand-500 transition-all">
-<span class="material-symbols-outlined text-sm">public</span>
-</button>
-<button class="w-8 h-8 rounded-brand bg-white/5 flex items-center justify-center hover:bg-brand-500 transition-all">
-<span class="material-symbols-outlined text-sm">share</span>
-</button>
-</div>
-</div>
-</div>
-</footer>
-<!-- Integration Logic -->
+
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-[#0e0e0e] border-t border-[#2a2a2a]">
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">ANA SAYFA</span>
+</a>
+<!-- Üye girişi yaptığı için Mancave ikonu kırmızı/aktif -->
+<a class="flex flex-col items-center justify-center text-[#ff2a2a] border-t-2 border-[#ff2a2a] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="mancave.html">
+<span class="material-symbols-outlined material-symbols-outlined-fill">hub</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">MANCAVE ÜS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="kartim.html">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">KARTIM</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="basvuru.html">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">BAŞVURU</span>
+</a>
+</nav>
+
 <script>
-        // Google Sheets Integration Logic Placeholder
-        // Maintain identical structure for script interaction as the previous version
-        const API_ENDPOINT = 'YOUR_GOOGLE_SHEETS_WEB_APP_URL';
+// --- GOOGLE SHEETS AYARLARI ---
+// Google form'un bağlı olduğu Etkinlik Sheets ID'sini buraya yapıştırın
+const EVENT_SHEET_ID = "1j6U0DlGw3OEhQj6zvrZl3SbIleZDbo4mVBIs4_pJgos"; 
+
+// Eğer Form yanıtları Sheet içindeki 2. sekmedeyse (GID), o zaman URL sonuna '&gid=xxxx' eklemek gerekebilir.
+// Şimdilik sadece tqx=out:json kullanarak ilk tab'ı çekiyoruz.
+const GVZ_URL = `https://docs.google.com/spreadsheets/d/${EVENT_SHEET_ID}/gviz/tq?tqx=out:json`;
+
+async function fetchEvents() {
+    const container = document.getElementById('events-container');
+
+    // Eğer ID değiştirilmemişse (Henüz Google Form kurulmamışsa) DEMO veriler ile sayfayı süsle
+    if (!EVENT_SHEET_ID || EVENT_SHEET_ID.includes("BURAYA")) {
+        renderDemoEvents(container);
+        return;
+    }
+
+    try {
+        const res = await fetch(GVZ_URL + "&t=" + Date.now());
+        const text = await res.text();
         
-        async function fetchSheetData() {
-            try {
-                // Logic to fetch from Google Sheets
-                console.log('Veri akışı başlatılıyor...');
-                // fetch(API_ENDPOINT)...
-            } catch (error) {
-                console.error('Veri çekme hatası:', error);
-            }
+        // Strip out Google's JSON callback wrapper
+        const jsonText = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1];
+        const json = JSON.parse(jsonText);
+        
+        const rows = json.table.rows;
+        
+        if (!rows || rows.length === 0) {
+            container.innerHTML = `
+                <div class="bg-surface-container-low p-8 text-center border border-outline-variant/20">
+                    <span class="material-symbols-outlined text-[#ff2a2a] text-4xl mb-4">radar</span>
+                    <h3 class="font-headline font-bold uppercase tracking-widest text-on-surface">RADAR TEMİZ</h3>
+                    <p class="text-xs text-on-surface-variant mt-2 font-body">Yakın zamanda planlanmış herhangi bir görev bulunmuyor.</p>
+                </div>
+            `;
+            return;
         }
 
-        document.getElementById('accessForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Kimlik doğrulama talebi gönderildi.');
-            // Add auth logic here
-        });
+        // Form'daki Sütun Ornegi: 
+        // 0: Timestamp
+        // 1: Başlık
+        // 2: Tarih / Saat
+        // 3: Konum
+        // 4: Detaylar
+        // 5: Fotoğraf Linki (Opsiyonel)
+        let html = '';
+        
+        // En son eklenen en üstte olmak üzere ters çeviriyoruz
+        for (let i = rows.length - 1; i >= 0; i--) {
+            const cells = rows[i].c;
+            const title = cells[1]?.v || "GİZLİ TOPLANTI";
+            const datetime = cells[2]?.f || cells[2]?.v || "ZAMAN BİLİNMİYOR"; 
+            const location = cells[3]?.v || "GİZLİ LOKASYON";
+            const details = cells[4]?.v || "Detaylar sadece onaylanmış üyelere toplantı esnasında aktarılacaktır.";
+            
+            let rawPhoto = cells[5]?.v || "";
+            let mapsUrlRaw = cells[6]?.v || ""; 
+            
+            // Konum linki oluştur (Kendi yazdıysa onu, yoksa google maps araması)
+            let mapsFinalUrl = mapsUrlRaw.startsWith("http") ? mapsUrlRaw : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 
-        // Initialize
-        window.addEventListener('DOMContentLoaded', () => {
-            fetchSheetData();
-        });
-    </script>
-</body></html>
+            let imgUrl = "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=1200"; // Lüks koyu varsayılan görsel
+            
+            if (rawPhoto && rawPhoto.startsWith("http")) {
+                imgUrl = rawPhoto;
+                // Google Drive uc?id düzeltmesi
+                const idMatch = rawPhoto.match(/[?&]id=([^&]+)/);
+                if (idMatch) {
+                    imgUrl = "https://drive.google.com/thumbnail?id=" + idMatch[1] + "&sz=w1200";
+                }
+            }
+
+            html += `
+            <div class="relative w-full max-w-2xl mx-auto mb-16 group">
+                <!-- Glow effect background -->
+                <div class="absolute -inset-1 bg-gradient-to-br from-[#ff2a2a]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                
+                <div class="relative bg-[#0e0e0e] border border-[#2a2a2a] overflow-hidden flex flex-col shadow-2xl">
+                    <!-- Photo Section -->
+                    <div class="relative h-64 sm:h-80 w-full overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent z-10 w-full h-full"></div>
+                        <img src="${imgUrl}" alt="Event Background" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-[2000ms] ease-out">
+                        <div class="absolute top-6 left-6 z-20">
+                            <span class="px-4 py-1.5 bg-[#131313]/90 backdrop-blur-md border border-[#ff2a2a]/30 text-[#ff2a2a] text-[8px] font-['Space_Grotesk'] uppercase tracking-[0.3em] font-bold">RESMİ DAVETİYE</span>
+                        </div>
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="p-8 sm:p-12 relative z-20 -mt-16 text-center">
+                        <div class="inline-block px-5 py-2.5 bg-[#131313] border border-[#2a2a2a] text-[#e8bcb7] text-[10px] uppercase font-bold tracking-[0.3em] mb-8 shadow-xl">
+                            ${datetime}
+                        </div>
+                        
+                        <h3 class="font-['Space_Grotesk'] text-3xl sm:text-4xl font-black uppercase tracking-tighter text-[#e5e2e1] mb-6 drop-shadow-lg">${title}</h3>
+                        
+                        <a href="${mapsFinalUrl}" target="_blank" class="inline-flex items-center justify-center gap-2 text-[#ff2a2a] hover:text-[#e8bcb7] transition-colors mb-8 cursor-pointer underline underline-offset-4 decoration-[#ff2a2a]/40 hover:decoration-[#e8bcb7]">
+                            <span class="material-symbols-outlined text-sm">location_on</span>
+                            <span class="text-xs font-['Space_Grotesk'] uppercase tracking-[0.2em] font-semibold">${location}</span>
+                        </a>
+
+                        <div class="h-px w-24 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent mx-auto mb-8"></div>
+                        
+                        <p class="text-sm font-['Inter'] text-[rgba(232,188,183,0.7)] leading-relaxed max-w-lg mx-auto whitespace-pre-line">
+                            ${details}
+                        </p>
+                    </div>
+                    
+                    <!-- Bottom ornamental detail -->
+                    <div class="h-1 w-full flex">
+                        <div class="h-full bg-[#ff2a2a] w-1/4 transition-all duration-700 group-hover:w-full"></div>
+                        <div class="h-full bg-[#1c1b1b] flex-1"></div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        container.innerHTML = html;
+
+    } catch (e) {
+        console.error("Etkinlikler yüklenemedi", e);
+        container.innerHTML = `
+            <div class="bg-surface-container-low p-6 text-center border-l-2 border-[#ff2a2a]">
+                <span class="material-symbols-outlined text-[#ff2a2a] text-3xl mb-2 block">warning</span>
+                <p class="text-sm font-body text-[#ff2a2a] uppercase tracking-widest">Veri senkronizasyonu başarısız</p>
+                <p class="text-[10px] text-on-surface-variant mt-2 hidden" id="err-msg">${e.message}</p>
+            </div>
+        `;
+    }
+}
+
+// Gecici DEMO Veriler (Kullanici SHEET_ID girene kadar tasarimi test edebilsin diye)
+function renderDemoEvents(container) {
+    const demoHtml = `
+    <!-- Etkinlik 1 (Lüks Davetiye Tasarımı) -->
+    <div class="relative w-full max-w-2xl mx-auto mb-16 group">
+        <div class="absolute -inset-1 bg-gradient-to-br from-[#ff2a2a]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+        <div class="relative bg-[#0e0e0e] border border-[#2a2a2a] overflow-hidden flex flex-col shadow-2xl">
+            <!-- Photo Section -->
+            <div class="relative h-64 sm:h-80 w-full overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-[#0e0e0e]/20 to-transparent z-10 w-full h-full"></div>
+                <img src="https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=1200" alt="Event Background" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[2000ms] ease-out">
+                <div class="absolute top-6 left-6 z-20">
+                    <span class="px-4 py-1.5 bg-[#131313]/90 backdrop-blur-md border border-[#ff2a2a]/30 text-[#ff2a2a] text-[8px] font-['Space_Grotesk'] uppercase tracking-[0.3em] font-bold">RESMİ DAVETİYE</span>
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="p-8 sm:p-12 relative z-20 -mt-20 text-center">
+                <div class="inline-block px-5 py-2.5 bg-[#131313] border border-[#2a2a2a] text-[#e8bcb7] text-[10px] uppercase font-bold tracking-[0.3em] mb-8 shadow-xl">
+                    CUMARTESİ GECE YARISI, 23:00 - 02:00
+                </div>
+                
+                <h3 class="font-['Space_Grotesk'] text-3xl sm:text-5xl font-black uppercase tracking-tighter text-[#e5e2e1] mb-6 drop-shadow-xl text-balance">MASLAK UNDERGROUND RUN</h3>
+                
+                <a href="https://www.google.com/maps/search/?api=1&query=Maslak+Oto+Sanayi" target="_blank" class="inline-flex items-center justify-center gap-2 text-[#ff2a2a] hover:text-[#e8bcb7] transition-colors mb-8 cursor-pointer underline underline-offset-4 decoration-[#ff2a2a]/40 hover:decoration-[#e8bcb7]">
+                    <span class="material-symbols-outlined text-sm">location_on</span>
+                    <span class="text-xs font-['Space_Grotesk'] uppercase tracking-[0.2em] font-semibold">MASLAK OTO SANAYİ - GARAJ A (LOKASYON GİZLİ)</span>
+                </a>
+
+                <div class="h-px w-24 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent mx-auto mb-8"></div>
+                
+                <p class="text-sm font-['Inter'] text-[rgba(232,188,183,0.7)] leading-relaxed max-w-lg mx-auto text-balance">
+                    Araçların modifiye durumlarını gözden geçireceğiz ve sanayi bölgesinde test çıkışı yapacağız. Yalnızca onaylanmış üyeler ve kayıtlı araçlar katılabilir. Yüksek desibel uyarısı sebebiyle yerel güvenlik protokollerine uyulması rica olunur.
+                </p>
+            </div>
+            
+            <div class="h-1 w-full flex">
+                <div class="h-full bg-[#ff2a2a] w-1/4 transition-all duration-700 group-hover:w-full"></div>
+                <div class="h-full bg-[#1c1b1b] flex-1"></div>
+            </div>
+        </div>
+    </div>
+    `;
+    container.innerHTML = demoHtml;
+}
+
+// Sayfa yüklendiğinde veriyi çek
+document.addEventListener("DOMContentLoaded", () => {
+    // GÜVENLİK KORİDORU: Giriş yapmamışsa Login'e at!
+    const userStr = localStorage.getItem('mancave_user');
+    if (!userStr) {
+        window.location.href = 'mancavecard.html';
+        return;
+    }
+    
+    fetchEvents();
+});
+</script>
+</body>
+</html>
