@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html class="dark" lang="tr">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MANCAVE | KARTIM</title>
+<title>BOSPHORUS FELLAS | KARTIM</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -16,14 +17,14 @@
         theme: {
             extend: {
                 colors: {
-                    background: "#131313",
-                    "surface-container-lowest": "#0e0e0e",
-                    "surface-container-low": "#1c1b1b",
-                    "surface-container-high": "#2a2a2a",
-                    "on-surface": "#e5e2e1",
-                    "on-surface-variant": "#e8bcb7",
-                    primary: "#ffb4ab",
-                    "outline-variant": "#5e3f3b"
+                    background: "#0a0f1a",
+                    "surface-container-lowest": "#060d18",
+                    "surface-container-low": "#111827",
+                    "surface-container-high": "#1e2d42",
+                    "on-surface": "#e8edf5",
+                    "on-surface-variant": "#93b4d4",
+                    primary: "#3b9eff",
+                    "outline-variant": "#1e3a5f"
                 },
                 fontFamily: {
                     headline: ["Space Grotesk"],
@@ -46,177 +47,181 @@
     body {
         min-height: max(884px, 100dvh);
         overflow-x: hidden;
+        background-color: #0a0f1a;
     }
-    
-    /* 3D Card Effects */
-    .perspective-1000 {
-        perspective: 1000px;
-    }
-    .card-3d-wrapper {
-        transform-style: preserve-3d;
-        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    .card-3d-wrapper:hover {
-        transform: rotateY(15deg) rotateX(5deg);
-    }
-    .card-front, .card-back {
-        backface-visibility: hidden;
-    }
-    .card-back {
-        transform: rotateY(180deg);
-    }
-    .flipped {
-        transform: rotateY(180deg) !important;
+    .bg-hero {
+        background-image: url('arkaplan2.png');
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
     }
 
-    /* Holographic shine */
-    .hologram-effect {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(135deg, rgba(255,42,42,0) 0%, rgba(255,42,42,0.1) 40%, rgba(255,255,255,0.4) 50%, rgba(255,42,42,0.1) 60%, rgba(255,42,42,0) 100%);
-        background-size: 200% 200%;
-        animation: shine 4s ease-in-out infinite alternate;
-        pointer-events: none;
-        mix-blend-mode: overlay;
-    }
+```
+/* 3D Card Effects */
+.perspective-1000 { perspective: 1000px; }
+.card-3d-wrapper {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.card-3d-wrapper:hover { transform: rotateY(8deg) rotateX(3deg); }
+.card-front, .card-back { backface-visibility: hidden; }
+.card-back { transform: rotateY(180deg); }
+.flipped { transform: rotateY(180deg) !important; }
 
-    @keyframes shine {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
+/* Holographic shine — blue palette */
+.hologram-effect {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(59,158,255,0) 0%, rgba(59,158,255,0.08) 40%, rgba(255,255,255,0.25) 50%, rgba(59,158,255,0.08) 60%, rgba(59,158,255,0) 100%);
+    background-size: 200% 200%;
+    animation: shine 5s ease-in-out infinite alternate;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+@keyframes shine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
 
-    #qrcode img {
-        margin: auto;
-        border: 4px solid #fff;
-    }
+#qrcode img { margin: auto; border: 4px solid #fff; }
+
+.accent-line {
+    height: 2px;
+    background: linear-gradient(90deg, #3b9eff, #0055aa, transparent);
+}
+```
+
 </style>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-[#410002]">
+<body class="bg-[#0a0f1a] text-[#e8edf5] font-body selection:bg-[#3b9eff] selection:text-[#0a0f1a]">
 <div class="grain-overlay fixed inset-0 z-50"></div>
+<div class="bg-hero fixed inset-0 opacity-15 pointer-events-none z-0"></div>
 
 <!-- TopAppBar -->
-<header class="bg-[#131313] w-full top-0 sticky flex justify-between items-center px-6 h-16 z-40 border-b border-[#2a2a2a]">
+
+<header class="bg-[#060d18]/90 backdrop-blur-sm w-full top-0 sticky flex justify-between items-center px-6 h-16 z-40 border-b border-[#1e2d42]">
     <div class="flex items-center gap-3">
-        <button onclick="window.history.back()" class="text-[#e8bcb7] hover:text-[#ff2a2a] transition-colors flex items-center">
+        <button onclick="window.history.back()" class="text-[#93b4d4] hover:text-[#3b9eff] transition-colors flex items-center mr-1">
             <span class="material-symbols-outlined">arrow_back</span>
         </button>
-        <span class="material-symbols-outlined text-[#ff2a2a]" data-icon="precision_manufacturing">precision_manufacturing</span>
-        <h1 class="font-['Space_Grotesk'] uppercase tracking-tighter font-bold text-xl text-[#ff2a2a]">MANCAVE</h1>
-        <div class="h-4 w-px bg-[#2a2a2a] mx-2"></div>
-        <span class="text-[10px] font-label uppercase tracking-widest text-[#e8bcb7]">DİJİTAL KİMLİK</span>
+        <img src="logo.png" alt="BF Logo" class="h-8 w-8 object-contain">
+        <div class="flex flex-col leading-none">
+            <span class="font-['Space_Grotesk'] uppercase tracking-widest font-black text-[13px] text-[#3b9eff]">BOSPHORUS FELLAS</span>
+            <span class="text-[8px] font-label uppercase tracking-[0.2em] text-[#93b4d4] opacity-60">DİJİTAL ÜYE KARTI</span>
+        </div>
     </div>
 </header>
 
-<main class="min-h-screen pb-32 flex flex-col items-center">
+<main class="relative z-10 min-h-screen pb-32 flex flex-col items-center">
 
-    <div class="w-full max-w-sm px-6 pt-10 text-center">
-        <span class="font-label text-primary/70 uppercase tracking-[0.3em] text-[10px] font-bold block mb-2">ERİŞİM SEVİYESİ 1</span>
-        <h2 class="font-headline text-3xl font-extrabold uppercase tracking-tighter text-[#e5e2e1] mb-2">MANCAVE<br>SÜRÜCÜ KARTI</h2>
-        <p class="text-xs font-body text-on-surface-variant opacity-60">Terminal geçişleri ve buluşmalar için resmi dijital kimliğiniz.</p>
-    </div>
+```
+<div class="w-full max-w-sm px-6 pt-10 text-center">
+    <div class="accent-line w-16 mx-auto mb-5"></div>
+    <span class="font-label text-[#3b9eff]/70 uppercase tracking-[0.3em] text-[10px] font-bold block mb-2">ERİŞİM SEVİYESİ 1</span>
+    <h2 class="font-headline text-3xl font-extrabold uppercase tracking-tighter text-[#e8edf5] mb-2">ÜYE TANITIM<br>KARTI</h2>
+    <p class="text-xs font-body text-[#93b4d4] opacity-60">Toplantılar ve etkinlikler için resmi dijital kimliğiniz.</p>
+</div>
 
-    <!-- 3D Card Container -->
-    <div class="mt-12 w-full max-w-[340px] aspect-[1/1.586] perspective-1000 cursor-pointer" onclick="flipCard()">
-        <div id="id-card" class="card-3d-wrapper relative w-full h-full">
-            
-            <!-- FRONT OF CARD -->
-            <div class="card-front absolute inset-0 bg-[#0e0e0e] border border-[#2a2a2a] shadow-[0_0_50px_rgba(255,42,42,0.15)] rounded-sm overflow-hidden flex flex-col justify-between">
-                <!-- Glossy / texture -->
-                <div class="absolute inset-0 bg-gradient-to-br from-[#2a2a2a]/30 to-transparent"></div>
-                <div class="hologram-effect"></div>
-                <div class="absolute -right-16 -top-16 w-48 h-48 bg-[#ff2a2a]/10 rounded-full blur-2xl"></div>
+<!-- 3D Card Container -->
+<div class="mt-12 w-full max-w-[340px] aspect-[1/1.586] perspective-1000 cursor-pointer" onclick="flipCard()">
+    <div id="id-card" class="card-3d-wrapper relative w-full h-full">
 
-                <!-- Header -->
-                <div class="p-6 relative z-10 flex justify-between items-start">
+        <!-- FRONT OF CARD -->
+        <div class="card-front absolute inset-0 bg-[#060d18] border border-[#1e2d42] shadow-[0_0_50px_rgba(59,158,255,0.12)] rounded-sm overflow-hidden flex flex-col justify-between">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#1e2d42]/30 to-transparent"></div>
+            <div class="hologram-effect"></div>
+            <div class="absolute -right-16 -top-16 w-48 h-48 bg-[#3b9eff]/8 rounded-full blur-2xl"></div>
+
+            <!-- Header -->
+            <div class="p-6 relative z-10 flex justify-between items-start">
+                <div>
+                    <span class="font-label text-[8px] text-[#93b4d4] tracking-[0.3em] uppercase opacity-70 block mb-1">MEMBER ID</span>
+                    <span class="font-headline text-lg font-bold tracking-widest text-[#e8edf5]">BF-8472</span>
+                </div>
+                <img src="logo.png" alt="BF" class="h-9 w-9 object-contain opacity-80">
+            </div>
+
+            <!-- Center Profile -->
+            <div class="flex-1 flex flex-col items-center justify-center relative z-10 px-6">
+                <div class="w-24 h-24 rounded-full border-2 border-[#3b9eff]/30 p-1 mb-4 shadow-[0_0_20px_rgba(59,158,255,0.15)]">
+                    <img id="card-photo" src="https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=200&h=200" alt="Avatar" class="w-full h-full object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500">
+                </div>
+                <h3 id="card-name" class="font-headline text-2xl font-black uppercase tracking-widest text-[#e8edf5] text-center w-full truncate">...</h3>
+                <p id="card-car" class="font-label text-[10px] uppercase tracking-[0.3em] text-[#3b9eff] mt-1">...</p>
+            </div>
+
+            <!-- Footer details -->
+            <div class="p-6 relative z-10 bg-[#0a0f1a]/60 backdrop-blur-sm border-t border-[#1e2d42]">
+                <div class="flex justify-between items-end">
                     <div>
-                        <span class="font-label text-[8px] text-[#e8bcb7] tracking-[0.3em] uppercase opacity-70 block mb-1">MEMBER ID</span>
-                        <span class="font-headline text-lg font-bold tracking-widest text-[#e5e2e1]">MC-8472</span>
+                        <span class="font-label text-[8px] text-[#93b4d4] tracking-[0.3em] uppercase opacity-60 block">KATILIM TARİHİ</span>
+                        <span class="font-body text-xs font-semibold text-[#e8edf5]">2023 — İSTANBUL</span>
                     </div>
-                    <span class="material-symbols-outlined text-[#ff2a2a] text-3xl opacity-80" data-icon="precision_manufacturing">precision_manufacturing</span>
-                </div>
-
-                <!-- Center Profile -->
-                <div class="flex-1 flex flex-col items-center justify-center relative z-10 px-6">
-                    <div class="w-24 h-24 rounded-full border-2 border-[#ff2a2a]/30 p-1 mb-4 shadow-[0_0_20px_rgba(255,42,42,0.2)]">
-                        <img id="card-photo" src="https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=200&h=200" alt="Avatar" class="w-full h-full object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500">
-                    </div>
-                    <h3 id="card-name" class="font-headline text-2xl font-black uppercase tracking-widest text-[#e5e2e1] text-center w-full truncate">...</h3>
-                    <p id="card-car" class="font-label text-[10px] uppercase tracking-[0.3em] text-[#ff2a2a] mt-1">...</p>
-                </div>
-
-                <!-- Footer details -->
-                <div class="p-6 relative z-10 bg-[#131313]/50 backdrop-blur-sm border-t border-[#2a2a2a]">
-                    <div class="flex justify-between items-end">
-                        <div>
-                            <span class="font-label text-[8px] text-[#e8bcb7] tracking-[0.3em] uppercase opacity-60 block">KATILIM TARİHİ</span>
-                            <span class="font-body text-xs font-semibold text-[#e5e2e1]">2023 - İSTANBUL</span>
-                        </div>
-                        <span class="material-symbols-outlined text-[#e8bcb7] opacity-50 text-2xl" data-icon="nfc">nfc</span>
-                    </div>
-                </div>
-
-                <!-- Left Edge Red Bar -->
-                <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#ff2a2a] to-[#5c0004]"></div>
-            </div>
-
-            <!-- BACK OF CARD (KASA/VAULT) -->
-            <div class="card-back absolute inset-0 bg-[#0e0e0e] border border-[#ffb400]/30 shadow-[0_0_50px_rgba(255,180,0,0.1)] rounded-sm overflow-hidden flex flex-col">
-                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#ffb400]/5 via-transparent to-transparent"></div>
-                
-                <div class="p-6 flex flex-col h-full relative z-10 w-full">
-                    <div class="flex items-center gap-3 mb-6 border-b border-[#2a2a2a] pb-4">
-                        <span class="material-symbols-outlined text-[#ffb400] text-2xl">account_balance</span>
-                        <div>
-                            <h3 class="font-headline text-[14px] font-bold tracking-widest text-[#e8bcb7] uppercase">KASA RAPORU</h3>
-                            <p class="font-label text-[8px] uppercase tracking-[0.2em] text-[rgba(232,188,183,0.5)] mt-1">GÜNCEL DURUM</p>
-                        </div>
-                    </div>
-                    
-                    <div id="vault-list" class="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-hide flex flex-col gap-2">
-                        <!-- Vault items inject via JS -->
-                        <div class="animate-pulse bg-[#1c1b1b] h-8 w-full"></div>
-                        <div class="animate-pulse bg-[#1c1b1b] h-8 w-full opacity-70"></div>
-                    </div>
-                    
-                    <button class="mt-6 w-full font-label text-[10px] text-[#ffb400] border border-[#ffb400]/30 px-4 py-3 uppercase tracking-widest hover:bg-[#ffb400]/10 transition-colors">
-                        ÖN YÜZE DÖN
-                    </button>
+                    <span class="material-symbols-outlined text-[#93b4d4] opacity-50 text-2xl">nfc</span>
                 </div>
             </div>
 
+            <!-- Left Edge Blue Bar -->
+            <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#3b9eff] to-[#0a2a5c]"></div>
         </div>
+
+        <!-- BACK OF CARD -->
+        <div class="card-back absolute inset-0 bg-[#060d18] border border-[#3b9eff]/20 shadow-[0_0_50px_rgba(59,158,255,0.08)] rounded-sm overflow-hidden flex flex-col">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#3b9eff]/5 via-transparent to-transparent"></div>
+
+            <div class="p-6 flex flex-col h-full relative z-10 w-full">
+                <div class="flex items-center gap-3 mb-6 border-b border-[#1e2d42] pb-4">
+                    <span class="material-symbols-outlined text-[#3b9eff] text-2xl">account_balance</span>
+                    <div>
+                        <h3 class="font-headline text-[14px] font-bold tracking-widest text-[#93b4d4] uppercase">PORTFÖY</h3>
+                        <p class="font-label text-[8px] uppercase tracking-[0.2em] text-[#93b4d4]/40 mt-1">GÜNCEL DURUM</p>
+                    </div>
+                </div>
+
+                <div id="vault-list" class="flex-1 overflow-y-auto space-y-3 pr-2 flex flex-col gap-2">
+                    <div class="animate-pulse bg-[#111827] h-8 w-full border border-[#1e2d42]"></div>
+                    <div class="animate-pulse bg-[#111827] h-8 w-full opacity-70 border border-[#1e2d42]"></div>
+                </div>
+
+                <button onclick="flipCard()" class="mt-6 w-full font-label text-[10px] text-[#3b9eff] border border-[#3b9eff]/30 px-4 py-3 uppercase tracking-widest hover:bg-[#3b9eff]/10 transition-colors">
+                    ÖN YÜZE DÖN
+                </button>
+            </div>
+        </div>
+
     </div>
-    
-    <p class="mt-8 text-[10px] font-label uppercase tracking-widest text-on-surface-variant/50 flex items-center gap-2">
-        <span class="material-symbols-outlined text-[14px]">touch_app</span> KARTA DOKUNARAK ÇEVİR
-    </p>
+</div>
+
+<p class="mt-8 text-[10px] font-label uppercase tracking-widest text-[#93b4d4]/40 flex items-center gap-2">
+    <span class="material-symbols-outlined text-[14px]">touch_app</span> KARTA DOKUNARAK ÇEVİR
+</p>
+```
 
 </main>
 
 <!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-[#0e0e0e] border-t border-[#2a2a2a]">
-<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="index.html">
-<span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">ANA SAYFA</span>
-</a>
-<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="mancave.html">
-<span class="material-symbols-outlined">hub</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">MANCAVE ÜS</span>
-</a>
-<!-- Aktif Sekme -->
-<a class="flex flex-col items-center justify-center text-[#ff2a2a] border-t-2 border-[#ff2a2a] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="kartim.html">
-<span class="material-symbols-outlined material-symbols-outlined-fill">badge</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">KARTIM</span>
-</a>
-<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="basvuru.html">
-<span class="material-symbols-outlined" data-icon="speed">speed</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">BAŞVURU</span>
-</a>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 bg-[#060d18]/95 backdrop-blur-sm border-t border-[#1e2d42]">
+    <a class="flex flex-col items-center justify-center text-[#93b4d4] pt-2 hover:bg-[#1e2d42]/50 w-full h-full transition-all active:bg-[#3b9eff]/10" href="index.html">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">ANA SAYFA</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#93b4d4] pt-2 hover:bg-[#1e2d42]/50 w-full h-full transition-all active:bg-[#3b9eff]/10" href="mancave.html">
+        <span class="material-symbols-outlined">hub</span>
+        <span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">ETKİNLİKLER</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#3b9eff] border-t-2 border-[#3b9eff] pt-2 hover:bg-[#1e2d42]/50 w-full h-full transition-all" href="kartim.html">
+        <span class="material-symbols-outlined">badge</span>
+        <span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">KARTIM</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#93b4d4] pt-2 hover:bg-[#1e2d42]/50 w-full h-full transition-all active:bg-[#3b9eff]/10" href="basvuru.html">
+        <span class="material-symbols-outlined">speed</span>
+        <span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">BAŞVURU</span>
+    </a>
 </nav>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // GÜVENLİK KORİDORU: Giriş yapmamışsa Login'e at!
         const userStr = localStorage.getItem('mancave_user');
         if (!userStr) {
             window.location.href = 'mancavecard.html';
@@ -225,50 +230,44 @@
 
         try {
             const user = JSON.parse(userStr);
-            
-            // Ön Yüz Verileri Doldur
-            document.getElementById('card-name').textContent = user.name || "BİLİNMEYEN MİSAFİR";
-            document.getElementById('card-car').textContent = user.car || "LİSTE DIŞI ARAÇ";
-            if(user.photoUrl && user.photoUrl.trim() !== "") {
+
+            document.getElementById('card-name').textContent = user.name || "BİLİNMEYEN ÜYE";
+            document.getElementById('card-car').textContent = user.car || "ARAÇ BİLGİSİ YOK";
+            if (user.photoUrl && user.photoUrl.trim() !== "") {
                 document.getElementById('card-photo').src = user.photoUrl;
             }
 
-            // Kasa Verisi Doldur (Virgülle veya Nokta ile ayrıldığını varsayıyoruz, 
-            // Veya satır satır basıyoruz)
             const vaultContainer = document.getElementById('vault-list');
             const vaultData = user.vault || "";
-            
+
             if (vaultData.trim() === "") {
                 vaultContainer.innerHTML = `<div class="text-center mt-4">
-                    <span class="material-symbols-outlined text-[rgba(232,188,183,0.3)] text-3xl mb-2">money_off</span>
-                    <p class="text-[9px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(232,188,183,0.4)]">KASA BİLGİSİ BULUNAMADI</p>
+                    <span class="material-symbols-outlined text-[#1e2d42] text-3xl mb-2">money_off</span>
+                    <p class="text-[9px] font-['Space_Grotesk'] uppercase tracking-widest text-[#93b4d4]/40">PORTFÖY BİLGİSİ BULUNAMADI</p>
                 </div>`;
             } else {
-                // Virgül ayracı ile bölüp kutulara yerleştir
                 const items = vaultData.split(',');
                 let html = '';
                 items.forEach(i => {
-                   if(i.trim().length > 0) {
-                       html += `
-                        <div class="bg-[#131313] border border-[#2a2a2a] p-3 border-l-2 border-l-[#ffb400]">
-                            <p class="font-['Space_Grotesk'] text-[10px] text-[#e5e2e1] uppercase tracking-widest">${i.trim()}</p>
-                        </div>
-                       `;
-                   }
+                    if (i.trim().length > 0) {
+                        html += `
+                        <div class="bg-[#0a0f1a] border border-[#1e2d42] p-3 border-l-2 border-l-[#3b9eff]">
+                            <p class="font-['Space_Grotesk'] text-[10px] text-[#e8edf5] uppercase tracking-widest">${i.trim()}</p>
+                        </div>`;
+                    }
                 });
                 vaultContainer.innerHTML = html;
             }
-
         } catch(e) {
             console.error("User data parse error", e);
         }
     });
 
-    // Kart çevirme efekti
     function flipCard() {
         const card = document.getElementById('id-card');
         card.classList.toggle('flipped');
     }
 </script>
+
 </body>
 </html>
