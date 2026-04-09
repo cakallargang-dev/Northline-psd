@@ -661,7 +661,7 @@ window.updateDoc = updateDoc;
 
     try {
       const qRef = collection(db, "users");
-      const querySnapshot = await getDocs(qRef);
+      const querySnapshot = await getDocs(qRef); alert('Sistem Mesajı: Firebase verisi başarıyla çekildi. Bulunan kişi sayısı: ' + querySnapshot.size);
       allApps = [];
       querySnapshot.forEach((docSnap) => {
         const d = docSnap.data();
@@ -698,6 +698,7 @@ window.updateDoc = updateDoc;
       document.getElementById("stats-bar").classList.remove("hidden");
 
     } catch(e) {
+      alert("Kritik Hata: " + e.message);
       console.error(e);
       document.getElementById("card-list").innerHTML = `<div class="p-6 text-center text-[#93b4d4]">Hata oluştu. Firebase ayarlarınızı kontrol edin.</div>`;
     }
@@ -908,7 +909,7 @@ window.updateDoc = updateDoc;
     if (!toast) {
       toast = document.createElement("div");
       toast.id = "toast";
-      toast.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;font-family:"Space Grotesk",sans-serif;font-size:10px;padding:10px;border:1px;transition:opacity 0.3s;";
+      toast.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;font-family:'Space Grotesk',sans-serif;font-size:10px;padding:10px;border:1px;transition:opacity 0.3s;";
       document.body.appendChild(toast);
     }
     toast.textContent = msg;
