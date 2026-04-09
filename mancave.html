@@ -1,218 +1,281 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="tr"><head>
+<html class="scroll-smooth" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>Bosphorus Fellas - Üye Merkezi</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-tertiary-fixed": "#1f0052",
-                    "inverse-on-surface": "#50565c",
-                    "secondary-fixed": "#b3d4ff",
-                    "tertiary-fixed": "#bda1ff",
-                    "on-primary-fixed": "#000000",
-                    "on-error": "#490006",
-                    "outline-variant": "#43494f",
-                    "surface-tint": "#5fb4ff",
-                    "tertiary": "#ba9eff",
-                    "on-secondary-container": "#b2d3fd",
-                    "on-background": "#eff4fc",
-                    "inverse-primary": "#00639e",
-                    "on-secondary-fixed": "#103658",
-                    "on-surface-variant": "#a6acb3",
-                    "primary": "#5fb4ff",
-                    "on-tertiary": "#391080",
-                    "surface-container-lowest": "#000000",
-                    "tertiary-fixed-dim": "#b191fe",
-                    "surface-dim": "#090f14",
-                    "primary-container": "#2ea7ff",
-                    "on-primary-fixed-variant": "#002e4e",
-                    "secondary-container": "#27496c",
-                    "error": "#ff716c",
-                    "on-primary-container": "#00253f",
-                    "outline": "#70767d",
-                    "background": "#090f14",
-                    "surface-bright": "#242d35",
-                    "error-dim": "#d7383b",
-                    "primary-fixed": "#2ea7ff",
-                    "tertiary-dim": "#ab8bf9",
-                    "on-error-container": "#ffa8a3",
-                    "error-container": "#9f0519",
-                    "surface-container-high": "#192027",
-                    "surface": "#090f14",
-                    "on-secondary": "#28496d",
-                    "surface-container-highest": "#1e272e",
-                    "on-surface": "#eff4fc",
-                    "primary-dim": "#1ca4ff",
-                    "secondary": "#b3d4ff",
-                    "surface-container": "#131a21",
-                    "surface-variant": "#1e272e",
-                    "secondary-fixed-dim": "#a6c6f0",
-                    "surface-container-low": "#0e141a",
-                    "on-tertiary-container": "#2c006e",
-                    "on-secondary-fixed-variant": "#325377",
-                    "on-tertiary-fixed-variant": "#44208b",
-                    "on-primary": "#003152",
-                    "secondary-dim": "#a6c6f0",
-                    "primary-fixed-dim": "#0099f2",
-                    "inverse-surface": "#f7f9ff",
-                    "tertiary-container": "#ae8efc"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Manrope"],
-                    "label": ["Space Grotesk"]
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0099FF',
+                        brand: {
+                            50: '#E6F5FF',
+                            100: '#B3E0FF',
+                            200: '#80CCFF',
+                            300: '#4DB8FF',
+                            400: '#1AA3FF',
+                            500: '#0099FF',
+                            600: '#007ACC',
+                            700: '#005C99',
+                            800: '#003D66',
+                            900: '#001F33',
+                        },
+                        dark: {
+                            DEFAULT: '#0A0A0A',
+                            lighter: '#121212',
+                            elevated: '#1A1A1A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'brand': '4px',
+                    }
+                }
             }
-          },
-        },
-      }
+        }
     </script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .glass-card {
-            background: rgba(25, 32, 39, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .text-gradient {
-            background: linear-gradient(135deg, #5fb4ff 0%, #2ea7ff 100%);
+            background: linear-gradient(to right, #0099FF, #00E5FF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .neon-border {
+            box-shadow: 0 0 15px rgba(0, 153, 255, 0.2);
+        }
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #FFFFFF;
+        }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
-<!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 w-full bg-[#090f14] shadow-[0px_20px_40px_rgba(0,162,255,0.06)]">
+<body class="font-sans antialiased overflow-x-hidden">
+<!-- Noise Layer -->
+<div class="fixed inset-0 pointer-events-none noise-bg z-50"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-40 glass-panel border-b border-white/5">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-20 items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-brand-500 rounded-brand flex items-center justify-center neon-border">
+<span class="material-symbols-outlined text-white">sailing</span>
+</div>
+<span class="text-xl font-bold tracking-tighter uppercase italic">Bosphorus <span class="text-brand-500">Fellas</span></span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#dashboard">Panel</a>
+<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#inventory">Ekipman</a>
+<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#missions">Görevler</a>
+<a class="text-sm font-medium hover:text-brand-500 transition-colors" href="#stats">İstatistikler</a>
+</div>
 <div class="flex items-center gap-4">
-<button class="text-[#5fb4ff] hover:opacity-80 transition-opacity scale-95 active:duration-150">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<img alt="BosphorusFellas Logosu" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhV5ELRjwMus8v5lYz_znL40i0nTvx8CPFtZj0Jq_JMAYXB20EmP93M0owTq0yJSvkQ6LEEuZ5HRgija4LcWLLvk-hODpKPqjim3rO-o8ZpVeas9KxEkEgBddmPOWgz36Sop0QA3CiNyKGQivtmWG-ICn2WgTn-WipNdnHRbt-ulcF5dqTJDVRkAR4GYygUFmi99NnAyVmdnqZoZaqKZtY9yxuagSyog7awh0rwAcCU7mETpXXrrmWhtxL6tKaznd7yGw6rBVxkZ2U"/>
-</div>
-<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden hover:opacity-80 transition-opacity cursor-pointer">
-<img alt="Üye Profil Avatarı" class="w-full h-full object-cover" data-alt="close-up portrait of a stylish man in a leather jacket against a blurred city night background with neon highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVXfh88S-uQG1jsl2l599yrvmNq_j8TG3m12mziwnbuIt8KCZY2g5tup38h97gaoQrLaka-5ZM9e_UHfdHlLCTo-PbgRafJAiT1TOyDgPPQgSciv6Q5XVTF28sZJdkQwBYsgZ0v5UzbEXtcCn_2D-ZX1r4dsNk-eRHSvSS0mEe4mkMIkqurUvfX5TDLKl5H4oD3IvA5mEed3MA9RYw5EzZF9CvZcHzgJDM_qoz5cIXODmcr20x9sabUr6R7JpTuWpic0bjJkLuG7h4"/>
-</div>
-</header>
-<main class="pt-16 pb-32">
-<!-- Hero Map Section -->
-<section class="relative h-[353px] w-full overflow-hidden">
-<img alt="Boğaziçi Köprüsü gece görünümü" class="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-700" data-alt="dramatic wide shot of the Bosphorus Bridge at night, glowing blue against a dark sky with city lights reflecting on the water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARqa65fFNQ22oLTNyRHTVBX2UFkHmdPm3qorTlOp8FJxkM4uAwWyRVqGSw3u_8ZRHE89sQGQJa4sSYI7LKr4gCt4dNoKCW6Sv2ZNtvJZqyNYwF-4F7P6etXX7peM0JAOhRWcEl3LygmAulVoA2lTLtU9qfb7ShLZsdaMgxxA7K3QxrP9TQDKHgrvbrHVGkcwLhHPQBMYCLk-flTrCBl5rP9CQFCLqWroAWwqZQjVSvIdtTKVUn0hyE6mXRdQBzsMnZhgYzHKHEF7-v"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
-<div class="absolute bottom-8 left-8 right-8">
-<div class="flex flex-col gap-2">
-<span class="text-xs font-bold tracking-[0.3em] text-primary uppercase font-headline">GİZLİ ÜS</span>
-<h2 class="text-4xl md:text-6xl font-extrabold font-headline tracking-tighter uppercase">ETKİNLİK AKIŞI</h2>
-</div>
-</div>
-</section>
-<!-- Filter Chips -->
-<section class="px-6 mb-12 flex gap-3 overflow-x-auto no-scrollbar">
-<button class="px-6 py-2 rounded-full bg-primary text-on-primary-fixed font-bold text-xs uppercase tracking-widest transition-transform active:scale-95 whitespace-nowrap">Tüm Etkinlikler</button>
-<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap">Gece Sürüşleri</button>
-<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap">Araç Buluşmaları</button>
-<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap">Özel</button>
-</section>
-<!-- Events Grid (Bento Style) -->
-<section class="px-6 grid grid-cols-1 md:grid-cols-12 gap-8">
-<!-- Featured Event -->
-<div class="md:col-span-12 group cursor-pointer">
-<div class="relative rounded-xl overflow-hidden aspect-[16/9] md:aspect-[21/9]">
-<img alt="Öne Çıkan Porsche Gece Sürüşü" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="sleek dark grey Porsche driving on a modern bridge at night with long exposure light trails and cinematic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-ysIH2awzgadUTua-pPeZh1DvWtvLZ4KgzEp-xcYM3gdSKtaPwqOaZZTs4TeODokMkkCJImrusNJgr3nEhP-shmx9T2gkp6MbVMfSKfhuQA0WmWLt24gp-8-eaL4jQMcqwP2ZCVpx6im0Y8j5FLzOG1JmqKKxrscNCua8SuB5zOuUd5upXp-w-8iL_hSh6k4LX0Gp5bG_kzPOoUdosMe2J1alDLFtJoc2f00FIGZR3A1yfX94TUvzNWWZFa0v04mRAOXuocyIANwv"/>
-<div class="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-transparent opacity-80"></div>
-<div class="absolute bottom-0 left-0 p-8 flex flex-col gap-4">
-<div class="flex items-center gap-4">
-<span class="bg-primary-container text-on-primary-container px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full">Öne Çıkan</span>
-<span class="flex items-center gap-1 text-primary text-sm font-bold">
-<span class="material-symbols-outlined text-sm">calendar_today</span>
-                                24 EKİM 2023
-                            </span>
-</div>
-<h3 class="text-3xl font-headline font-bold max-w-xl">Geceyarısı Köprü Sürüşü: 911 Edisyonu</h3>
-<p class="text-on-surface-variant max-w-md hidden md:block">Mavi ışıklar altında Boğaz'ı geçen seçkin bir gece turu. Sadece FELLAS Gold üyelerine özel giriş.</p>
-<div class="flex items-center gap-2 text-primary font-bold text-xs tracking-widest uppercase">
-<span class="material-symbols-outlined">location_on</span>
-                            Kuruçeşme Buluşma Noktası
-                        </div>
+<button class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold rounded-brand transition-all neon-border flex items-center gap-2" id="loginBtn">
+<span class="material-symbols-outlined text-sm">lock_open</span>
+                        GİRİŞ YAP
+                    </button>
 </div>
 </div>
 </div>
-<!-- Secondary Grid -->
-<div class="md:col-span-6 bg-surface-container-low rounded-xl p-1 overflow-hidden group">
-<div class="relative h-64 rounded-lg overflow-hidden mb-6">
-<img alt="Klasik Araç Buluşması" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="vintage luxury cars parked under neon lights in a modern industrial garage setting with reflections on polished concrete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgfUTmwVmyesTn_73gneTK0Mm6BVHxNUiRyrfxXJ7FxjzqKB_velZo1xe1xV91XVVxXirE88uqztfPm090haQBRg8MSrHbYvyV1RIe5YZyw1T0zKeqE_BX7vBEt4bcnd2pc9RlDsqd4VXS4wlqDLAA4LuV84jXTxDsqswZ_ZlMeeNDjkSrHmPbfgiYynkfi2g514W2Qe8Ld85jckioYRdEyAVkCmGEJNQz7d4D3TMTaFVMovvfUvcgI-PTZvOq_uDOWUklB0nPW5l2"/>
-<div class="absolute top-4 right-4 bg-background/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary border border-primary/20 uppercase">Buluşma</div>
-</div>
-<div class="px-6 pb-8">
-<div class="text-primary font-black text-sm mb-2 font-headline uppercase tracking-tighter">28 EKİM / 20:00</div>
-<h4 class="text-xl font-bold font-headline mb-3">Klasik Ruhu ve V8'ler</h4>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Galataport'un kalbinde otomotiv tasarımının altın çağını kutluyoruz.</p>
-<button class="w-full py-4 bg-surface-bright text-on-surface font-bold text-xs uppercase tracking-widest rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-colors">Davetiye İste</button>
-</div>
-</div>
-<div class="md:col-span-6 bg-surface-container-low rounded-xl p-1 overflow-hidden group">
-<div class="relative h-64 rounded-lg overflow-hidden mb-6">
-<img alt="Hiperaraç Sergisi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="futuristic electric hypercar displayed in a minimalist gallery with blue architectural lighting and dark shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAYjHUl7VqBlWWcBrEnz8ACyH-CztZcOCxlPPev5wlOtvsI4mhHfuuTUHt58FKsxwmacPUuP8GCHKLLuADf0CKqAf4kJ6v0tsBkVOwV0KQrj8HrtgVla-m5ilUbrnNnZYn0V5O1EPtjnnq-w5UMpBBEbgzSGeee7XrEWnKMk7phBtzeXgb7uEnIKHfktB9A2GS8rjnVPx6C_YaBWIg_0aEtsCFcOPAd4PipAeYBiOm-NTs22bFESzmLiWYmGPsy_ZvsYaJtWUqh5Yw"/>
-<div class="absolute top-4 right-4 bg-background/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary border border-primary/20 uppercase">Sergi</div>
-</div>
-<div class="px-6 pb-8">
-<div class="text-primary font-black text-sm mb-2 font-headline uppercase tracking-tighter">02 KASIM / 19:30</div>
-<h4 class="text-xl font-bold font-headline mb-3">Elektrikli Gelecek Tanıtımı</h4>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Rimac Nevera'ya ve sessiz performansın geleceğine ilk bakış.</p>
-<button class="w-full py-4 bg-surface-bright text-on-surface font-bold text-xs uppercase tracking-widest rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-colors">Kayıt Ol</button>
-</div>
-</div>
-<!-- Full Width Newsletter/Secret Info -->
-<div class="md:col-span-12 mt-8">
-<div class="glass-card rounded-xl p-10 border border-primary/10 flex flex-col md:flex-row items-center justify-between gap-8">
-<div class="max-w-xl text-center md:text-left">
-<h3 class="text-2xl font-bold font-headline mb-2 uppercase italic tracking-tighter">Radarın Altında Kal</h3>
-<p class="text-on-surface-variant text-sm">Anlık buluşma noktaları ve gece sürüşü koordinat sızıntıları için şifreli bültenimize katılın.</p>
-</div>
-<div class="flex w-full md:w-auto gap-4">
-<input class="bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-xs tracking-widest font-bold px-6 py-4 rounded-lg flex-grow uppercase" placeholder="E-POSTA ADRESİ" type="email"/>
-<button class="bg-primary text-on-primary-fixed px-8 py-4 rounded-lg font-black text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">Bağlan</button>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-[#090f14]/80 backdrop-blur-xl z-50 rounded-t-xl border-t border-[#5fb4ff]/10 shadow-[0_-10px_30px_rgba(0,162,255,0.04)]">
-<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-1">home</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Ana Sayfa</span>
-</a>
-<a class="flex flex-col items-center justify-center text-[#5fb4ff] font-bold hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-1">event_seat</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Etkinlikler</span>
-</a>
-<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-1">contactless</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Kartım</span>
-</a>
-<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined mb-1">assignment_ind</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Başvur</span>
-</a>
 </nav>
+<!-- Main Content -->
+<main class="pt-24 pb-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Hero Section -->
+<div class="mb-12 relative overflow-hidden rounded-brand h-64 flex items-center p-8 bg-gradient-to-r from-dark-lighter to-dark-elevated border border-white/5">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545463322-c47af6c92437?auto=format&amp;fit=crop&amp;q=80')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+<div class="relative z-10 max-w-2xl">
+<h1 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">Hoş Geldin, Kaptan</h1>
+<p class="text-gray-400 text-lg">Bosphorus Fellas operasyonel üssüne erişim sağladın. Tüm sistemler aktif ve optimize edildi.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Sidebar / Quick Stats -->
+<div class="lg:col-span-1 space-y-6">
+<div class="glass-panel p-6 rounded-brand">
+<h2 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-500">analytics</span>
+                            OPERASYON DURUMU
+                        </h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center p-3 rounded-brand bg-white/5 border border-white/5">
+<span class="text-gray-400 text-sm">Aktif Görevler</span>
+<span class="text-brand-500 font-bold">12</span>
+</div>
+<div class="flex justify-between items-center p-3 rounded-brand bg-white/5 border border-white/5">
+<span class="text-gray-400 text-sm">Üye Sayısı</span>
+<span class="text-brand-500 font-bold">156</span>
+</div>
+<div class="flex justify-between items-center p-3 rounded-brand bg-white/5 border border-white/5">
+<span class="text-gray-400 text-sm">Sistem Durumu</span>
+<span class="text-green-500 font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                    Çevrimiçi
+                                </span>
+</div>
+</div>
+</div>
+<!-- Member Access Form -->
+<div class="glass-panel p-6 rounded-brand">
+<h2 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-500">key</span>
+                            ERİŞİM PANELİ
+                        </h2>
+<form class="space-y-4" id="accessForm">
+<div>
+<label class="block text-xs text-gray-500 mb-2 font-bold uppercase">Üye Kimlik Numarası</label>
+<input class="w-full bg-black/40 border-white/10 rounded-brand focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white p-3" placeholder="ID-XXXX-XXXX" type="text"/>
+</div>
+<button class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-brand transition-all flex justify-center items-center gap-2" type="submit">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                                KİMLİK DOĞRULA
+                            </button>
+</form>
+</div>
+</div>
+<!-- Main Feed / Data Display -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Dynamic Data Section (Google Sheets Integration Point) -->
+<div class="glass-panel rounded-brand overflow-hidden">
+<div class="p-6 border-b border-white/5 flex justify-between items-center">
+<h2 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-brand-500">database</span>
+                                Üye Veri Akışı
+                            </h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-brand-500/10 text-brand-500 text-[10px] font-bold rounded-full border border-brand-500/20 uppercase tracking-widest">Canlı Veri</span>
+</div>
+</div>
+<div class="p-0" id="dataContainer">
+<!-- Placeholder for Google Sheets Data -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white/5 text-xs text-gray-500 uppercase tracking-widest">
+<th class="p-4 border-b border-white/5 font-medium">Pozisyon</th>
+<th class="p-4 border-b border-white/5 font-medium">Takma Ad</th>
+<th class="p-4 border-b border-white/5 font-medium">Bölge</th>
+<th class="p-4 border-b border-white/5 font-medium">Durum</th>
+</tr>
+</thead>
+<tbody class="text-sm" id="sheetDataBody">
+<!-- Simulating data while waiting for JS load -->
+<tr class="hover:bg-white/5 border-b border-white/5 transition-colors group">
+<td class="p-4 font-mono text-brand-500">01</td>
+<td class="p-4 font-medium">DenizKurdu</td>
+<td class="p-4 text-gray-400">İstanbul / Boğaz</td>
+<td class="p-4"><span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] rounded border border-green-500/20">AKTİF</span></td>
+</tr>
+<tr class="hover:bg-white/5 border-b border-white/5 transition-colors group">
+<td class="p-4 font-mono text-brand-500">02</td>
+<td class="p-4 font-medium">MaviGözcü</td>
+<td class="p-4 text-gray-400">Kadıköy</td>
+<td class="p-4"><span class="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-[10px] rounded border border-yellow-500/20">BEKLEMEDE</span></td>
+</tr>
+<tr class="hover:bg-white/5 border-b border-white/5 transition-colors group">
+<td class="p-4 font-mono text-brand-500">03</td>
+<td class="p-4 font-medium">GeceFeneri</td>
+<td class="p-4 text-gray-400">Beşiktaş</td>
+<td class="p-4"><span class="px-2 py-1 bg-brand-500/10 text-brand-500 text-[10px] rounded border border-brand-500/20">GÖREVDE</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Visual Assets Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass-panel p-6 rounded-brand group cursor-pointer hover:border-brand-500/30 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-brand-500/10 rounded-brand flex items-center justify-center text-brand-500">
+<span class="material-symbols-outlined text-3xl">map</span>
+</div>
+<span class="material-symbols-outlined text-gray-600 group-hover:text-brand-500 transition-colors">open_in_new</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Görev Haritası</h3>
+<p class="text-sm text-gray-500">Operasyon bölgelerini ve stratejik noktaları detaylı olarak inceleyin.</p>
+</div>
+<div class="glass-panel p-6 rounded-brand group cursor-pointer hover:border-brand-500/30 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-brand-500/10 rounded-brand flex items-center justify-center text-brand-500">
+<span class="material-symbols-outlined text-3xl">shield</span>
+</div>
+<span class="material-symbols-outlined text-gray-600 group-hover:text-brand-500 transition-colors">open_in_new</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Güvenlik Protokolü</h3>
+<p class="text-sm text-gray-500">Sistem bütünlüğü ve üyelik gizliliği için güncellenmiş talimatlar.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="border-t border-white/5 py-12 mt-12 bg-dark-lighter">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-brand-500 rounded-brand flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm">sailing</span>
+</div>
+<span class="font-bold tracking-tighter uppercase italic text-sm">Bosphorus <span class="text-brand-500">Fellas</span></span>
+</div>
+<div class="text-xs text-gray-600 flex gap-8">
+<span>© 2024 OPERASYON MERKEZİ</span>
+<a class="hover:text-brand-500" href="#">GİZLİLİK POLİTİKASI</a>
+<a class="hover:text-brand-500" href="#">İLETİŞİM</a>
+</div>
+<div class="flex gap-4">
+<button class="w-8 h-8 rounded-brand bg-white/5 flex items-center justify-center hover:bg-brand-500 transition-all">
+<span class="material-symbols-outlined text-sm">public</span>
+</button>
+<button class="w-8 h-8 rounded-brand bg-white/5 flex items-center justify-center hover:bg-brand-500 transition-all">
+<span class="material-symbols-outlined text-sm">share</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+<!-- Integration Logic -->
+<script>
+        // Google Sheets Integration Logic Placeholder
+        // Maintain identical structure for script interaction as the previous version
+        const API_ENDPOINT = 'YOUR_GOOGLE_SHEETS_WEB_APP_URL';
+        
+        async function fetchSheetData() {
+            try {
+                // Logic to fetch from Google Sheets
+                console.log('Veri akışı başlatılıyor...');
+                // fetch(API_ENDPOINT)...
+            } catch (error) {
+                console.error('Veri çekme hatası:', error);
+            }
+        }
+
+        document.getElementById('accessForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Kimlik doğrulama talebi gönderildi.');
+            // Add auth logic here
+        });
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchSheetData();
+        });
+    </script>
 </body></html>

@@ -1,258 +1,257 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="tr"><head>
+<html class="scroll-smooth" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>Başvuru Formu | Bosphorus Fellas</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "on-tertiary-fixed": "#1f0052",
-                        "inverse-on-surface": "#50565c",
-                        "secondary-fixed": "#b3d4ff",
-                        "tertiary-fixed": "#bda1ff",
-                        "on-primary-fixed": "#000000",
-                        "on-error": "#490006",
-                        "outline-variant": "#43494f",
-                        "surface-tint": "#5fb4ff",
-                        "tertiary": "#ba9eff",
-                        "on-secondary-container": "#b2d3fd",
-                        "on-background": "#eff4fc",
-                        "inverse-primary": "#00639e",
-                        "on-secondary-fixed": "#103658",
-                        "on-surface-variant": "#a6acb3",
-                        "primary": "#5fb4ff",
-                        "on-tertiary": "#391080",
-                        "surface-container-lowest": "#000000",
-                        "tertiary-fixed-dim": "#b191fe",
-                        "surface-dim": "#090f14",
-                        "primary-container": "#2ea7ff",
-                        "on-primary-fixed-variant": "#002e4e",
-                        "secondary-container": "#27496c",
-                        "error": "#ff716c",
-                        "on-primary-container": "#00253f",
-                        "outline": "#70767d",
-                        "background": "#090f14",
-                        "surface-bright": "#242d35",
-                        "error-dim": "#d7383b",
-                        "primary-fixed": "#2ea7ff",
-                        "tertiary-dim": "#ab8bf9",
-                        "on-error-container": "#ffa8a3",
-                        "error-container": "#9f0519",
-                        "surface-container-high": "#192027",
-                        "surface": "#090f14",
-                        "on-secondary": "#28496d",
-                        "surface-container-highest": "#1e272e",
-                        "on-surface": "#eff4fc",
-                        "primary-dim": "#1ca4ff",
-                        "secondary": "#b3d4ff",
-                        "surface-container": "#131a21",
-                        "surface-variant": "#1e272e",
-                        "secondary-fixed-dim": "#a6c6f0",
-                        "surface-container-low": "#0e141a",
-                        "on-tertiary-container": "#2c006e",
-                        "on-secondary-fixed-variant": "#325377",
-                        "on-tertiary-fixed-variant": "#44208b",
-                        "on-primary": "#003152",
-                        "secondary-dim": "#a6c6f0",
-                        "primary-fixed-dim": "#0099f2",
-                        "inverse-surface": "#f7f9ff",
-                        "tertiary-container": "#ae8efc"
+                    colors: {
+                        primary: '#0099FF',
+                        bgDark: '#0A0A0A',
+                        cardDark: '#121212',
+                        borderDark: '#2A2A2A',
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
                     },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Manrope"],
-                        "label": ["Space Grotesk"]
+                    borderRadius: {
+                        'brand': '4px',
                     }
-                },
-            },
+                }
+            }
         }
     </script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .glass-panel {
-            background: rgba(36, 45, 53, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-        .engine-gradient {
-            background: linear-gradient(135deg, #5fb4ff 0%, #2ea7ff 100%);
-        }
-        body {
-            background-color: #090f14;
-            color: #eff4fc;
-            font-family: 'Manrope', sans-serif;
-        }
-    </style>
-<style>
-        body {
-            min-height: max(884px, 100dvh);
+        .step-inactive { display: none; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #0099FF !important;
+            ring-color: #0099FF !important;
         }
     </style>
 </head>
-<body class="bg-background min-h-screen selection:bg-primary selection:text-on-primary">
-<header class="fixed top-0 w-full z-50 bg-[#090f14] shadow-[0px_20px_40px_rgba(0,162,255,0.06)] flex items-center justify-between px-6 h-16 w-full">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-[#5fb4ff]">menu</span>
-<img alt="BosphorusFellas Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhV5ELRjwMus8v5lYz_znL40i0nTvx8CPFtZj0Jq_JMAYXB20EmP93M0owTq0yJSvkQ6LEEuZ5HRgija4LcWLLvk-hODpKPqjim3rO-o8ZpVeas9KxEkEgBddmPOWgz36Sop0QA3CiNyKGQivtmWG-ICn2WgTn-WipNdnHRbt-ulcF5dqTJDVRkAR4GYygUFmi99NnAyVmdnqZoZaqKZtY9yxuagSyog7awh0rwAcCU7mETpXXrrmWhtxL6tKaznd7yGw6rBVxkZ2U"/>
+<body class="bg-bgDark text-gray-100 font-sans min-h-screen flex flex-col">
+<!-- Header / Navbar -->
+<nav class="border-b border-borderDark bg-bgDark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-20 items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">water_lux</span>
+<span class="text-xl font-bold tracking-tighter uppercase italic">Bosphorus <span class="text-primary">Fellas</span></span>
 </div>
-<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden border border-primary/20">
-<img alt="Üye Profil Avatarı" data-alt="High-end studio portrait of a sophisticated man in a dark tailored suit with soft cinematic blue backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgNgsdpJlgMsVMY6tG6Eks3c7qDfW0B7JlMQAasjDzdERGwlh8buX_iVhAZvROekuMR_M8f_ehaqdev_pRsRqTkQLw4JzuWnfU7vJ4zvE6CbsTWJ7t-n3Sw4swBLiSkj-4iRYBuJBd2qyWrHK3KSNbmM2NaUyI8-CB0Ra6mzv7dJdMsNUCK7kcAmYkVzE_YjpAClxH4Wjk1atMx8GUnfJGazcxUVEdczUsm8htNaayLSlewgnaVGnEHfti9oCPeRUCRN6KmK8oPiUq"/>
+<a class="text-sm font-medium hover:text-primary transition-colors duration-300 flex items-center gap-1" href="index.html">
+<span class="material-symbols-outlined text-base">arrow_back</span>
+                    Ana Sayfaya Dön
+                </a>
 </div>
-</header>
-<main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
-<div class="mb-12">
-<div class="flex justify-between items-end mb-4">
-<div>
-<span class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 block">Başvuru Süreci</span>
-<h1 class="font-headline text-4xl font-bold tracking-tight text-on-surface">İç Çembere Katıl</h1>
-</div>
-<div class="text-right">
-<span class="font-headline text-2xl font-bold text-primary">60%</span>
-<span class="text-on-surface-variant text-sm block">Tamamlandı</span>
-</div>
-</div>
-<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
-<div class="h-full engine-gradient w-3/5 transition-all duration-500 ease-out"></div>
-</div>
-</div>
-<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-<div class="lg:col-span-8 space-y-8">
-<div class="glass-panel p-8 rounded-xl border border-outline-variant/10">
-<div class="mb-8">
-<h2 class="font-headline text-2xl font-semibold mb-2">Otomotiv Kimliği</h2>
-<p class="text-on-surface-variant text-sm">Topluluğumuzu kullandığımız araçlar ve paylaştığımız tutkuyla tanımlıyoruz.</p>
-</div>
-<form class="space-y-6">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Ad Soyad</label>
-<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="Can Demir" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">E-posta Adresi</label>
-<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="can@bosphorusfellas.com" type="email"/>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Telefon Numarası</label>
-<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="+90 532 --- -- --" type="tel"/>
-</div>
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Instagram Kullanıcı Adı</label>
-<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="@kullaniciadi" type="text"/>
-</div>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<h3 class="font-headline text-lg font-medium mb-6 text-primary">Araç Özellikleri</h3>
-<div class="space-y-6">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Marka</label>
-<select class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg appearance-none">
-<option>Porsche</option>
-<option>BMW</option>
-<option>Mercedes-Benz</option>
-<option>Ferrari</option>
-<option>Diğer</option>
-</select>
-</div>
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Model</label>
-<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg" placeholder="911 GT3 RS" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Yıl</label>
-<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg" placeholder="2024" type="number"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Modifiyeler (Opsiyonel)</label>
-<textarea class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg resize-none" placeholder="Performans veya estetik yükseltmeleri listeleyin..." rows="3"></textarea>
-</div>
-</div>
-</div>
-<div class="flex justify-between items-center pt-8">
-<button class="px-8 py-3 rounded-lg font-label text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors" type="button">
-                            GERİ
-                        </button>
-<button class="engine-gradient text-on-primary-fixed px-10 py-3 rounded-lg font-headline font-bold text-sm tracking-wide shadow-[0px_10px_20px_rgba(0,162,255,0.2)] hover:scale-[1.02] active:scale-95 transition-transform" type="button">
-                            SONRAKİ ADIM
-                        </button>
-</div>
-</form>
-</div>
-</div>
-<div class="lg:col-span-4 space-y-6">
-<div class="bg-surface-container-high rounded-xl overflow-hidden group">
-<div class="h-48 relative">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Rear view of a sleek sports car crossing the Bosphorus Bridge at night with blurred city lights and blue architectural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAklINXbGxgOPcmshL9QhwiGhimV-LQwtzpbtdHKju6RJozWDsN7uzPF3vgHaWi1Bz5y-6iM56Cxd-028dHRqmBD59iskFzW1Vl43op9hg7Rsj6qlBcTuhuA3BXw5sNRfkqFrPnqsuh5eC-WA1SARKtO_OBXJHk0UY62oDeI7g1TlDbC1h_SqoZXuna93YrsGQvxGYOzYJSoQn_bmVmPmboqC387UGNyTa_DpD-LB393fEyABtrDWDEABxovtskPuE78J_bRYw8ftHA"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high to-transparent"></div>
-</div>
-<div class="p-6 relative -mt-12">
-<div class="h-12 w-12 rounded-lg engine-gradient flex items-center justify-center mb-4 shadow-lg">
-<span class="material-symbols-outlined text-on-primary-fixed" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
-</div>
-<h3 class="font-headline text-xl font-bold mb-2">Ayrıcalık Sizi Bekliyor</h3>
-<p class="text-on-surface-variant text-sm leading-relaxed">
-                        BosphorusFellas bir araba kulübünden daha fazlasıdır. Azimli olanlar için bir ekosistemdir. Üyelik, ağımızın kalitesini korumak için kesinlikle sınırlıdır.
-                    </p>
-</div>
-</div>
-<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10">
-<h4 class="font-label text-[10px] uppercase tracking-widest text-primary mb-4">Üyelik Seviyeleri</h4>
-<ul class="space-y-4">
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-<div>
-<span class="block font-headline text-sm font-bold">Gece Yarısı Rallisi Erişimi</span>
-<span class="text-xs text-on-surface-variant">Aylık özel sürüşlere öncelikli katılım.</span>
-</div>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
-<div>
-<span class="block font-headline text-sm font-bold">Partner Ekosistemi</span>
-<span class="text-xs text-on-surface-variant">İstanbul'un en iyi performans atölyelerinde özel oranlar.</span>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</section>
-</main>
-<footer class="md:hidden">
-<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-[#090f14]/80 backdrop-blur-xl z-50 rounded-t-xl border-t border-[#5fb4ff]/10 shadow-[0_-10px_30px_rgba(0,162,255,0.04)]">
-<div class="flex flex-col items-center justify-center text-slate-500 font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
-<span class="material-symbols-outlined">home</span>
-<span>Ana Sayfa</span>
-</div>
-<div class="flex flex-col items-center justify-center text-slate-500 font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
-<span class="material-symbols-outlined">event_seat</span>
-<span>Etkinlikler</span>
-</div>
-<div class="flex flex-col items-center justify-center text-slate-500 font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
-<span class="material-symbols-outlined">contactless</span>
-<span>Kartım</span>
-</div>
-<div class="flex flex-col items-center justify-center text-[#5fb4ff] font-bold font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_ind</span>
-<span>Başvur</span>
 </div>
 </nav>
+<main class="flex-grow flex items-center justify-center p-4 py-12 md:py-20">
+<div class="max-w-2xl w-full">
+<!-- Progress Tracker -->
+<div class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<h1 class="text-2xl md:text-3xl font-bold">Üyelik Başvurusu</h1>
+<span class="text-primary font-medium" id="step-counter">Adım 1/3</span>
+</div>
+<div class="w-full bg-borderDark h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full transition-all duration-500 ease-out" id="progress-bar" style="width: 33.33%"></div>
+</div>
+</div>
+<form class="bg-cardDark border border-borderDark p-6 md:p-10 rounded-brand shadow-2xl" id="application-form">
+<!-- STEP 1: Personal Info -->
+<div class="space-y-6" id="step-1">
+<div class="space-y-2">
+<h2 class="text-xl font-semibold">Kişisel Bilgiler</h2>
+<p class="text-gray-400 text-sm">Size daha iyi hitap edebilmemiz için temel bilgilerinizi paylaşın.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">Ad</label>
+<input class="w-full bg-black/40 border border-borderDark rounded-brand py-3 px-4 text-white focus:border-primary transition-all" name="firstname" placeholder="Örn: Ahmet" required="" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">Soyad</label>
+<input class="w-full bg-black/40 border border-borderDark rounded-brand py-3 px-4 text-white focus:border-primary transition-all" name="lastname" placeholder="Örn: Yılmaz" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">E-posta Adresi</label>
+<input class="w-full bg-black/40 border border-borderDark rounded-brand py-3 px-4 text-white focus:border-primary transition-all" name="email" placeholder="ahmet@email.com" required="" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">Telefon Numarası</label>
+<input class="w-full bg-black/40 border border-borderDark rounded-brand py-3 px-4 text-white focus:border-primary transition-all" name="phone" placeholder="+90 5xx xxx xx xx" required="" type="tel"/>
+</div>
+<div class="pt-4">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-brand transition-all flex justify-center items-center gap-2 group" onclick="nextStep(2)" type="button">
+                            Devam Et
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- STEP 2: Lifestyle / Grooming -->
+<div class="step-inactive space-y-6" id="step-2">
+<div class="space-y-2">
+<h2 class="text-xl font-semibold">Hizmet Tercihleri</h2>
+<p class="text-gray-400 text-sm">Tarzınızı ve beklentilerinizi anlamamıza yardımcı olun.</p>
+</div>
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">Mevcut Saç/Sakal Stili</label>
+<select class="w-full bg-black/40 border border-borderDark rounded-brand py-3 px-4 text-white focus:border-primary transition-all appearance-none" name="current_style">
+<option value="">Seçiniz...</option>
+<option value="classic">Klasik Kesim</option>
+<option value="modern">Modern / Fade</option>
+<option value="long">Uzun Saç</option>
+<option value="bearded">Sakal Odaklı</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">İlginizi Çeken Hizmetler</label>
+<div class="grid grid-cols-2 gap-3 mt-2">
+<label class="flex items-center gap-3 p-3 border border-borderDark rounded-brand cursor-pointer hover:border-primary/50 transition-colors">
+<input class="rounded text-primary focus:ring-primary bg-transparent border-borderDark" name="services" type="checkbox" value="grooming"/>
+<span class="text-sm">V.I.P Grooming</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-borderDark rounded-brand cursor-pointer hover:border-primary/50 transition-colors">
+<input class="rounded text-primary focus:ring-primary bg-transparent border-borderDark" name="services" type="checkbox" value="spa"/>
+<span class="text-sm">Spa &amp; Terapi</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-borderDark rounded-brand cursor-pointer hover:border-primary/50 transition-colors">
+<input class="rounded text-primary focus:ring-primary bg-transparent border-borderDark" name="services" type="checkbox" value="lounge"/>
+<span class="text-sm">Lounge Erişimi</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-borderDark rounded-brand cursor-pointer hover:border-primary/50 transition-colors">
+<input class="rounded text-primary focus:ring-primary bg-transparent border-borderDark" name="services" type="checkbox" value="events"/>
+<span class="text-sm">Özel Etkinlikler</span>
+</label>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">Bizi Nereden Duydunuz?</label>
+<textarea class="w-full bg-black/40 border border-borderDark rounded-brand py-3 px-4 text-white focus:border-primary transition-all" name="source" placeholder="Sosyal medya, tavsiye, vb..." rows="2"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-4">
+<button class="w-full border border-borderDark hover:border-white text-gray-400 hover:text-white font-bold py-4 px-6 rounded-brand transition-all flex justify-center items-center gap-2" onclick="nextStep(1)" type="button">
+                            Geri
+                        </button>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-brand transition-all flex justify-center items-center gap-2 group" onclick="nextStep(3)" type="button">
+                            Son Adım
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- STEP 3: Authentication / Motivation -->
+<div class="step-inactive space-y-6" id="step-3">
+<div class="space-y-2">
+<h2 class="text-xl font-semibold">Neden Bosphorus Fellas?</h2>
+<p class="text-gray-400 text-sm">Üyeliğinizin kabul edilmesi için motivasyonunuzu bilmek isteriz.</p>
+</div>
+<div class="space-y-1">
+<label class="text-xs uppercase tracking-wider font-bold text-gray-500">Kısa Bir Mesaj</label>
+<textarea class="w-full bg-black/40 border border-borderDark rounded-brand py-3 px-4 text-white focus:border-primary transition-all" name="motivation" placeholder="Kulübümüze neden katılmak istiyorsunuz?" required="" rows="4"></textarea>
+</div>
+<div class="space-y-4 py-2">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 rounded text-primary focus:ring-primary bg-transparent border-borderDark" required="" type="checkbox"/>
+<span class="text-xs text-gray-400 group-hover:text-gray-300 transition-colors">Kullanım Koşullarını ve KVKK metnini okudum, kabul ediyorum. Üyelik başvurumun değerlendirilmesine izin veriyorum.</span>
+</label>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-4">
+<button class="w-full border border-borderDark hover:border-white text-gray-400 hover:text-white font-bold py-4 px-6 rounded-brand transition-all flex justify-center items-center gap-2" onclick="nextStep(2)" type="button">
+                            Geri
+                        </button>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-brand transition-all flex justify-center items-center gap-2 group shadow-[0_0_20px_rgba(0,153,255,0.3)]" type="submit">
+                            Başvuruyu Tamamla
+                            <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<!-- SUCCESS MESSAGE -->
+<div class="step-inactive text-center py-8 space-y-6" id="success-message">
+<div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/20 text-primary mb-2">
+<span class="material-symbols-outlined text-5xl">check_circle</span>
+</div>
+<div class="space-y-2">
+<h2 class="text-3xl font-bold">Başvurunuz Alındı!</h2>
+<p class="text-gray-400">Teşekkürler. Başvurunuz küratör ekibimiz tarafından incelenecek ve en kısa sürede size geri dönüş yapılacaktır.</p>
+</div>
+<div class="pt-6">
+<a class="inline-block bg-white text-black font-bold py-4 px-10 rounded-brand hover:bg-primary hover:text-white transition-all" href="index.html">Ana Sayfaya Dön</a>
+</div>
+</div>
+</form>
+<!-- Support Info -->
+<div class="mt-12 text-center text-gray-500 text-sm">
+<p>Sorularınız için bizimle iletişime geçin: <span class="text-white font-medium">membership@bosphorusfellas.com</span></p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="py-8 border-t border-borderDark mt-auto">
+<div class="max-w-7xl mx-auto px-4 text-center">
+<p class="text-gray-600 text-xs tracking-widest uppercase">© 2024 Bosphorus Fellas — Premium Gentleman's Club</p>
+</div>
 </footer>
+<script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function nextStep(step) {
+            // Validation (simplified)
+            if (step > currentStep) {
+                const inputs = document.getElementById(`step-${currentStep}`).querySelectorAll('input[required], textarea[required]');
+                let valid = true;
+                inputs.forEach(input => {
+                    if (!input.value) {
+                        input.classList.add('border-red-500');
+                        valid = false;
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+                if (!valid) return;
+            }
+
+            // Hide all steps
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.add('step-inactive');
+            }
+
+            // Show target step
+            document.getElementById(`step-${step}`).classList.remove('step-inactive');
+            currentStep = step;
+
+            // Update Progress
+            const progress = (step / totalSteps) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('step-counter').innerText = `Adım ${step}/${totalSteps}`;
+            
+            // Scroll to top of form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('application-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Hide form steps
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.add('step-inactive');
+            }
+            
+            // Update counter and bar
+            document.getElementById('step-counter').innerText = 'Tamamlandı';
+            document.getElementById('progress-bar').style.width = '100%';
+            
+            // Show success
+            document.getElementById('success-message').classList.remove('step-inactive');
+        });
+    </script>
 </body></html>

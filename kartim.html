@@ -3,263 +3,315 @@
 <html class="dark" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>BosphorusFellas | Üye Kimliği</title>
+<title>Bosphorus Fellas Üye Kartı</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
         tailwind.config = {
-            darkMode: "class",
+            darkMode: 'class',
             theme: {
                 extend: {
-                    "colors": {
-                        "on-tertiary-fixed": "#1f0052",
-                        "inverse-on-surface": "#50565c",
-                        "secondary-fixed": "#b3d4ff",
-                        "tertiary-fixed": "#bda1ff",
-                        "on-primary-fixed": "#000000",
-                        "on-error": "#490006",
-                        "outline-variant": "#43494f",
-                        "surface-tint": "#5fb4ff",
-                        "tertiary": "#ba9eff",
-                        "on-secondary-container": "#b2d3fd",
-                        "on-background": "#eff4fc",
-                        "inverse-primary": "#00639e",
-                        "on-secondary-fixed": "#103658",
-                        "on-surface-variant": "#a6acb3",
-                        "primary": "#5fb4ff",
-                        "on-tertiary": "#391080",
-                        "surface-container-lowest": "#000000",
-                        "tertiary-fixed-dim": "#b191fe",
-                        "surface-dim": "#090f14",
-                        "primary-container": "#2ea7ff",
-                        "on-primary-fixed-variant": "#002e4e",
-                        "secondary-container": "#27496c",
-                        "error": "#ff716c",
-                        "on-primary-container": "#00253f",
-                        "outline": "#70767d",
-                        "background": "#090f14",
-                        "surface-bright": "#242d35",
-                        "error-dim": "#d7383b",
-                        "primary-fixed": "#2ea7ff",
-                        "tertiary-dim": "#ab8bf9",
-                        "on-error-container": "#ffa8a3",
-                        "error-container": "#9f0519",
-                        "surface-container-high": "#192027",
-                        "surface": "#090f14",
-                        "on-secondary": "#28496d",
-                        "surface-container-highest": "#1e272e",
-                        "on-surface": "#eff4fc",
-                        "primary-dim": "#1ca4ff",
-                        "secondary": "#b3d4ff",
-                        "surface-container": "#131a21",
-                        "surface-variant": "#1e272e",
-                        "secondary-fixed-dim": "#a6c6f0",
-                        "surface-container-low": "#0e141a",
-                        "on-tertiary-container": "#2c006e",
-                        "on-secondary-fixed-variant": "#325377",
-                        "on-tertiary-fixed-variant": "#44208b",
-                        "on-primary": "#003152",
-                        "secondary-dim": "#a6c6f0",
-                        "primary-fixed-dim": "#0099f2",
-                        "inverse-surface": "#f7f9ff"
+                    colors: {
+                        brand: {
+                            blue: '#0099FF',
+                            dark: '#0A0A0A',
+                            gray: '#1A1A1A'
+                        }
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
                     },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Manrope"],
-                        "label": ["Space Grotesk"]
+                    borderRadius: {
+                        'none': '0',
+                        'sm': '2px',
+                        'DEFAULT': '4px',
+                        'md': '4px',
+                        'lg': '4px',
+                        'xl': '4px',
+                        '2xl': '4px',
+                        '3xl': '4px',
+                        'full': '9999px',
                     }
-                },
-            },
+                }
+            }
         }
     </script>
 <style>
-        body { font-family: 'Manrope', sans-serif; background-color: #090f14; }
-        .font-headline { font-family: 'Space Grotesk', sans-serif; }
-        
-        .id-card-perspective {
-            perspective: 1500px;
+        body {
+            background-color: #0A0A0A;
+            color: #FFFFFF;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
         }
-        .id-card-inner {
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+        .card-perspective {
+            perspective: 2000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
+            cursor: pointer;
         }
-        .id-card-perspective:hover .id-card-inner {
+
+        .card-inner.flipped {
             transform: rotateY(180deg);
         }
-        .id-card-front, .id-card-back {
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .id-card-back {
+
+        .card-back {
             transform: rotateY(180deg);
         }
-        .holographic-sheen {
+
+        .holographic-overlay {
+            position: absolute;
+            inset: 0;
             background: linear-gradient(
                 135deg,
-                rgba(95, 180, 255, 0) 0%,
-                rgba(95, 180, 255, 0.1) 25%,
-                rgba(255, 255, 255, 0.2) 50%,
-                rgba(95, 180, 255, 0.1) 75%,
-                rgba(95, 180, 255, 0) 100%
+                rgba(0, 153, 255, 0) 0%,
+                rgba(0, 153, 255, 0.05) 25%,
+                rgba(0, 153, 255, 0.1) 50%,
+                rgba(0, 153, 255, 0.05) 75%,
+                rgba(0, 153, 255, 0) 100%
             );
-            background-size: 200% 200%;
+            background-size: 400% 400%;
+            animation: holoShift 8s ease infinite;
+            pointer-events: none;
         }
-        body {
-            min-height: max(884px, 100dvh);
+
+        @keyframes holoShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-effect {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .card-glow {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at center, rgba(0, 153, 255, 0.15) 0%, transparent 70%);
+            top: -25%;
+            left: -25%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 45%,
+                rgba(0, 153, 255, 0.1) 50%,
+                transparent 55%
+            );
+            transform: rotate(45deg);
+            animation: shimmerEffect 6s infinite;
+        }
+
+        @keyframes shimmerEffect {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            20%, 100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .fellas-pattern {
+            background-image: radial-gradient(rgba(0, 153, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
     </style>
 </head>
-<body class="text-on-surface selection:bg-primary selection:text-on-primary min-h-screen flex flex-col overflow-x-hidden">
-<!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-[#090f14] shadow-[0px_20px_40px_rgba(0,162,255,0.06)] flex items-center justify-between px-6 h-16 w-full">
-<div class="flex items-center gap-4">
-<button class="text-[#5fb4ff] hover:opacity-80 transition-opacity active:duration-150 scale-95">
-<span class="material-symbols-outlined">menu</span>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8 fellas-pattern">
+<div class="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- Left: Text Info -->
+<div class="space-y-6">
+<div>
+<h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-2">Bosphorus Fellas <span class="text-brand-blue">Üye Kartı</span></h1>
+<p class="text-zinc-400 text-lg">Özel sürüş topluluğumuzun dijital kimliği. Kartınızı incelemek için üzerine tıklayın.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800">
+<span class="material-symbols-outlined text-brand-blue">verified_user</span>
+<div>
+<h3 class="font-semibold">Dijital Doğrulama</h3>
+<p class="text-sm text-zinc-500">QR kod ile etkinliklerde hızlı giriş ve kimlik doğrulama.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800">
+<span class="material-symbols-outlined text-brand-blue">military_tech</span>
+<div>
+<h3 class="font-semibold">Üyelik Seviyesi</h3>
+<p class="text-sm text-zinc-500">Sürüş puanlarınıza göre dinamik olarak güncellenen statü.</p>
+</div>
+</div>
+</div>
+<button class="w-full md:w-auto px-8 py-3 bg-brand-blue text-white font-bold rounded uppercase tracking-wider hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
+<span>KARTIMI İNDİR (CÜZDAN)</span>
+<span class="material-symbols-outlined">download</span>
 </button>
-<img alt="BosphorusFellas Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhV5ELRjwMus8v5lYz_znL40i0nTvx8CPFtZj0Jq_JMAYXB20EmP93M0owTq0yJSvkQ6LEEuZ5HRgija4LcWLLvk-hODpKPqjim3rO-o8ZpVeas9KxEkEgBddmPOWgz36Sop0QA3CiNyKGQivtmWG-ICn2WgTn-WipNdnHRbt-ulcF5dqTJDVRkAR4GYygUFmi99NnAyVmdnqZoZaqKZtY9yxuagSyog7awh0rwAcCU7mETpXXrrmWhtxL6tKaznd7yGw6rBVxkZ2U"/>
 </div>
-<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20 hover:opacity-80 transition-opacity cursor-pointer">
-<img alt="Üye Profil Avatarı" class="w-full h-full object-cover" data-alt="Close up portrait of a stylish modern man with sharp features against a dark blue neon studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTburmbAh3ktvNtUKnpescgNs8QxAMA4jrRBdaR05bAA0QIgYt21mVmSfx75TZihw5Zv47Gb4Nxq0FnSncjffJyzhH9H7xCgOvZiqQvgPmrpn7UUz39dCK5auzSomzVYdmKLtBuRNOLnDcuWUrB0NUvayrO0anIIl_VFfBrTJAuyGJNCgnhb_TD-nd_XUbV6cbpGncNqS9u8JAuRBXltL9CoDTnkyZMFPshKkXIzcER3itPkVmeBeGVjSak2JyWU6dYxKIG0qnymg0"/>
-</div>
-</header>
-<!-- Main Canvas -->
-<main class="flex-grow pt-24 pb-32 px-6 flex flex-col items-center relative">
-<!-- Background Map Layer -->
-<div class="fixed inset-0 z-0 opacity-20 pointer-events-none">
-<img alt="Bosphorus Gece Haritası" class="w-full h-full object-cover grayscale brightness-50 contrast-125" data-alt="Stylized dark map of Istanbul Bosphorus at night with glowing blue transit lines and neon structural highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm7PoKkk-ui9xh5wlQ-g4KTNUMpvq3pMR3z7CSHgA7I4AFFWHG9SUqH9WmbcFxe-z3kEPUgZvMROsDEROLQjBW97BEghtS7gHeCPJ_Uayx1leUxHdzeyuwU2gYGtq6qZs8SNlh301izK2zODxMaLBkvEU8Zf83nmUgyw7nhPnb9LrwBfKVR10M-HIhOOC0mHAlrsATjsors6Dil2MAt-tMEvoja0pRBFEIJzly41ExFyTkVvxJnbIeuFVILP0sVEZEMyWEozmc3QTS"/>
-</div>
-<section class="relative z-10 w-full max-w-md flex flex-col gap-10">
-<!-- Header Text -->
-<div class="space-y-2">
-<span class="text-primary font-headline text-xs font-bold uppercase tracking-[0.3em]">Erişim Onaylandı</span>
-<h2 class="text-4xl font-headline font-bold text-on-surface leading-tight">Üye Kimliği</h2>
-<p class="text-on-surface-variant text-sm font-light">Güvenli kasa detaylarını görmek için dokunun veya üzerine gelin</p>
-</div>
-<!-- 3D Flip Card -->
-<div class="id-card-perspective w-full aspect-[1.586/1] group">
-<div class="id-card-inner relative w-full h-full shadow-[0px_30px_60px_rgba(0,162,255,0.15)]">
-<!-- Card Front -->
-<div class="id-card-front absolute inset-0 rounded-2xl bg-surface-container-high overflow-hidden border border-white/5">
-<div class="absolute inset-0 holographic-sheen opacity-30"></div>
+<!-- Right: 3D Card -->
+<div class="card-perspective w-full aspect-[1.586/1] relative group">
+<div class="card-inner shadow-2xl" id="idCard">
+<!-- Front Side -->
+<div class="card-face bg-brand-dark glass-effect border-brand-blue/30">
+<div class="holographic-overlay"></div>
+<div class="card-glow"></div>
 <!-- Content -->
-<div class="relative h-full flex flex-col p-6 justify-between">
+<div class="p-6 h-full flex flex-col justify-between relative z-10">
 <div class="flex justify-between items-start">
-<div class="w-16 h-10 bg-primary/10 rounded-lg flex items-center justify-center border border-primary/20">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">contactless</span>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-brand-blue flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-black font-bold">directions_car</span>
+</div>
+<div>
+<h2 class="font-bold text-lg leading-tight uppercase tracking-widest">Bosphorus Fellas</h2>
+<p class="text-[10px] text-brand-blue font-semibold tracking-[0.2em] uppercase">Üye Kartı</p>
+</div>
 </div>
 <div class="text-right">
-<p class="text-[10px] uppercase tracking-widest text-primary font-bold">Seçkin Üye</p>
-<p class="text-xl font-headline font-bold text-on-surface">BF-8472</p>
+<span class="material-symbols-outlined text-brand-blue text-4xl opacity-50">nfc</span>
 </div>
 </div>
-<div class="flex items-end gap-6">
-<div class="w-24 h-24 rounded-xl overflow-hidden border-2 border-primary/30 shadow-lg shrink-0">
-<img alt="Kullanıcı Fotoğrafı" class="w-full h-full object-cover" data-alt="High quality professional portrait of a member for an ID card, dark dramatic lighting with blue arrow light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEDrtfVYrA-MiygEmWTVIhKo3hj1CHDClJKMIsERdUpDnvQN1tAwH9-N_Y6v9V0JkO9nWO0-NQumTd5tC_p5_0nthH_YWH6X_S4QuKke735y7EdMpsYcHevlSnHyVDAamuk9rbRQbAw8O9wWfeaIMfOfrinO_yxFJM5bPqIUaLn6Qpbddcx3SNE6XCXC3lfbeJ9Ca-NrAyHGPWBWQ_3FlzyXapsVaXhDHilR_w3-AYLNMddOGhuMlGwohnjrTuvmm_87eEPSByyK6J"/>
+<div class="flex gap-6 items-end">
+<div class="w-32 h-40 bg-zinc-800 rounded-lg overflow-hidden border border-zinc-700 relative shimmer">
+<img alt="Profil" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv5MAQkrQnchgKNl1YXmIwIedfh9-_pC6J9iYMEeKAk3FipfpzQX0zQ_b9OhW-RMe9C6p27Z5WHbsBSNadCuQw0ccbrI0ruJ_cgwlfuarhS1K2d_yo3oJGGRu4wih4aSu1KhJU4myzG9MaLhVz7jYmi5_kaUDikMSGD7xx6XTYA_fIryasjSi2baIvTgJhojH_bNIeu7CONEmSLvpE7rhcvV22g_7n2Qikd7liG5_QVHeKD-OgSXsgi_lsVkE3YCegbUssr9HGr326"/>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-brand-blue"></div>
 </div>
-<div class="flex-grow pb-2">
-<h3 class="text-2xl font-headline font-bold text-on-surface">Caner Yıldırım</h3>
-<div class="flex items-center gap-2 mt-1">
-<span class="material-symbols-outlined text-xs text-on-surface-variant">directions_car</span>
-<span class="text-xs text-on-surface-variant font-medium tracking-wide uppercase">911 GT3 RS • 34 BF 8472</span>
+<div class="flex-1 pb-2">
+<div class="mb-4">
+<p class="text-[9px] text-zinc-500 uppercase tracking-widest mb-0.5">ÜYE ADI SOYADI</p>
+<p class="text-xl font-bold tracking-tight uppercase" id="display-name">KEREM CAN ÖZTÜRK</p>
 </div>
-</div>
-</div>
-<div class="absolute bottom-6 right-6 opacity-40">
-<span class="material-symbols-outlined text-4xl text-primary/40">security</span>
-</div>
-</div>
-</div>
-<!-- Card Back -->
-<div class="id-card-back absolute inset-0 rounded-2xl bg-surface-container-highest overflow-hidden border border-primary/20">
-<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5"></div>
-<div class="relative h-full flex flex-col p-6">
-<div class="flex items-center gap-3 mb-6">
-<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
-<h4 class="font-headline font-bold text-lg text-primary tracking-tight">Vault / Kasa</h4>
-</div>
-<div class="grid grid-cols-2 gap-4 flex-grow">
-<div class="bg-surface-container-low p-4 rounded-xl border border-white/5">
-<p class="text-[10px] uppercase tracking-tighter text-on-surface-variant mb-1">Mevcut Kredi</p>
-<p class="text-xl font-headline font-bold text-on-surface">12,450 <span class="text-xs text-primary">BF</span></p>
-</div>
-<div class="bg-surface-container-low p-4 rounded-xl border border-white/5">
-<p class="text-[10px] uppercase tracking-tighter text-on-surface-variant mb-1">Durum</p>
-<p class="text-xl font-headline font-bold text-primary">Aktif</p>
-</div>
-<div class="col-span-2 bg-surface-container-low p-4 rounded-xl border border-white/5 flex justify-between items-center">
+<div class="grid grid-cols-2 gap-4">
 <div>
-<p class="text-[10px] uppercase tracking-tighter text-on-surface-variant mb-1">Garaj Erişimi</p>
-<p class="text-sm font-medium text-on-surface">Seviye 4 - Yönetici Bölmesi</p>
+<p class="text-[9px] text-zinc-500 uppercase tracking-widest mb-0.5">ÜYELİK NO</p>
+<p class="font-mono text-sm tracking-widest">#BF-2024-089</p>
 </div>
-<span class="material-symbols-outlined text-primary/60">encrypted</span>
+<div>
+<p class="text-[9px] text-zinc-500 uppercase tracking-widest mb-0.5">SEVİYE</p>
+<p class="text-brand-blue font-bold text-sm">FOUNDER</p>
 </div>
 </div>
-<div class="mt-4 pt-4 border-t border-primary/10 flex justify-between items-center">
+</div>
+</div>
+</div>
+<!-- Decorative stripe -->
+<div class="absolute top-0 right-0 bottom-0 w-1.5 bg-brand-blue opacity-50"></div>
+</div>
+<!-- Back Side -->
+<div class="card-face card-back bg-brand-dark glass-effect border-zinc-800">
+<div class="p-6 h-full flex flex-col justify-between">
+<div>
+<div class="w-full h-12 bg-black -mx-6 mt-4 opacity-80 mb-6"></div>
+<div class="space-y-4">
+<div>
+<p class="text-[10px] text-zinc-500 uppercase tracking-widest">KULLANIM ŞARTLARI</p>
+<p class="text-[9px] text-zinc-400 leading-tight">Bu kart Bosphorus Fellas üyelerine özeldir ve devredilemez. Tüm etkinliklerde ibraz edilmesi zorunludur. Kaybolması durumunda kulüp yönetimine bildirilmelidir.</p>
+</div>
+<div class="flex justify-between items-center bg-zinc-900/80 p-3 rounded border border-zinc-800">
 <div class="flex flex-col">
-<p class="text-[8px] uppercase tracking-widest text-on-surface-variant">Güvenli Kod</p>
-<p class="text-[9px] font-mono text-on-surface-variant/50">8f92-b472-a1c2-7e5d</p>
+<span class="text-[8px] text-zinc-500">DÜZENLENME TARİHİ</span>
+<span class="text-xs font-mono">01/2024</span>
 </div>
-<img alt="Güvenlik QR" class="w-10 h-10 opacity-80" data-alt="Minimalist glowing blue digital QR code on black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnsp7_694i8EZJrWxvcIFmsjefE_O-XMsD6JqZ9Q9ZaJhOrVyz2lkHTM1IlUlRMIyxAWT7JHBJpnfGE99zk3Z17bSnbhhiG05_GJG3XprS4hiBf9mBFo6k7XmS_2p8Te8fqPyeKu6pPSIjSdQyzgtVbaz5rqCXDnAN5n6tCc2SG4KdYqDNJuhIf6lTJjLJx70OXsAhdSJtawAbaGfpRNdCd5wZnV_qvPGfNOYRsHboAkEZlcyvx4rnaESTFohKq0pw5Lw9TX48D6tU"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Stats Grid -->
-<div class="grid grid-cols-3 gap-4">
-<div class="bg-surface-container-high/50 backdrop-blur-md p-4 rounded-xl border border-white/5 flex flex-col items-center">
-<span class="material-symbols-outlined text-primary mb-2">speed</span>
-<span class="text-xs text-on-surface-variant text-center">En Yüksek Hız</span>
-<span class="text-sm font-bold">312 km/s</span>
-</div>
-<div class="bg-surface-container-high/50 backdrop-blur-md p-4 rounded-xl border border-white/5 flex flex-col items-center">
-<span class="material-symbols-outlined text-primary mb-2">event_available</span>
-<span class="text-xs text-on-surface-variant text-center">Katıldığı Etkinlikler</span>
-<span class="text-sm font-bold">24 Adet</span>
-</div>
-<div class="bg-surface-container-high/50 backdrop-blur-md p-4 rounded-xl border border-white/5 flex flex-col items-center">
-<span class="material-symbols-outlined text-primary mb-2">military_tech</span>
-<span class="text-xs text-on-surface-variant text-center">Rütbe</span>
-<span class="text-sm font-bold">Patron</span>
+<div class="flex flex-col text-right">
+<span class="text-[8px] text-zinc-500">GEÇERLİLİK</span>
+<span class="text-xs font-mono">SÜRESİZ</span>
 </div>
 </div>
-<!-- Actions -->
-<div class="flex flex-col gap-3">
-<button class="w-full bg-gradient-to-r from-primary to-primary-container h-14 rounded-xl font-headline font-bold text-on-primary flex items-center justify-center gap-2 shadow-[0_10px_20px_rgba(95,180,255,0.2)] active:scale-95 transition-transform">
-<span class="material-symbols-outlined">qr_code_scanner</span>
-                Konumda Check-in Yap
-            </button>
-<button class="w-full bg-surface-container-high h-14 rounded-xl font-headline font-bold text-on-surface flex items-center justify-center gap-2 border border-outline-variant/30 hover:bg-surface-bright transition-colors">
-<span class="material-symbols-outlined">ios_share</span>
-                Dijital Kartı Paylaş
-            </button>
 </div>
-</section>
-</main>
-<!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-[#090f14]/80 backdrop-blur-xl z-50 rounded-t-xl border-t border-[#5fb4ff]/10 shadow-[0_-10px_30px_rgba(0,162,255,0.04)]">
-<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined">home</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest mt-1">Anasayfa</span>
-</a>
-<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined">event_seat</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest mt-1">Etkinlikler</span>
-</a>
-<a class="flex flex-col items-center justify-center text-[#5fb4ff] font-bold tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">contactless</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest mt-1">Kartım</span>
-</a>
-<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
-<span class="material-symbols-outlined">assignment_ind</span>
-<span class="font-['Manrope'] text-[10px] uppercase tracking-widest mt-1">Başvur</span>
-</a>
-</nav>
+</div>
+<div class="flex justify-between items-end">
+<div class="w-20 h-20 bg-white p-1 rounded-sm">
+<!-- Placeholder QR -->
+<div class="w-full h-full bg-[url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=BosphorusFellas_BF2024089')] bg-cover"></div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-zinc-500 mb-1">MÜŞTERİ HİZMETLERİ</p>
+<p class="text-xs font-bold text-brand-blue tracking-tighter">+90 212 555 44 33</p>
+<p class="text-[8px] text-zinc-500 mt-2 italic">© 2024 Bosphorus Fellas Social Club</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Hidden Input for Logic Demonstration -->
+<input id="userNameInput" type="hidden" value="KEREM CAN ÖZTÜRK"/>
+<script>
+        // Flip Logic
+        const card = document.getElementById('idCard');
+        card.addEventListener('click', () => {
+            card.classList.toggle('flipped');
+        });
+
+        // Data Population Logic (Preserved as requested)
+        function updateCardData() {
+            const nameInput = document.getElementById('userNameInput');
+            const displayElements = document.querySelectorAll('#display-name');
+            
+            if (nameInput && displayElements.length > 0) {
+                displayElements.forEach(el => {
+                    el.textContent = nameInput.value;
+                });
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', updateCardData);
+
+        // Interactive mouse tilt effect
+        const cardContainer = document.querySelector('.card-perspective');
+        cardContainer.addEventListener('mousemove', (e) => {
+            if (card.classList.contains('flipped')) return;
+            
+            const rect = cardContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
+            
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        cardContainer.addEventListener('mouseleave', () => {
+            if (card.classList.contains('flipped')) {
+                card.style.transform = 'rotateY(180deg)';
+            } else {
+                card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            }
+        });
+    </script>
 </body></html>
