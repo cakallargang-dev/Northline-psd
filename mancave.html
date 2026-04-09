@@ -1,314 +1,218 @@
 <!DOCTYPE html>
-<html class="dark" lang="tr">
-<head>
+
+<html class="dark" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MANCAVE | ÜS</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
-    tailwind.config = {
+      tailwind.config = {
         darkMode: "class",
         theme: {
-            extend: {
-                colors: {
-                    background: "#131313",
-                    "surface-container-lowest": "#0e0e0e",
-                    "surface-container-low": "#1c1b1b",
-                    "surface-container-high": "#2a2a2a",
-                    "on-surface": "#e5e2e1",
-                    "on-surface-variant": "#e8bcb7",
-                    primary: "#ffb4ab",
-                    "outline-variant": "#5e3f3b"
-                },
-                fontFamily: {
-                    headline: ["Space Grotesk"],
-                    body: ["Inter"],
-                    label: ["Space Grotesk"]
-                }
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#1f0052",
+                    "inverse-on-surface": "#50565c",
+                    "secondary-fixed": "#b3d4ff",
+                    "tertiary-fixed": "#bda1ff",
+                    "on-primary-fixed": "#000000",
+                    "on-error": "#490006",
+                    "outline-variant": "#43494f",
+                    "surface-tint": "#5fb4ff",
+                    "tertiary": "#ba9eff",
+                    "on-secondary-container": "#b2d3fd",
+                    "on-background": "#eff4fc",
+                    "inverse-primary": "#00639e",
+                    "on-secondary-fixed": "#103658",
+                    "on-surface-variant": "#a6acb3",
+                    "primary": "#5fb4ff",
+                    "on-tertiary": "#391080",
+                    "surface-container-lowest": "#000000",
+                    "tertiary-fixed-dim": "#b191fe",
+                    "surface-dim": "#090f14",
+                    "primary-container": "#2ea7ff",
+                    "on-primary-fixed-variant": "#002e4e",
+                    "secondary-container": "#27496c",
+                    "error": "#ff716c",
+                    "on-primary-container": "#00253f",
+                    "outline": "#70767d",
+                    "background": "#090f14",
+                    "surface-bright": "#242d35",
+                    "error-dim": "#d7383b",
+                    "primary-fixed": "#2ea7ff",
+                    "tertiary-dim": "#ab8bf9",
+                    "on-error-container": "#ffa8a3",
+                    "error-container": "#9f0519",
+                    "surface-container-high": "#192027",
+                    "surface": "#090f14",
+                    "on-secondary": "#28496d",
+                    "surface-container-highest": "#1e272e",
+                    "on-surface": "#eff4fc",
+                    "primary-dim": "#1ca4ff",
+                    "secondary": "#b3d4ff",
+                    "surface-container": "#131a21",
+                    "surface-variant": "#1e272e",
+                    "secondary-fixed-dim": "#a6c6f0",
+                    "surface-container-low": "#0e141a",
+                    "on-tertiary-container": "#2c006e",
+                    "on-secondary-fixed-variant": "#325377",
+                    "on-tertiary-fixed-variant": "#44208b",
+                    "on-primary": "#003152",
+                    "secondary-dim": "#a6c6f0",
+                    "primary-fixed-dim": "#0099f2",
+                    "inverse-surface": "#f7f9ff",
+                    "tertiary-container": "#ae8efc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
             }
-        }
-    }
-</script>
+          },
+        },
+      }
+    </script>
 <style>
-    .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
-    }
-    .grain-overlay {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.03;
-        pointer-events: none;
-    }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(25, 32, 39, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #5fb4ff 0%, #2ea7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<style>
     body {
-        min-height: max(884px, 100dvh);
+      min-height: max(884px, 100dvh);
     }
-    /* Event card hover effect */
-    .event-card {
-        transition: all 0.3s ease;
-        border-left: 2px solid transparent;
-    }
-    .event-card:hover {
-        background-color: #201f1f;
-        border-left-color: #ff2a2a;
-        transform: translateX(4px);
-    }
-</style>
+  </style>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-[#410002]">
-<div class="grain-overlay fixed inset-0 z-50"></div>
-
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
 <!-- TopAppBar -->
-<header class="bg-[#131313] w-full top-0 sticky flex justify-between items-center px-6 h-16 z-40">
-    <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-[#ff2a2a]" data-icon="precision_manufacturing">precision_manufacturing</span>
-        <h1 class="font-['Space_Grotesk'] uppercase tracking-tighter font-bold text-xl text-[#ff2a2a]">MANCAVE</h1>
-        <div class="h-4 w-px bg-[#2a2a2a] mx-2"></div>
-        <span class="text-[10px] font-label uppercase tracking-widest text-[#e8bcb7]">GİZLİ ÜS</span>
-    </div>
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 w-full bg-[#090f14] shadow-[0px_20px_40px_rgba(0,162,255,0.06)]">
+<div class="flex items-center gap-4">
+<button class="text-[#5fb4ff] hover:opacity-80 transition-opacity scale-95 active:duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<img alt="BosphorusFellas Logosu" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhV5ELRjwMus8v5lYz_znL40i0nTvx8CPFtZj0Jq_JMAYXB20EmP93M0owTq0yJSvkQ6LEEuZ5HRgija4LcWLLvk-hODpKPqjim3rO-o8ZpVeas9KxEkEgBddmPOWgz36Sop0QA3CiNyKGQivtmWG-ICn2WgTn-WipNdnHRbt-ulcF5dqTJDVRkAR4GYygUFmi99NnAyVmdnqZoZaqKZtY9yxuagSyog7awh0rwAcCU7mETpXXrrmWhtxL6tKaznd7yGw6rBVxkZ2U"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden hover:opacity-80 transition-opacity cursor-pointer">
+<img alt="Üye Profil Avatarı" class="w-full h-full object-cover" data-alt="close-up portrait of a stylish man in a leather jacket against a blurred city night background with neon highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVXfh88S-uQG1jsl2l599yrvmNq_j8TG3m12mziwnbuIt8KCZY2g5tup38h97gaoQrLaka-5ZM9e_UHfdHlLCTo-PbgRafJAiT1TOyDgPPQgSciv6Q5XVTF28sZJdkQwBYsgZ0v5UzbEXtcCn_2D-ZX1r4dsNk-eRHSvSS0mEe4mkMIkqurUvfX5TDLKl5H4oD3IvA5mEed3MA9RYw5EzZF9CvZcHzgJDM_qoz5cIXODmcr20x9sabUr6R7JpTuWpic0bjJkLuG7h4"/>
+</div>
 </header>
-
-<main class="min-h-screen pb-32">
-    <!-- Hero Context -->
-    <section class="px-6 pt-12 pb-8">
-        <div class="max-w-4xl mx-auto">
-            <span class="font-label text-primary uppercase tracking-[0.3em] text-xs font-bold block mb-2">ERİŞİM ONAYLANDI</span>
-            <h2 class="font-headline text-4xl font-extrabold uppercase tracking-tighter leading-none mb-4">GİZLİ ETKİNLİKLER</h2>
-            <div class="h-1 w-24 bg-[#ff5449]"></div>
-            <p class="mt-4 text-sm text-[#e8bcb7] max-w-lg leading-relaxed">
-                ManCave üyelerine özel yaklaşan gizli buluşmalar, sürüşler ve atölye toplantıları.
-            </p>
-        </div>
-    </section>
-
-    <!-- Events Feed -->
-    <section class="px-6 max-w-4xl mx-auto space-y-4" id="events-container">
-        <!-- Skeleton Loading Loader -->
-        <div class="animate-pulse bg-surface-container-low p-6 flex flex-col gap-4">
-            <div class="h-4 bg-surface-container-high w-1/4"></div>
-            <div class="h-6 bg-surface-container-high w-3/4"></div>
-            <div class="h-16 bg-surface-container-high w-full"></div>
-        </div>
-        <div class="animate-pulse bg-surface-container-low p-6 flex flex-col gap-4 opacity-70">
-            <div class="h-4 bg-surface-container-high w-1/4"></div>
-            <div class="h-6 bg-surface-container-high w-3/4"></div>
-            <div class="h-16 bg-surface-container-high w-full"></div>
-        </div>
-    </section>
+<main class="pt-16 pb-32">
+<!-- Hero Map Section -->
+<section class="relative h-[353px] w-full overflow-hidden">
+<img alt="Boğaziçi Köprüsü gece görünümü" class="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-700" data-alt="dramatic wide shot of the Bosphorus Bridge at night, glowing blue against a dark sky with city lights reflecting on the water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARqa65fFNQ22oLTNyRHTVBX2UFkHmdPm3qorTlOp8FJxkM4uAwWyRVqGSw3u_8ZRHE89sQGQJa4sSYI7LKr4gCt4dNoKCW6Sv2ZNtvJZqyNYwF-4F7P6etXX7peM0JAOhRWcEl3LygmAulVoA2lTLtU9qfb7ShLZsdaMgxxA7K3QxrP9TQDKHgrvbrHVGkcwLhHPQBMYCLk-flTrCBl5rP9CQFCLqWroAWwqZQjVSvIdtTKVUn0hyE6mXRdQBzsMnZhgYzHKHEF7-v"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<div class="flex flex-col gap-2">
+<span class="text-xs font-bold tracking-[0.3em] text-primary uppercase font-headline">GİZLİ ÜS</span>
+<h2 class="text-4xl md:text-6xl font-extrabold font-headline tracking-tighter uppercase">ETKİNLİK AKIŞI</h2>
+</div>
+</div>
+</section>
+<!-- Filter Chips -->
+<section class="px-6 mb-12 flex gap-3 overflow-x-auto no-scrollbar">
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary-fixed font-bold text-xs uppercase tracking-widest transition-transform active:scale-95 whitespace-nowrap">Tüm Etkinlikler</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap">Gece Sürüşleri</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap">Araç Buluşmaları</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap">Özel</button>
+</section>
+<!-- Events Grid (Bento Style) -->
+<section class="px-6 grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Featured Event -->
+<div class="md:col-span-12 group cursor-pointer">
+<div class="relative rounded-xl overflow-hidden aspect-[16/9] md:aspect-[21/9]">
+<img alt="Öne Çıkan Porsche Gece Sürüşü" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="sleek dark grey Porsche driving on a modern bridge at night with long exposure light trails and cinematic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-ysIH2awzgadUTua-pPeZh1DvWtvLZ4KgzEp-xcYM3gdSKtaPwqOaZZTs4TeODokMkkCJImrusNJgr3nEhP-shmx9T2gkp6MbVMfSKfhuQA0WmWLt24gp-8-eaL4jQMcqwP2ZCVpx6im0Y8j5FLzOG1JmqKKxrscNCua8SuB5zOuUd5upXp-w-8iL_hSh6k4LX0Gp5bG_kzPOoUdosMe2J1alDLFtJoc2f00FIGZR3A1yfX94TUvzNWWZFa0v04mRAOXuocyIANwv"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-0 left-0 p-8 flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<span class="bg-primary-container text-on-primary-container px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full">Öne Çıkan</span>
+<span class="flex items-center gap-1 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                                24 EKİM 2023
+                            </span>
+</div>
+<h3 class="text-3xl font-headline font-bold max-w-xl">Geceyarısı Köprü Sürüşü: 911 Edisyonu</h3>
+<p class="text-on-surface-variant max-w-md hidden md:block">Mavi ışıklar altında Boğaz'ı geçen seçkin bir gece turu. Sadece FELLAS Gold üyelerine özel giriş.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-xs tracking-widest uppercase">
+<span class="material-symbols-outlined">location_on</span>
+                            Kuruçeşme Buluşma Noktası
+                        </div>
+</div>
+</div>
+</div>
+<!-- Secondary Grid -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-1 overflow-hidden group">
+<div class="relative h-64 rounded-lg overflow-hidden mb-6">
+<img alt="Klasik Araç Buluşması" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="vintage luxury cars parked under neon lights in a modern industrial garage setting with reflections on polished concrete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgfUTmwVmyesTn_73gneTK0Mm6BVHxNUiRyrfxXJ7FxjzqKB_velZo1xe1xV91XVVxXirE88uqztfPm090haQBRg8MSrHbYvyV1RIe5YZyw1T0zKeqE_BX7vBEt4bcnd2pc9RlDsqd4VXS4wlqDLAA4LuV84jXTxDsqswZ_ZlMeeNDjkSrHmPbfgiYynkfi2g514W2Qe8Ld85jckioYRdEyAVkCmGEJNQz7d4D3TMTaFVMovvfUvcgI-PTZvOq_uDOWUklB0nPW5l2"/>
+<div class="absolute top-4 right-4 bg-background/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary border border-primary/20 uppercase">Buluşma</div>
+</div>
+<div class="px-6 pb-8">
+<div class="text-primary font-black text-sm mb-2 font-headline uppercase tracking-tighter">28 EKİM / 20:00</div>
+<h4 class="text-xl font-bold font-headline mb-3">Klasik Ruhu ve V8'ler</h4>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Galataport'un kalbinde otomotiv tasarımının altın çağını kutluyoruz.</p>
+<button class="w-full py-4 bg-surface-bright text-on-surface font-bold text-xs uppercase tracking-widest rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-colors">Davetiye İste</button>
+</div>
+</div>
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-1 overflow-hidden group">
+<div class="relative h-64 rounded-lg overflow-hidden mb-6">
+<img alt="Hiperaraç Sergisi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="futuristic electric hypercar displayed in a minimalist gallery with blue architectural lighting and dark shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAYjHUl7VqBlWWcBrEnz8ACyH-CztZcOCxlPPev5wlOtvsI4mhHfuuTUHt58FKsxwmacPUuP8GCHKLLuADf0CKqAf4kJ6v0tsBkVOwV0KQrj8HrtgVla-m5ilUbrnNnZYn0V5O1EPtjnnq-w5UMpBBEbgzSGeee7XrEWnKMk7phBtzeXgb7uEnIKHfktB9A2GS8rjnVPx6C_YaBWIg_0aEtsCFcOPAd4PipAeYBiOm-NTs22bFESzmLiWYmGPsy_ZvsYaJtWUqh5Yw"/>
+<div class="absolute top-4 right-4 bg-background/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary border border-primary/20 uppercase">Sergi</div>
+</div>
+<div class="px-6 pb-8">
+<div class="text-primary font-black text-sm mb-2 font-headline uppercase tracking-tighter">02 KASIM / 19:30</div>
+<h4 class="text-xl font-bold font-headline mb-3">Elektrikli Gelecek Tanıtımı</h4>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Rimac Nevera'ya ve sessiz performansın geleceğine ilk bakış.</p>
+<button class="w-full py-4 bg-surface-bright text-on-surface font-bold text-xs uppercase tracking-widest rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-colors">Kayıt Ol</button>
+</div>
+</div>
+<!-- Full Width Newsletter/Secret Info -->
+<div class="md:col-span-12 mt-8">
+<div class="glass-card rounded-xl p-10 border border-primary/10 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-xl text-center md:text-left">
+<h3 class="text-2xl font-bold font-headline mb-2 uppercase italic tracking-tighter">Radarın Altında Kal</h3>
+<p class="text-on-surface-variant text-sm">Anlık buluşma noktaları ve gece sürüşü koordinat sızıntıları için şifreli bültenimize katılın.</p>
+</div>
+<div class="flex w-full md:w-auto gap-4">
+<input class="bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-xs tracking-widest font-bold px-6 py-4 rounded-lg flex-grow uppercase" placeholder="E-POSTA ADRESİ" type="email"/>
+<button class="bg-primary text-on-primary-fixed px-8 py-4 rounded-lg font-black text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">Bağlan</button>
+</div>
+</div>
+</div>
+</section>
 </main>
-
 <!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-[#0e0e0e] border-t border-[#2a2a2a]">
-<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="index.html">
-<span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">ANA SAYFA</span>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-[#090f14]/80 backdrop-blur-xl z-50 rounded-t-xl border-t border-[#5fb4ff]/10 shadow-[0_-10px_30px_rgba(0,162,255,0.04)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Ana Sayfa</span>
 </a>
-<!-- Üye girişi yaptığı için Mancave ikonu kırmızı/aktif -->
-<a class="flex flex-col items-center justify-center text-[#ff2a2a] border-t-2 border-[#ff2a2a] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="mancave.html">
-<span class="material-symbols-outlined material-symbols-outlined-fill">hub</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">MANCAVE ÜS</span>
+<a class="flex flex-col items-center justify-center text-[#5fb4ff] font-bold hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">event_seat</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Etkinlikler</span>
 </a>
-<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="kartim.html">
-<span class="material-symbols-outlined" data-icon="badge">badge</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">KARTIM</span>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">contactless</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Kartım</span>
 </a>
-<a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="basvuru.html">
-<span class="material-symbols-outlined" data-icon="speed">speed</span>
-<span class="font-label uppercase text-[10px] tracking-widest font-bold mt-1">BAŞVURU</span>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">assignment_ind</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest">Başvur</span>
 </a>
 </nav>
-
-<script>
-// --- GOOGLE SHEETS AYARLARI ---
-// Google form'un bağlı olduğu Etkinlik Sheets ID'sini buraya yapıştırın
-const EVENT_SHEET_ID = "1j6U0DlGw3OEhQj6zvrZl3SbIleZDbo4mVBIs4_pJgos"; 
-
-// Eğer Form yanıtları Sheet içindeki 2. sekmedeyse (GID), o zaman URL sonuna '&gid=xxxx' eklemek gerekebilir.
-// Şimdilik sadece tqx=out:json kullanarak ilk tab'ı çekiyoruz.
-const GVZ_URL = `https://docs.google.com/spreadsheets/d/${EVENT_SHEET_ID}/gviz/tq?tqx=out:json`;
-
-async function fetchEvents() {
-    const container = document.getElementById('events-container');
-
-    // Eğer ID değiştirilmemişse (Henüz Google Form kurulmamışsa) DEMO veriler ile sayfayı süsle
-    if (!EVENT_SHEET_ID || EVENT_SHEET_ID.includes("BURAYA")) {
-        renderDemoEvents(container);
-        return;
-    }
-
-    try {
-        const res = await fetch(GVZ_URL + "&t=" + Date.now());
-        const text = await res.text();
-        
-        // Strip out Google's JSON callback wrapper
-        const jsonText = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1];
-        const json = JSON.parse(jsonText);
-        
-        const rows = json.table.rows;
-        
-        if (!rows || rows.length === 0) {
-            container.innerHTML = `
-                <div class="bg-surface-container-low p-8 text-center border border-outline-variant/20">
-                    <span class="material-symbols-outlined text-[#ff2a2a] text-4xl mb-4">radar</span>
-                    <h3 class="font-headline font-bold uppercase tracking-widest text-on-surface">RADAR TEMİZ</h3>
-                    <p class="text-xs text-on-surface-variant mt-2 font-body">Yakın zamanda planlanmış herhangi bir görev bulunmuyor.</p>
-                </div>
-            `;
-            return;
-        }
-
-        // Form'daki Sütun Ornegi: 
-        // 0: Timestamp
-        // 1: Başlık
-        // 2: Tarih / Saat
-        // 3: Konum
-        // 4: Detaylar
-        // 5: Fotoğraf Linki (Opsiyonel)
-        let html = '';
-        
-        // En son eklenen en üstte olmak üzere ters çeviriyoruz
-        for (let i = rows.length - 1; i >= 0; i--) {
-            const cells = rows[i].c;
-            const title = cells[1]?.v || "GİZLİ TOPLANTI";
-            const datetime = cells[2]?.f || cells[2]?.v || "ZAMAN BİLİNMİYOR"; 
-            const location = cells[3]?.v || "GİZLİ LOKASYON";
-            const details = cells[4]?.v || "Detaylar sadece onaylanmış üyelere toplantı esnasında aktarılacaktır.";
-            
-            let rawPhoto = cells[5]?.v || "";
-            let mapsUrlRaw = cells[6]?.v || ""; 
-            
-            // Konum linki oluştur (Kendi yazdıysa onu, yoksa google maps araması)
-            let mapsFinalUrl = mapsUrlRaw.startsWith("http") ? mapsUrlRaw : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
-
-            let imgUrl = "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=1200"; // Lüks koyu varsayılan görsel
-            
-            if (rawPhoto && rawPhoto.startsWith("http")) {
-                imgUrl = rawPhoto;
-                // Google Drive uc?id düzeltmesi
-                const idMatch = rawPhoto.match(/[?&]id=([^&]+)/);
-                if (idMatch) {
-                    imgUrl = "https://drive.google.com/thumbnail?id=" + idMatch[1] + "&sz=w1200";
-                }
-            }
-
-            html += `
-            <div class="relative w-full max-w-2xl mx-auto mb-16 group">
-                <!-- Glow effect background -->
-                <div class="absolute -inset-1 bg-gradient-to-br from-[#ff2a2a]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                
-                <div class="relative bg-[#0e0e0e] border border-[#2a2a2a] overflow-hidden flex flex-col shadow-2xl">
-                    <!-- Photo Section -->
-                    <div class="relative h-64 sm:h-80 w-full overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent z-10 w-full h-full"></div>
-                        <img src="${imgUrl}" alt="Event Background" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-[2000ms] ease-out">
-                        <div class="absolute top-6 left-6 z-20">
-                            <span class="px-4 py-1.5 bg-[#131313]/90 backdrop-blur-md border border-[#ff2a2a]/30 text-[#ff2a2a] text-[8px] font-['Space_Grotesk'] uppercase tracking-[0.3em] font-bold">RESMİ DAVETİYE</span>
-                        </div>
-                    </div>
-
-                    <!-- Content Section -->
-                    <div class="p-8 sm:p-12 relative z-20 -mt-16 text-center">
-                        <div class="inline-block px-5 py-2.5 bg-[#131313] border border-[#2a2a2a] text-[#e8bcb7] text-[10px] uppercase font-bold tracking-[0.3em] mb-8 shadow-xl">
-                            ${datetime}
-                        </div>
-                        
-                        <h3 class="font-['Space_Grotesk'] text-3xl sm:text-4xl font-black uppercase tracking-tighter text-[#e5e2e1] mb-6 drop-shadow-lg">${title}</h3>
-                        
-                        <a href="${mapsFinalUrl}" target="_blank" class="inline-flex items-center justify-center gap-2 text-[#ff2a2a] hover:text-[#e8bcb7] transition-colors mb-8 cursor-pointer underline underline-offset-4 decoration-[#ff2a2a]/40 hover:decoration-[#e8bcb7]">
-                            <span class="material-symbols-outlined text-sm">location_on</span>
-                            <span class="text-xs font-['Space_Grotesk'] uppercase tracking-[0.2em] font-semibold">${location}</span>
-                        </a>
-
-                        <div class="h-px w-24 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent mx-auto mb-8"></div>
-                        
-                        <p class="text-sm font-['Inter'] text-[rgba(232,188,183,0.7)] leading-relaxed max-w-lg mx-auto whitespace-pre-line">
-                            ${details}
-                        </p>
-                    </div>
-                    
-                    <!-- Bottom ornamental detail -->
-                    <div class="h-1 w-full flex">
-                        <div class="h-full bg-[#ff2a2a] w-1/4 transition-all duration-700 group-hover:w-full"></div>
-                        <div class="h-full bg-[#1c1b1b] flex-1"></div>
-                    </div>
-                </div>
-            </div>
-            `;
-        }
-
-        container.innerHTML = html;
-
-    } catch (e) {
-        console.error("Etkinlikler yüklenemedi", e);
-        container.innerHTML = `
-            <div class="bg-surface-container-low p-6 text-center border-l-2 border-[#ff2a2a]">
-                <span class="material-symbols-outlined text-[#ff2a2a] text-3xl mb-2 block">warning</span>
-                <p class="text-sm font-body text-[#ff2a2a] uppercase tracking-widest">Veri senkronizasyonu başarısız</p>
-                <p class="text-[10px] text-on-surface-variant mt-2 hidden" id="err-msg">${e.message}</p>
-            </div>
-        `;
-    }
-}
-
-// Gecici DEMO Veriler (Kullanici SHEET_ID girene kadar tasarimi test edebilsin diye)
-function renderDemoEvents(container) {
-    const demoHtml = `
-    <!-- Etkinlik 1 (Lüks Davetiye Tasarımı) -->
-    <div class="relative w-full max-w-2xl mx-auto mb-16 group">
-        <div class="absolute -inset-1 bg-gradient-to-br from-[#ff2a2a]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-        <div class="relative bg-[#0e0e0e] border border-[#2a2a2a] overflow-hidden flex flex-col shadow-2xl">
-            <!-- Photo Section -->
-            <div class="relative h-64 sm:h-80 w-full overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-[#0e0e0e]/20 to-transparent z-10 w-full h-full"></div>
-                <img src="https://images.unsplash.com/photo-1542282088-72c9c2d8ed96?auto=format&fit=crop&q=80&w=1200" alt="Event Background" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[2000ms] ease-out">
-                <div class="absolute top-6 left-6 z-20">
-                    <span class="px-4 py-1.5 bg-[#131313]/90 backdrop-blur-md border border-[#ff2a2a]/30 text-[#ff2a2a] text-[8px] font-['Space_Grotesk'] uppercase tracking-[0.3em] font-bold">RESMİ DAVETİYE</span>
-                </div>
-            </div>
-
-            <!-- Content Section -->
-            <div class="p-8 sm:p-12 relative z-20 -mt-20 text-center">
-                <div class="inline-block px-5 py-2.5 bg-[#131313] border border-[#2a2a2a] text-[#e8bcb7] text-[10px] uppercase font-bold tracking-[0.3em] mb-8 shadow-xl">
-                    CUMARTESİ GECE YARISI, 23:00 - 02:00
-                </div>
-                
-                <h3 class="font-['Space_Grotesk'] text-3xl sm:text-5xl font-black uppercase tracking-tighter text-[#e5e2e1] mb-6 drop-shadow-xl text-balance">MASLAK UNDERGROUND RUN</h3>
-                
-                <a href="https://www.google.com/maps/search/?api=1&query=Maslak+Oto+Sanayi" target="_blank" class="inline-flex items-center justify-center gap-2 text-[#ff2a2a] hover:text-[#e8bcb7] transition-colors mb-8 cursor-pointer underline underline-offset-4 decoration-[#ff2a2a]/40 hover:decoration-[#e8bcb7]">
-                    <span class="material-symbols-outlined text-sm">location_on</span>
-                    <span class="text-xs font-['Space_Grotesk'] uppercase tracking-[0.2em] font-semibold">MASLAK OTO SANAYİ - GARAJ A (LOKASYON GİZLİ)</span>
-                </a>
-
-                <div class="h-px w-24 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent mx-auto mb-8"></div>
-                
-                <p class="text-sm font-['Inter'] text-[rgba(232,188,183,0.7)] leading-relaxed max-w-lg mx-auto text-balance">
-                    Araçların modifiye durumlarını gözden geçireceğiz ve sanayi bölgesinde test çıkışı yapacağız. Yalnızca onaylanmış üyeler ve kayıtlı araçlar katılabilir. Yüksek desibel uyarısı sebebiyle yerel güvenlik protokollerine uyulması rica olunur.
-                </p>
-            </div>
-            
-            <div class="h-1 w-full flex">
-                <div class="h-full bg-[#ff2a2a] w-1/4 transition-all duration-700 group-hover:w-full"></div>
-                <div class="h-full bg-[#1c1b1b] flex-1"></div>
-            </div>
-        </div>
-    </div>
-    `;
-    container.innerHTML = demoHtml;
-}
-
-// Sayfa yüklendiğinde veriyi çek
-document.addEventListener("DOMContentLoaded", () => {
-    // GÜVENLİK KORİDORU: Giriş yapmamışsa Login'e at!
-    const userStr = localStorage.getItem('mancave_user');
-    if (!userStr) {
-        window.location.href = 'mancavecard.html';
-        return;
-    }
-    
-    fetchEvents();
-});
-</script>
-</body>
-</html>
+</body></html>
