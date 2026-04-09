@@ -764,7 +764,7 @@ window.updateDoc = updateDoc;
       return `
         <div class="app-card p-5 fade-up ${isSelected ? "selected" : ""}" 
              style="animation-delay:${i * 0.04}s"
-             onclick="selectApp(${app.id})">
+             onclick="selectApp('${app.id}')">
           <div class="flex items-start justify-between mb-3">
             <div>
               <p class="app-number mb-0.5">BAŞVURU #${String(app.id + 1).padStart(3,"0")}</p>
@@ -881,38 +881,26 @@ window.updateDoc = updateDoc;
   }
 
   // ── Status update ──
-  async function setStatus(st) {
+  window.setStatus = async function setStatus(st) {
     if (selectedIndex === null) return;
-    statuses[String(selectedIndex)] = st;
-    saveStatuses();
-    updateBadge("d-status-badge", st);
-    updateBadge("m-status-badge", st);
+    const previous = statuses[selectedIndex];
+    statuses[selectedIndex] = st;
     updateStats();
+    filterCards();
 
-    // Listedeki ilgili kartın badge'ini yerinde güncelle (innerHTML yeniden oluşturmadan)
-    const idx = filtered.findIndex(a => a.id === selectedIndex);
-    if (idx !== -1) {
-      const cards = document.querySelectorAll(".app-card");
-      if (cards[idx]) {
-        const badge = cards[idx].querySelector(".badge");
-        if (badge) {
-          badge.className = "badge";
-          if (st === "approved") { badge.classList.add("badge-approved"); badge.textContent = "ONAYLANDI"; }
-          else if (st === "rejected") { badge.classList.add("badge-rejected"); badge.textContent = "REDDEDİLDİ"; }
-          else { badge.classList.add("badge-pending"); badge.textContent = "BEKLEMEDE"; }
-        }
-      }
-    }
-
-    // Detail paneli koru - seçili başvuruyu yeniden doldur
     const app = allApps.find(a => a.id === selectedIndex);
-    if (app) fillDetail(app);
+    if(app) fillDetail(app);
 
-    // Sheets'e yaz
-    const statusText = st; // "approved" / "rejected" / "pending" — İngilizce sabit değer
-    showToast("Sheets'e kaydediliyor...", false);
-    await saveToSheet(selectedIndex, statusText);
-    showToast("✓ Kaydedildi", true);
+    const statusMap = {"approved": "Onaylandı", "rejected": "Reddedildi", "pending": "Bekliyor"};
+    try {
+      await updateDoc(doc(db, "users", app.uid), {
+          status: statusMap[st]
+      });
+      showToast("✓ Kaydedildi", true);
+    } catch(e) {
+      console.error(e);
+      showToast("Hata oluştu", false);
+    }
   }
 
   function showToast(msg, success) {
@@ -920,12 +908,11 @@ window.updateDoc = updateDoc;
     if (!toast) {
       toast = document.createElement("div");
       toast.id = "toast";
-      toast.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:10px 24px;border:1px solid;transition:opacity 0.3s;";
+      toast.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;font-family:"Space Grotesk",sans-serif;font-size:10px;padding:10px;border:1px;transition:opacity 0.3s;";
       document.body.appendChild(toast);
     }
     toast.textContent = msg;
     toast.style.background = success ? "rgba(0,200,100,0.15)" : "rgba(255,180,0,0.15)";
-    toast.style.borderColor = success ? "rgba(0,200,100,0.4)" : "rgba(255,180,0,0.4)";
     toast.style.color = success ? "#00c864" : "#ffb400";
     toast.style.opacity = "1";
     if (success) setTimeout(() => { toast.style.opacity = "0"; }, 2000);
@@ -979,7 +966,7 @@ window.updateDoc = updateDoc;
   }
 
   // Init
-  loadData();
+  window.loadData();
 </script>
 </body>
 </html>
