@@ -1,660 +1,258 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="tr">
-<head>
+<html class="dark" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MANCAVE | BAŞVURU</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1f0052",
+                        "inverse-on-surface": "#50565c",
+                        "secondary-fixed": "#b3d4ff",
+                        "tertiary-fixed": "#bda1ff",
+                        "on-primary-fixed": "#000000",
+                        "on-error": "#490006",
+                        "outline-variant": "#43494f",
+                        "surface-tint": "#5fb4ff",
+                        "tertiary": "#ba9eff",
+                        "on-secondary-container": "#b2d3fd",
+                        "on-background": "#eff4fc",
+                        "inverse-primary": "#00639e",
+                        "on-secondary-fixed": "#103658",
+                        "on-surface-variant": "#a6acb3",
+                        "primary": "#5fb4ff",
+                        "on-tertiary": "#391080",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-fixed-dim": "#b191fe",
+                        "surface-dim": "#090f14",
+                        "primary-container": "#2ea7ff",
+                        "on-primary-fixed-variant": "#002e4e",
+                        "secondary-container": "#27496c",
+                        "error": "#ff716c",
+                        "on-primary-container": "#00253f",
+                        "outline": "#70767d",
+                        "background": "#090f14",
+                        "surface-bright": "#242d35",
+                        "error-dim": "#d7383b",
+                        "primary-fixed": "#2ea7ff",
+                        "tertiary-dim": "#ab8bf9",
+                        "on-error-container": "#ffa8a3",
+                        "error-container": "#9f0519",
+                        "surface-container-high": "#192027",
+                        "surface": "#090f14",
+                        "on-secondary": "#28496d",
+                        "surface-container-highest": "#1e272e",
+                        "on-surface": "#eff4fc",
+                        "primary-dim": "#1ca4ff",
+                        "secondary": "#b3d4ff",
+                        "surface-container": "#131a21",
+                        "surface-variant": "#1e272e",
+                        "secondary-fixed-dim": "#a6c6f0",
+                        "surface-container-low": "#0e141a",
+                        "on-tertiary-container": "#2c006e",
+                        "on-secondary-fixed-variant": "#325377",
+                        "on-tertiary-fixed-variant": "#44208b",
+                        "on-primary": "#003152",
+                        "secondary-dim": "#a6c6f0",
+                        "primary-fixed-dim": "#0099f2",
+                        "inverse-surface": "#f7f9ff",
+                        "tertiary-container": "#ae8efc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
 <style>
-  .material-symbols-outlined {
-    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
-  }
-  body {
-    font-family: "Inter", sans-serif;
-    background-color: #131313;
-  }
-  .headline-font { font-family: "Space Grotesk", sans-serif }
-  .grain-texture {
-    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAZgXUI0AKBV0HZJLeDkCDm3tiQShR5OLmSQBjFHjhbLyIMUlph2Cy8wywl2ibCnWByisk92bZCBqyw02X_3QWZLthgiib3otHBKrllJpK1fJmS6iq6b0EPer44kHQJ_pHfbDGKTb5OMIxEBEtcdZQ5Lga7FXN3U1MtZ4NKXUZAEDbTzieoce_vJ268yts5gFJfrHe94MR1P2Nausna9hAWfqkt5HFixaTcUKFkRYwOL10jfyLcwbol9j1f960LSRat7JMbftJXF1H3);
-    opacity: 0.03;
-    pointer-events: none
-  }
-
-/* Step container */
-.step { display: none; }
-.step.active { display: block; }
-
-/* Slide animations */
-@keyframes slideInRight {
-from { opacity: 0; transform: translateX(40px); }
-to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes slideInLeft {
-from { opacity: 0; transform: translateX(-40px); }
-to   { opacity: 1; transform: translateX(0); }
-}
-.slide-in-right { animation: slideInRight 0.35s cubic-bezier(.4,0,.2,1) forwards; }
-.slide-in-left  { animation: slideInLeft  0.35s cubic-bezier(.4,0,.2,1) forwards; }
-
-/* Progress bar */
-#progress-bar {
-transition: width 0.4s cubic-bezier(.4,0,.2,1);
-}
-
-/* Input focus glow */
-.mc-input {
-width: 100%;
-background: transparent;
-border: 0;
-border-bottom: 2px solid #ff2a2a55;
-color: #000000;
-font-family: “Space Grotesk”, sans-serif;
-font-size: 1.5rem;
-font-weight: 600;
-letter-spacing: 0.05em;
-padding: 12px 0;
-outline: none;
-transition: border-color 0.2s;
-text-transform: uppercase;
-}
-.mc-input::placeholder { color: rgba(0,0,0,0.25); }
-.mc-input:focus { border-color: #ff2a2a; }
-
-textarea.mc-input { resize: none; font-size: 1.1rem; }
-
-/* Date input dark */
-input[type=“date”].mc-input { color-scheme: dark; }
-
-/* File input */
-.mc-file {
-width: 100%;
-background: transparent;
-border-bottom: 2px solid #ff2a2a55;
-color: #ffffff;
-font-family: “Space Grotesk”, sans-serif;
-font-size: 0.75rem;
-letter-spacing: 0.15em;
-padding: 12px 0;
-outline: none;
-cursor: pointer;
-}
-.mc-file:focus { border-color: #ff2a2a; }
-
-/* Step number */
-.step-num {
-font-family: “Space Grotesk”, sans-serif;
-font-size: 8rem;
-font-weight: 700;
-line-height: 1;
-color: rgba(255,42,42,0.08);
-position: absolute;
-top: -1.5rem;
-right: 0;
-pointer-events: none;
-user-select: none;
-}
-
-/* Success checkmark */
-@keyframes checkPop {
-0%   { transform: scale(0); opacity: 0; }
-70%  { transform: scale(1.15); }
-100% { transform: scale(1); opacity: 1; }
-}
-.check-anim { animation: checkPop 0.5s cubic-bezier(.4,0,.2,1) forwards; }
-
-/* Hint text */
-.hint {
-font-size: 10px;
-letter-spacing: 0.15em;
-color: rgba(255,255,255,0.35);
-margin-top: 8px;
-font-family: “Space Grotesk”, sans-serif;
-text-transform: uppercase;
-}
-
-/* Card background override */
-.step > div {
-background: #181818 !important;
-}
-
-body { min-height: max(884px, 100dvh); }
-</style>
-
-<script>
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          "surface": "#131313",
-          "background": "#131313",
-          "primary": "#ffb4ab",
-          "primary-container": "#ff5449",
-          "on-primary": "#690005",
-          "on-surface": "#e5e2e1",
-          "surface-variant": "#353534",
-          "on-surface-variant": "#e8bcb7",
-          "surface-container-low": "#1c1b1b",
-          "surface-container-high": "#2a2a2a",
-          "outline-variant": "#5e3f3b",
-          "surface-container-lowest": "#0e0e0e",
-        },
-        borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
-        fontFamily: { headline: ["Space Grotesk"], body: ["Inter"] }
-      }
-    }
-  }
-</script>
-
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(36, 45, 53, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .engine-gradient {
+            background: linear-gradient(135deg, #5fb4ff 0%, #2ea7ff 100%);
+        }
+        body {
+            background-color: #090f14;
+            color: #eff4fc;
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
 </head>
-<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
-
-<div class="fixed inset-0 grain-texture z-50 pointer-events-none"></div>
-
-<!-- TopAppBar -->
-
-<header class="bg-[#131313] border-none w-full top-0 sticky z-40">
-  <div class="flex justify-between items-center px-6 h-16 w-full">
-    <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-[#ff2a2a]">precision_manufacturing</span>
-      <h1 class="text-xl font-black tracking-widest text-[#ff2a2a] font-['Space_Grotesk'] uppercase">MANCAVE</h1>
-    </div>
-    <div class="flex items-center">
-      <span class="material-symbols-outlined text-[#e8bcb7] hover:text-[#ff2a2a] transition-colors duration-300 cursor-pointer">account_circle</span>
-    </div>
-  </div>
-  <!-- Progress bar -->
-  <div class="h-[2px] w-full bg-[#1c1b1b]">
-    <div id="progress-bar" class="h-full bg-[#ff2a2a]" style="width: 10%"></div>
-  </div>
+<body class="bg-background min-h-screen selection:bg-primary selection:text-on-primary">
+<header class="fixed top-0 w-full z-50 bg-[#090f14] shadow-[0px_20px_40px_rgba(0,162,255,0.06)] flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#5fb4ff]">menu</span>
+<img alt="BosphorusFellas Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhV5ELRjwMus8v5lYz_znL40i0nTvx8CPFtZj0Jq_JMAYXB20EmP93M0owTq0yJSvkQ6LEEuZ5HRgija4LcWLLvk-hODpKPqjim3rO-o8ZpVeas9KxEkEgBddmPOWgz36Sop0QA3CiNyKGQivtmWG-ICn2WgTn-WipNdnHRbt-ulcF5dqTJDVRkAR4GYygUFmi99NnAyVmdnqZoZaqKZtY9yxuagSyog7awh0rwAcCU7mETpXXrrmWhtxL6tKaznd7yGw6rBVxkZ2U"/>
+</div>
+<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden border border-primary/20">
+<img alt="Üye Profil Avatarı" data-alt="High-end studio portrait of a sophisticated man in a dark tailored suit with soft cinematic blue backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgNgsdpJlgMsVMY6tG6Eks3c7qDfW0B7JlMQAasjDzdERGwlh8buX_iVhAZvROekuMR_M8f_ehaqdev_pRsRqTkQLw4JzuWnfU7vJ4zvE6CbsTWJ7t-n3Sw4swBLiSkj-4iRYBuJBd2qyWrHK3KSNbmM2NaUyI8-CB0Ra6mzv7dJdMsNUCK7kcAmYkVzE_YjpAClxH4Wjk1atMx8GUnfJGazcxUVEdczUsm8htNaayLSlewgnaVGnEHfti9oCPeRUCRN6KmK8oPiUq"/>
+</div>
 </header>
-
-<main class="min-h-screen pb-32">
-
-  <!-- Hero (only shown on step 0) -->
-
-  <section id="hero-section" class="relative h-[353px] w-full overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
-    <img alt="Üyelik Arka Planı" class="w-full h-full object-cover grayscale opacity-50"
-         src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3OpVyUr1QwMcLK-nweVo8VYsYtg66Mf2VtbcapMsHg3BqXvZLEJV4hXuW8JcJpyH5_iNKl4Z9cdoBIu9dUZ73GWLaBKN7bVJPxm42F2hByX1CmdXhsrnPiQ_qYBpAiofv1bKhwtExEpDNY_ZayxwGtN_8hyGNTx6OHiodx8jL8c1vOfp4HP9Gjf6dV--Q3xlD-RsYvSo5qaQYRbH91dl-gZ0epDQCWf0qzTxHEKKPSbGn-Cswlbh_IOegThzqhNNxk4n802EF_gpc"/>
-    <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
-      <div class="flex items-center gap-2 mb-2">
-        <div class="h-1 w-12 bg-primary"></div>
-        <span class="text-primary font-headline uppercase tracking-[0.2em] text-xs font-bold">ALIM AŞAMASI</span>
-      </div>
-      <h2 class="text-4xl md:text-6xl font-headline font-bold text-on-surface uppercase tracking-tighter">TOPLULUĞA KATIL</h2>
-      <p class="text-on-surface-variant max-w-lg mt-4 font-light leading-relaxed">
-        Özel mekanik atölyeye erişim yalnızca davet ve inceleme ile sağlanır. Kimlik bilgilerinizi aşağıda belirtin.
-      </p>
-    </div>
-  </section>
-
-  <!-- Form Area -->
-
-  <section class="px-6 py-12 max-w-3xl mx-auto">
-
-<!-- Step counter -->
-<div id="step-counter" class="flex items-center gap-3 mb-10 hidden">
-  <button id="btn-back" onclick="prevStep()" class="text-[#e8bcb7] hover:text-[#ff2a2a] transition-colors flex items-center gap-1 text-xs font-['Space_Grotesk'] uppercase tracking-widest">
-    <span class="material-symbols-outlined text-sm">arrow_back</span> GERİ
-  </button>
-  <span class="flex-1 text-center text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,255,255,0.35)]" id="step-label"></span>
-  <span class="text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,255,255,0.35)]" id="step-fraction"></span>
+<main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
+<div class="mb-12">
+<div class="flex justify-between items-end mb-4">
+<div>
+<span class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 block">Başvuru Süreci</span>
+<h1 class="font-headline text-4xl font-bold tracking-tight text-on-surface">İç Çembere Katıl</h1>
 </div>
-
-<!-- ── STEP 0: Start ── -->
-<div class="step active" id="step-0">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">01</span>
-    <p class="text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.5)] mb-6">BAŞVURU SÜRECİ · 10 SORU</p>
-    <h3 class="text-3xl font-['Space_Grotesk'] font-bold uppercase tracking-tight text-[#e5e2e1] mb-4">
-      Hazır mısın?
-    </h3>
-    <p class="text-[#e8bcb7] font-light leading-relaxed mb-10 text-sm">
-      Her soruyu cevaplayıp <kbd class="bg-[#2a2a2a] px-2 py-0.5 text-xs rounded font-mono">ENTER</kbd>'a bas veya butona tıkla. Başvurun konseye iletilecek.
-    </p>
-    <button onclick="nextStep()" class="bg-[#ff2a2a] text-white px-10 py-4 font-['Space_Grotesk'] font-bold uppercase tracking-widest hover:shadow-[0_0_30px_rgba(255,42,42,0.4)] active:scale-95 transition-all">
-      BAŞVURUYU BAŞLAT →
-    </button>
-  </div>
-
-  <!-- Status cards -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-    <div class="bg-surface-container-high p-6 flex items-start gap-4">
-      <span class="material-symbols-outlined text-[#ffb4ab] text-3xl">verified_user</span>
-      <div>
-        <h4 class="font-['Space_Grotesk'] font-bold text-sm uppercase tracking-wider">İNCELEME SÜRECİ</h4>
-        <p class="text-xs text-[#e8bcb7] mt-1">Konseyimiz, her makineyi ve adayı tarihsel ve kültürel uyum açısından inceler.</p>
-      </div>
-    </div>
-    <div class="bg-surface-container-high p-6 flex items-start gap-4">
-      <span class="material-symbols-outlined text-[#ffb4ab] text-3xl">schedule</span>
-      <div>
-        <h4 class="font-['Space_Grotesk'] font-bold text-sm uppercase tracking-wider">BEKLEME LİSTESİ</h4>
-        <p class="text-xs text-[#e8bcb7] mt-1">Mevcut işlem süresi: Teknik inceleme ve garaj denetimi için 14-21 gün.</p>
-      </div>
-    </div>
-  </div>
+<div class="text-right">
+<span class="font-headline text-2xl font-bold text-primary">60%</span>
+<span class="text-on-surface-variant text-sm block">Tamamlandı</span>
 </div>
-
-<!-- ── STEP 1: Email ── -->
-<div class="step" id="step-1">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">01</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">E-POSTA ADRESİN</label>
-    <input id="f-email" type="email" class="mc-input" placeholder="ornek@email.com" autocomplete="email" />
-    <p class="hint">Enter'a basarak devam et</p>
-    <div id="err-1" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">Geçerli bir e-posta adresi gir.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
 </div>
-
-<!-- ── STEP 2: Ad Soyad ── -->
-<div class="step" id="step-2">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">02</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">ADI VE SOYADIN</label>
-    <input id="f-name" type="text" class="mc-input" placeholder="TAM YASAL İSMİN" autocomplete="name"/>
-    <p class="hint">Enter'a basarak devam et</p>
-    <div id="err-2" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">Adını ve soyadını gir.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full engine-gradient w-3/5 transition-all duration-500 ease-out"></div>
 </div>
-
-<!-- ── STEP 3: Telefon ── -->
-<div class="step" id="step-3">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">03</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">TELEFON NUMARASI</label>
-    <input id="f-phone" type="tel" class="mc-input" placeholder="05XX XXX XX XX" autocomplete="tel"/>
-    <p class="hint">Enter'a basarak devam et</p>
-    <div id="err-3" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">Telefon numaranı gir.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
 </div>
-
-<!-- ── STEP 4: Doğum Tarihi ── -->
-<div class="step" id="step-4">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">04</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">DOĞUM TARİHİN</label>
-    <input id="f-dob" type="date" class="mc-input" style="color-scheme:dark;"/>
-    <p class="hint">Enter'a basarak devam et</p>
-    <div id="err-4" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">Doğum tarihini gir.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-8 space-y-8">
+<div class="glass-panel p-8 rounded-xl border border-outline-variant/10">
+<div class="mb-8">
+<h2 class="font-headline text-2xl font-semibold mb-2">Otomotiv Kimliği</h2>
+<p class="text-on-surface-variant text-sm">Topluluğumuzu kullandığımız araçlar ve paylaştığımız tutkuyla tanımlıyoruz.</p>
 </div>
-
-<!-- ── STEP 5: İlçe / İl ── -->
-<div class="step" id="step-5">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">05</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">YAŞADIĞIN İLÇE VE İL</label>
-    <input id="f-city" type="text" class="mc-input" placeholder="ÖR: KADIKÖY, İSTANBUL"/>
-    <p class="hint">Enter'a basarak devam et</p>
-    <div id="err-5" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">İlçe ve il bilgini gir.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Ad Soyad</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="Can Demir" type="text"/>
 </div>
-
-<!-- ── STEP 6: Instagram ── -->
-<div class="step" id="step-6">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">06</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">KİŞİSEL VEYA ARAÇ INSTAGRAM KULLANICI ADI</label>
-    <input id="f-ig" type="text" class="mc-input" placeholder="@KULLANICIADI"/>
-    <p class="hint">İsteğe bağlı · Enter'a basarak devam et</p>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">E-posta Adresi</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="can@bosphorusfellas.com" type="email"/>
 </div>
-
-<!-- ── STEP 7: Meslek ── -->
-<div class="step" id="step-7">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">07</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">MESLEĞİN VEYA OKUMAKTA OLDUĞUN BÖLÜM</label>
-    <input id="f-job" type="text" class="mc-input" placeholder="MESLEK / BÖLÜM BİLGİSİ"/>
-    <p class="hint">Enter'a basarak devam et</p>
-    <div id="err-7" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">Meslek veya bölüm bilgini gir.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
 </div>
-
-<!-- ── STEP 8: Araç ── -->
-<div class="step" id="step-8">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">08</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">ARACININ YILI, MARKASI VE MODELİ</label>
-    <input id="f-car" type="text" class="mc-input" placeholder="ÖR. 1974 PORSCHE 911"/>
-    <p class="hint">Enter'a basarak devam et</p>
-    <div id="err-8" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">Araç bilgini gir.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Telefon Numarası</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="+90 532 --- -- --" type="tel"/>
 </div>
-
-<!-- ── STEP 9: Katılma Amacı ── -->
-<div class="step" id="step-9">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">09</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">MANCAVE AİLESİNE KATILMA AMACIN</label>
-    <textarea id="f-reason" class="mc-input" placeholder="BİZE NEDEN KATILMAK İSTEDİĞİNİ ANLAT..." rows="4"></textarea>
-    <p class="hint">Enter değil, butona bas · Shift+Enter yeni satır</p>
-    <div id="err-9" class="text-[#ff2a2a] text-xs font-['Space_Grotesk'] mt-3 hidden">Katılma amacını yaz.</div>
-    <button onclick="nextStep()" class="mt-8 bg-[#ff2a2a] text-white px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] active:scale-95 transition-all">
-      DEVAM →
-    </button>
-  </div>
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Instagram Kullanıcı Adı</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface transition-colors py-3 px-4 rounded-t-lg" placeholder="@kullaniciadi" type="text"/>
 </div>
-
-<!-- ── STEP 10: Fotoğraf ── -->
-<div class="step" id="step-10">
-  <div class="bg-surface-container-low p-8 border-l-4 border-[#ff2a2a] relative overflow-hidden">
-    <span class="step-num">10</span>
-    <label class="block text-[10px] font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.9)] mb-6">ARACININ FOTOĞRAFI</label>
-    <input type="file" id="f-photo" accept="image/*" class="hidden" onchange="previewPhoto(this)"/>
-    <div class="border border-dashed border-[#5e3f3b] p-8 flex flex-col items-center justify-center gap-3 hover:border-[#ff2a2a] transition-colors cursor-pointer" id="drop-zone" onclick="document.getElementById('f-photo').click()">
-      <span class="material-symbols-outlined text-[#ffb4ab] text-4xl">photo_camera</span>
-      <span class="text-xs font-['Space_Grotesk'] uppercase tracking-widest text-[rgba(255,180,171,0.5)]">İSTEĞE BAĞLI — DOKUNMAK İÇİN TIKla</span>
-    </div>
-    <div id="photo-preview" class="hidden mt-4">
-      <img id="photo-img" src="" class="w-full max-h-48 object-cover border border-[#5e3f3b]"/>
-      <p id="photo-name" class="hint mt-2"></p>
-    </div>
-    <div class="flex gap-4 mt-8">
-      <button onclick="submitForm()" class="flex-1 bg-[#ff2a2a] text-white px-8 py-4 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(255,42,42,0.5)] active:scale-95 transition-all">
-        BAŞVURUYU GÖNDER ↗
-      </button>
-    </div>
-  </div>
 </div>
-
-<!-- ── STEP SUCCESS ── -->
-<div class="step" id="step-success">
-  <div class="bg-surface-container-low p-12 border-l-4 border-[#ff2a2a] text-center relative overflow-hidden">
-    <div class="check-anim inline-flex items-center justify-center w-20 h-20 rounded-full border-2 border-[#ff2a2a] mb-8">
-      <span class="material-symbols-outlined text-[#ff2a2a] text-4xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
-    </div>
-    <h3 class="text-3xl font-['Space_Grotesk'] font-bold uppercase tracking-tight text-[#e5e2e1] mb-4">BAŞVURU ALINDI</h3>
-    <p class="text-[#e8bcb7] font-light leading-relaxed mb-8 text-sm max-w-md mx-auto">
-      Konseyimiz başvurunu inceleyecek. 14-21 gün içinde geri dönüş yapılacak.
-    </p>
-    <a href="index.html" class="inline-block border border-[#5e3f3b] text-[#e8bcb7] px-8 py-3 font-['Space_Grotesk'] font-bold uppercase tracking-widest text-sm hover:border-[#ff2a2a] hover:text-[#ff2a2a] transition-all">
-      ANA SAYFAYA DÖN
-    </a>
-  </div>
+<div class="pt-4 border-t border-outline-variant/10">
+<h3 class="font-headline text-lg font-medium mb-6 text-primary">Araç Özellikleri</h3>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Marka</label>
+<select class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg appearance-none">
+<option>Porsche</option>
+<option>BMW</option>
+<option>Mercedes-Benz</option>
+<option>Ferrari</option>
+<option>Diğer</option>
+</select>
 </div>
-
-  </section>
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Model</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg" placeholder="911 GT3 RS" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Yıl</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg" placeholder="2024" type="number"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant ml-1">Modifiyeler (Opsiyonel)</label>
+<textarea class="w-full bg-surface-container-lowest border-none border-b-2 border-outline focus:border-primary focus:ring-0 text-on-surface py-3 px-4 rounded-t-lg resize-none" placeholder="Performans veya estetik yükseltmeleri listeleyin..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center pt-8">
+<button class="px-8 py-3 rounded-lg font-label text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+                            GERİ
+                        </button>
+<button class="engine-gradient text-on-primary-fixed px-10 py-3 rounded-lg font-headline font-bold text-sm tracking-wide shadow-[0px_10px_20px_rgba(0,162,255,0.2)] hover:scale-[1.02] active:scale-95 transition-transform" type="button">
+                            SONRAKİ ADIM
+                        </button>
+</div>
+</form>
+</div>
+</div>
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-container-high rounded-xl overflow-hidden group">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Rear view of a sleek sports car crossing the Bosphorus Bridge at night with blurred city lights and blue architectural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAklINXbGxgOPcmshL9QhwiGhimV-LQwtzpbtdHKju6RJozWDsN7uzPF3vgHaWi1Bz5y-6iM56Cxd-028dHRqmBD59iskFzW1Vl43op9hg7Rsj6qlBcTuhuA3BXw5sNRfkqFrPnqsuh5eC-WA1SARKtO_OBXJHk0UY62oDeI7g1TlDbC1h_SqoZXuna93YrsGQvxGYOzYJSoQn_bmVmPmboqC387UGNyTa_DpD-LB393fEyABtrDWDEABxovtskPuE78J_bRYw8ftHA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high to-transparent"></div>
+</div>
+<div class="p-6 relative -mt-12">
+<div class="h-12 w-12 rounded-lg engine-gradient flex items-center justify-center mb-4 shadow-lg">
+<span class="material-symbols-outlined text-on-primary-fixed" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Ayrıcalık Sizi Bekliyor</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                        BosphorusFellas bir araba kulübünden daha fazlasıdır. Azimli olanlar için bir ekosistemdir. Üyelik, ağımızın kalitesini korumak için kesinlikle sınırlıdır.
+                    </p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10">
+<h4 class="font-label text-[10px] uppercase tracking-widest text-primary mb-4">Üyelik Seviyeleri</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<div>
+<span class="block font-headline text-sm font-bold">Gece Yarısı Rallisi Erişimi</span>
+<span class="text-xs text-on-surface-variant">Aylık özel sürüşlere öncelikli katılım.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<div>
+<span class="block font-headline text-sm font-bold">Partner Ekosistemi</span>
+<span class="text-xs text-on-surface-variant">İstanbul'un en iyi performans atölyelerinde özel oranlar.</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
 </main>
-
-<!-- BottomNavBar -->
-
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-[#0e0e0e] border-t border-[#2a2a2a]">
-  <a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="index.html">
-    <span class="material-symbols-outlined">home</span>
-    <span class="font-['Space_Grotesk'] uppercase text-[10px] tracking-widest font-bold mt-1">ANA SAYFA</span>
-  </a>
-  <a class="flex flex-col items-center justify-center text-[#e8bcb7] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="mancavecard.html">
-    <span class="material-symbols-outlined">badge</span>
-    <span class="font-['Space_Grotesk'] uppercase text-[10px] tracking-widest font-bold mt-1">MANCAVECARD</span>
-  </a>
-  <a class="flex flex-col items-center justify-center text-[#ff2a2a] border-t-2 border-[#ff2a2a] pt-2 hover:bg-[#2a2a2a] w-full h-full transition-all active:bg-[#ff2a2a]/10" href="basvuru.html">
-    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">speed</span>
-    <span class="font-['Space_Grotesk'] uppercase text-[10px] tracking-widest font-bold mt-1">BAŞVURU</span>
-  </a>
+<footer class="md:hidden">
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-[#090f14]/80 backdrop-blur-xl z-50 rounded-t-xl border-t border-[#5fb4ff]/10 shadow-[0_-10px_30px_rgba(0,162,255,0.04)]">
+<div class="flex flex-col items-center justify-center text-slate-500 font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
+<span class="material-symbols-outlined">home</span>
+<span>Ana Sayfa</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
+<span class="material-symbols-outlined">event_seat</span>
+<span>Etkinlikler</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
+<span class="material-symbols-outlined">contactless</span>
+<span>Kartım</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#5fb4ff] font-bold font-['Manrope'] text-[10px] uppercase tracking-widest hover:text-[#5fb4ff] transition-colors tap-highlight-none active:scale-90 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_ind</span>
+<span>Başvur</span>
+</div>
 </nav>
-
-<!-- Hidden iframe for form submission -->
-
-<iframe name="hidden-submit" id="hidden-submit" style="display:none;"></iframe>
-
-<script>
-  // ── Apps Script config ──
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYYKIFtUu3Ae8fmdvYxLwm4JevdKfcp4JTLr9FWMmkt9Hl0tf_RR2aN3S7N5I4G2RU0g/exec";
-
-  // ── State ──
-  const TOTAL_STEPS = 10; // 0 = start, 1-10 = questions
-  let current = 0;
-
-  // ── Validation rules per step ──
-  const validators = {
-    1: () => {
-      const v = document.getElementById("f-email").value.trim();
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    },
-    2: () => document.getElementById("f-name").value.trim().length > 1,
-    3: () => document.getElementById("f-phone").value.trim().length > 5,
-    4: () => document.getElementById("f-dob").value.trim().length > 0,
-    5: () => document.getElementById("f-city").value.trim().length > 1,
-    6: () => true, // optional
-    7: () => document.getElementById("f-job").value.trim().length > 1,
-    8: () => document.getElementById("f-car").value.trim().length > 1,
-    9: () => document.getElementById("f-reason").value.trim().length > 5,
-    10: () => true, // optional photo step
-  };
-
-  function updateProgress() {
-    const pct = current === 0 ? 5 : Math.round((current / TOTAL_STEPS) * 100);
-    document.getElementById("progress-bar").style.width = pct + "%";
-
-    const counter = document.getElementById("step-counter");
-    const hero = document.getElementById("hero-section");
-    if (current === 0) {
-      counter.classList.add("hidden");
-      hero.style.display = "";
-    } else if (current > TOTAL_STEPS) {
-      counter.classList.add("hidden");
-      hero.style.display = "none";
-    } else {
-      counter.classList.remove("hidden");
-      hero.style.display = "none";
-      document.getElementById("step-label").textContent = stepLabel(current);
-      document.getElementById("step-fraction").textContent = current + " / " + TOTAL_STEPS;
-      document.getElementById("btn-back").style.visibility = current <= 1 ? "hidden" : "visible";
-    }
-  }
-
-  function stepLabel(n) {
-    const labels = ["","E-POSTA","İSİM","TELEFON","DOĞUM","KONUM","INSTAGRAM","MESLEK","ARAÇ","AMAÇ","FOTOĞRAF"];
-    return labels[n] || "";
-  }
-
-  function showStep(n, direction) {
-    const prev = document.getElementById("step-" + (n === 0 ? 0 : ""));
-    document.querySelectorAll(".step").forEach(el => el.classList.remove("active", "slide-in-right", "slide-in-left"));
-
-    const id = n > TOTAL_STEPS ? "step-success" : "step-" + n;
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.add("active");
-    el.classList.add(direction === "forward" ? "slide-in-right" : "slide-in-left");
-
-    // Focus first input
-    setTimeout(() => {
-      const inp = el.querySelector("input, textarea");
-      if (inp) inp.focus();
-    }, 50);
-
-    updateProgress();
-  }
-
-  function nextStep() {
-    // Validate current step
-    if (current > 0 && current <= TOTAL_STEPS) {
-      const errEl = document.getElementById("err-" + current);
-      const valid = validators[current] ? validators[current]() : true;
-      if (!valid) {
-        if (errEl) { errEl.classList.remove("hidden"); }
-        const inp = document.querySelector("#step-" + current + " input, #step-" + current + " textarea");
-        if (inp) inp.focus();
-        return;
-      }
-      if (errEl) errEl.classList.add("hidden");
-    }
-
-    if (current === TOTAL_STEPS) {
-      submitForm();
-      return;
-    }
-
-    current++;
-    showStep(current, "forward");
-  }
-
-  function prevStep() {
-    if (current <= 1) return;
-    current--;
-    showStep(current, "backward");
-  }
-
-  let isSubmitting = false;
-
-  // Küçültülmüş fotoğrafın base64'ünü sakla
-  let compressedPhotoBase64 = "";
-  let compressedPhotoName = "";
-
-  function previewPhoto(input) {
-    if (!input.files || !input.files[0]) return;
-    const file = input.files[0];
-
-    // Dosya boyutu kontrolü (10MB limit)
-    if (file.size > 10 * 1024 * 1024) {
-      alert("Fotoğraf 10MB'dan küçük olmalıdır.");
-      input.value = "";
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = new Image();
-      img.onload = function() {
-        const canvas = document.createElement("canvas");
-        const MAX = 800;
-        let w = img.width, h = img.height;
-        if (w > h && w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
-        else if (h > MAX) { w = Math.round(w * MAX / h); h = MAX; }
-        canvas.width = w; canvas.height = h;
-        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-        const compressed = canvas.toDataURL("image/jpeg", 0.7);
-
-        // Base64'ü global değişkende sakla (data: prefix olmadan)
-        compressedPhotoBase64 = compressed.split(",")[1];
-        compressedPhotoName = file.name;
-
-        document.getElementById("photo-img").src = compressed;
-        document.getElementById("photo-name").textContent = file.name;
-        document.getElementById("photo-preview").classList.remove("hidden");
-        document.getElementById("drop-zone").classList.add("hidden");
-      };
-      img.onerror = function() {
-        alert("Fotoğraf yüklenemedi. Lütfen geçerli bir resim dosyası seç.");
-        input.value = "";
-      };
-      img.src = e.target.result;
-    };
-    reader.onerror = function() {
-      alert("Dosya okunamadı. Lütfen tekrar dene.");
-      input.value = "";
-    };
-    reader.readAsDataURL(file);
-  }
-
-  async function postData(payload) {
-    return fetch(SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify(payload),
-    });
-  }
-
-  async function submitForm() {
-    if (isSubmitting) return;
-    isSubmitting = true;
-
-    const submitBtn = document.querySelector("#step-10 button[onclick=\'submitForm()\']");
-    if (submitBtn) { submitBtn.textContent = "GÖNDERİLİYOR..."; submitBtn.disabled = true; }
-
-    const email = document.getElementById("f-email").value.trim();
-
-    // ── 1. Adım: Metin verilerini gönder (fotoğrafsız) ──
-    const textData = {
-      action: "submit",
-      email,
-      name:   document.getElementById("f-name").value.trim(),
-      phone:  document.getElementById("f-phone").value.trim(),
-      dob:    document.getElementById("f-dob").value.trim(),
-      city:   document.getElementById("f-city").value.trim(),
-      ig:     document.getElementById("f-ig").value.trim(),
-      job:    document.getElementById("f-job").value.trim(),
-      car:    document.getElementById("f-car").value.trim(),
-      reason: document.getElementById("f-reason").value.trim(),
-      photo: "", photoType: "", photoName: "",
-    };
-
-    try { await postData(textData); } catch(e) { console.error("Metin gönderme hatası:", e); }
-
-    // ── 2. Adım: Fotoğrafı ayrıca gönder (varsa) ──
-    if (compressedPhotoBase64) {
-      try {
-        await postData({
-          action: "update_photo",
-          email,
-          photo:     compressedPhotoBase64,
-          photoType: "image/jpeg",
-          photoName: compressedPhotoName,
-        });
-      } catch(e) { console.warn("Fotoğraf gönderme hatası:", e); }
-    }
-
-    // ── Başarı ekranını göster ──
-    current = TOTAL_STEPS + 1;
-    document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
-    const suc = document.getElementById("step-success");
-    suc.classList.add("active", "slide-in-right");
-    document.getElementById("progress-bar").style.width = "100%";
-    document.getElementById("step-counter").classList.add("hidden");
-    document.getElementById("hero-section").style.display = "none";
-  }
-
-  // ── Enter key navigation ──
-  document.addEventListener("keydown", function(e) {
-    if (e.key !== "Enter") return;
-    if (isSubmitting) { e.preventDefault(); return; }
-    const active = document.querySelector(".step.active");
-    if (!active) return;
-    const tag = document.activeElement ? document.activeElement.tagName : "";
-    // In textarea, Enter = new line (only submit on Ctrl+Enter)
-    if (tag === "TEXTAREA") {
-      if (e.ctrlKey || e.metaKey) { e.preventDefault(); nextStep(); }
-      return;
-    }
-    e.preventDefault();
-    nextStep();
-  });
-
-  // Init
-  updateProgress();
-</script>
-
-</body>
-</html>
+</footer>
+</body></html>
