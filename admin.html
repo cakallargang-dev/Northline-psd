@@ -472,6 +472,17 @@ window.updateDoc = updateDoc;
     try {
       await signInWithEmailAndPassword(auth, email, pass);
     } catch(e) {
+      const errEl = document.getElementById("login-error");
+      // Firebase hata kodlarını Türkçeye çevir
+      let msg = "Hata: " + e.message;
+      if (e.code === "auth/user-not-found" || e.code === "auth/wrong-password" || e.code === "auth/invalid-credential") {
+        msg = "Hatalı e-posta veya parola.";
+      } else if (e.code === "auth/invalid-email") {
+        msg = "Geçersiz e-posta formatı.";
+      } else if (e.code === "auth/too-many-requests") {
+        msg = "Çok fazla deneme. Lütfen bekleyin.";
+      }
+      errEl.textContent = msg;
       errEl.classList.remove("hidden");
       btn.textContent = "GİRİŞ YAP";
       btn.disabled = false;
@@ -537,7 +548,7 @@ window.updateDoc = updateDoc;
     fetchAdminEvents();
   }
 
-  async window.submitCustomEvent = function submitCustomEvent(e) {
+  window.submitCustomEvent = async function submitCustomEvent(e) {
       e.preventDefault();
       
       if (EVENT_SCRIPT_URL_ADMIN === "BURAYA_APPSCRIPT_URL_GELECEK") {
